@@ -14,7 +14,7 @@ out/
 *.war
 *.ear
 *.db
-!*jstl*.jar
+!*/WEB-INF/lib/*.jar
 
 ######################
 # Windows
