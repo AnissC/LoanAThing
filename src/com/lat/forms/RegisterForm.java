@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 public final class RegisterForm
 {
     private static final String CHAMP_EMAIL = "email";
-    private static final String CHAMP_PASS = "motdepasse";
-    private static final String CHAMP_VALID = "confirmation";
-    private static final String CHAMP_NAME = "nom";
+    private static final String CHAMP_PASS = "password";
+    private static final String CHAMP_VALID = "valid";
+    private static final String CHAMP_NAME = "name";
 
     private String results;
     private Map<String, String> errors = new HashMap<String, String>();
