@@ -15,22 +15,22 @@
 
                 <label for="email">Adresse email <span class="requis">*</span></label>
                 <input type="email" id="email" name="email" value="<c:out value="${user.email}"/>" size="20" maxlength="60" />
-                <span class="erreur">${form.errors['email']}</span>
+                <span class="error">${form.errors['email']}</span>
                 <br />
 
                 <label for="password">Mot de passe <span class="requis">*</span></label>
                 <input type="password" id="password" name="password" value="" size="20" maxlength="20" />
-                <span class="erreur">${form.errors['password']}</span>
+                <span class="error">${form.errors['password']}</span>
                 <br />
 
                 <label for="valid">Confirmation du mot de passe <span class="requis">*</span></label>
                 <input type="password" id="valid" name="valid" value="" size="20" maxlength="20" />
-                <span class="erreur">${form.errors['valid']}</span>
+                <span class="error">${form.errors['valid']}</span>
                 <br />
 
                 <label for="name">Nom d'utilisateur</label>
                 <input type="text" id="name" name="name" value="<c:out value="${user.name}"/>" size="20" maxlength="20" />
-                <span class="erreur">${form.errors['name']}</span>
+                <span class="error">${form.errors['name']}</span>
                 <br />
 
                 <input type="submit" value="Inscription" class="sansLabel" />
