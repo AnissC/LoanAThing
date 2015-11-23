@@ -4,17 +4,17 @@ body, p, legend, label, input {
     font: normal 8pt verdana, helvetica, sans-serif;
 }
 
-/* Forms --------------------------------------------------------------------------------------- */
 fieldset {
     padding: 10px;
     border: 1px #0568CD solid;
-    margin: 10px;
 }
 
 legend {
     font-weight: bold;
     color: #0568CD;
 }
+
+/* Forms --------------------------------------------------------------------------------------- */
 
 form label {
     float: left;
@@ -27,34 +27,18 @@ form input {
     border: 1px #999 solid;
 }
 
-form input.sansLabel {
+form input.withoutLabel {
     margin-left: 200px;
 }
 
-/* Styles et couleurs -------------------------------------------------------------------------- */
-.requis {
+form .required {
     color: #c00;
 }
 
-.erreur {
+form .error {
     color: #900;
 }
 
-.succes {
+form .success {
     color: #090;
-}
-
-.info {
-    font-style: italic;
-    color: #E8A22B;
-}
-
-/* Blocs constituants -------------------------------------------------------------------------- */
-div#menu{
-    border: 1px solid #0568CD;
-    padding: 10px;
-    margin: 10px;
-}
-div#corps{
-    margin: 10px;
 }
