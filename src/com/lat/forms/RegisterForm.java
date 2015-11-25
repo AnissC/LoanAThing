@@ -1,6 +1,8 @@
 package com.lat.forms;
 
 import com.lat.beans.User;
+import com.lat.dao.DAOException;
+import com.lat.dao.UserDao;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +16,15 @@ public final class RegisterForm
     private static final String CHAMP_VALID = "valid";
     private static final String CHAMP_NAME = "name";
 
+    private UserDao userDao;
+
     private String results;
     private Map<String, String> errors = new HashMap<String, String>();
+
+    public RegisterForm(UserDao userDao)
+    {
+        this.userDao = userDao;
+    }
 
     public String getResults()
     {
@@ -37,31 +46,19 @@ public final class RegisterForm
         User user = new User();
 
         try {
-            checkEmail(email);
-        } catch (Exception e) {
-            setError(CHAMP_EMAIL, e.getMessage());
-        }
-        user.setEmail(email);
+            checkEmail(email, user);
+            checkPassword(password, valid, user);
+            checkName(name, user);
 
-        try {
-            checkPassword(password, valid);
-        } catch (Exception e) {
-            setError(CHAMP_PASS, e.getMessage());
-            setError(CHAMP_VALID, null);
-        }
-        user.setPassword(password);
-
-        try {
-            checkName(name);
-        } catch (Exception e) {
-            setError(CHAMP_NAME, e.getMessage());
-        }
-        user.setName(name);
-
-        if (errors.isEmpty()) {
-            results = "Succès de l'inscription.";
-        } else {
-            results = "Échec de l'inscription.";
+            if (errors.isEmpty()) {
+                userDao.create(user);
+                results = "Succès de l'inscription.";
+            } else {
+                results = "Échec de l'inscription.";
+            }
+        } catch (DAOException e) {
+            results = "Échec de l'inscription : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+            e.printStackTrace();
         }
 
         return user;
@@ -78,6 +75,11 @@ public final class RegisterForm
         }
     }
 
+    private void checkEmail(String email, User user)
+    {
+
+    }
+
     private void checkPassword(String password, String valid) throws Exception
     {
         if (password != null && valid != null) {
@@ -91,11 +93,21 @@ public final class RegisterForm
         }
     }
 
+    private void checkPassword(String password, String valid, User user)
+    {
+
+    }
+
     private void checkName(String name) throws Exception
     {
         if (name != null && name.length() < 3) {
             throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
         }
+    }
+
+    private void checkName(String name, User user)
+    {
+        
     }
 
     /*
