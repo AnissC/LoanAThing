@@ -3,6 +3,7 @@ package com.lat.forms;
 import com.lat.beans.User;
 import com.lat.dao.DAOException;
 import com.lat.dao.UserDao;
+import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +16,7 @@ public final class RegisterForm
     private static final String CHAMP_PASS = "password";
     private static final String CHAMP_VALID = "valid";
     private static final String CHAMP_NAME = "name";
+    private static final String ALGO_CHIFFREMENT = "SHA-256";
 
     private UserDao userDao;
 
@@ -48,7 +50,7 @@ public final class RegisterForm
         try {
             checkEmail(email, user);
             checkPassword(password, valid, user);
-            checkName(name, user);
+            checkName(name);
 
             if (errors.isEmpty()) {
                 userDao.create(user);
@@ -59,6 +61,8 @@ public final class RegisterForm
         } catch (DAOException e) {
             results = "Échec de l'inscription : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return user;
@@ -67,17 +71,27 @@ public final class RegisterForm
     private void checkEmail(String email) throws Exception
     {
         if (email != null) {
-            if (!email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
-                throw new Exception("Merci de saisir une adresse mail valide.");
+            if (!email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
+                throw new FormValidationException("Merci de saisir une adresse mail valide.");
+            } else if (userDao.find(email) != null) {
+                throw new FormValidationException("Cette adresse email est déjà utilisée, merci d'en choisir une autre.");
             }
         } else {
-            throw new Exception("Merci de saisir une adresse mail.");
+            throw new FormValidationException("Merci de saisir une adresse mail.");
         }
     }
 
     private void checkEmail(String email, User user)
     {
+        try {
+            checkEmail(email);
+        } catch (FormValidationException e) {
+            setError(CHAMP_EMAIL, e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        user.setEmail(email);
     }
 
     private void checkPassword(String password, String valid) throws Exception
@@ -95,7 +109,31 @@ public final class RegisterForm
 
     private void checkPassword(String password, String valid, User user)
     {
+        try {
+            checkPassword(password, valid);
+        } catch (FormValidationException e) {
+            setError(CHAMP_PASS, e.getMessage());
+            setError(CHAMP_VALID, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        /*
+         * Utilisation de la bibliothèque Jasypt pour chiffrer le mot de passe
+         * efficacement.
+         *
+         * L'algorithme SHA-256 est ici utilisé, avec par défaut un salage
+         * aléatoire et un grand nombre d'itérations de la fonction de hashage.
+         *
+         * La String retournée est de longueur 56 et contient le hash en Base64.
+         */
+        ConfigurablePasswordEncryptor passwordEncryptor;
+        passwordEncryptor = new ConfigurablePasswordEncryptor();
+        passwordEncryptor.setAlgorithm(ALGO_CHIFFREMENT);
+        passwordEncryptor.setPlainDigest(false);
+        String encryptedPassword = passwordEncryptor.encryptPassword(password);
+
+        user.setPassword(encryptedPassword);
     }
 
     private void checkName(String name) throws Exception
@@ -103,11 +141,6 @@ public final class RegisterForm
         if (name != null && name.length() < 3) {
             throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
         }
-    }
-
-    private void checkName(String name, User user)
-    {
-        
     }
 
     /*
