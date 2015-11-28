@@ -35,10 +35,10 @@ CREATE TABLE  user (
 User Stories
 -------------------------------------------
 
-1. En tant qu'utilisateur je souhaite pouvoir m'inscrire sur le site
-2. En tant qu'utilisateur je souhaite pouvoir me connecter sur le site
-3. En tant qu'utilisateur je souhaite pouvoir visualiser et modifier mes informations personnelles
-4. En tant qu'utilisateur je souhaite pouvoir visualiser les objets disponible sur le site
-5. En tant qu'utilisateur je souhaite pouvoir accéder à la fiche produit d'un objet
-6. En tant qu'utilisateur je souhaite pouvoir effectuer une demande de prêt
-7. En tant qu'utilisateur je souhaite pouvoir afficher mes prêts
+1. En tant qu'utilisateur je souhaite pouvoir m'inscrire sur le site (V)
+2. En tant qu'utilisateur je souhaite pouvoir me connecter sur le site (V)
+3. En tant qu'utilisateur je souhaite pouvoir visualiser et modifier mes informations personnelles (X)
+4. En tant qu'utilisateur je souhaite pouvoir visualiser les objets disponible sur le site (X)
+5. En tant qu'utilisateur je souhaite pouvoir accéder à la fiche produit d'un objet (X)
+6. En tant qu'utilisateur je souhaite pouvoir effectuer une demande de prêt (X)
+7. En tant qu'utilisateur je souhaite pouvoir afficher mes prêts (X)
