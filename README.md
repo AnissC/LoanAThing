@@ -25,7 +25,7 @@ create database lat;
 CREATE TABLE  user (
     id INT(11) NOT NULL AUTO_INCREMENT,
     email VARCHAR(60) NOT NULL,
-    password VARCHAR(32) NOT NULL,
+    password CHAR(56) NOT NULL,
     name VARCHAR(20) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (email)
