@@ -50,7 +50,7 @@ public final class RegisterForm
         try {
             checkEmail(email, user);
             checkPassword(password, valid, user);
-            checkName(name);
+            checkName(name, user);
 
             if (errors.isEmpty()) {
                 userDao.create(user);
@@ -136,10 +136,12 @@ public final class RegisterForm
         user.setPassword(encryptedPassword);
     }
 
-    private void checkName(String name) throws Exception
+    private void checkName(String name, User user) throws Exception
     {
         if (name != null && name.length() < 3) {
             throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
+        } else {
+            user.setName(name);
         }
     }
 

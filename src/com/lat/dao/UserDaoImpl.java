@@ -11,8 +11,8 @@ import java.sql.SQLException;
 public class UserDaoImpl implements UserDao
 {
     private DAOFactory daoFactory;
-    private static final String SQL_SELECT_WHITH_EMAIL = "SELECT id, email, nom, mot_de_passe, date_inscription FROM Utilisateur WHERE email = ?";
-    private static final String SQL_INSERT = "INSERT INTO Utilisateur (email, mot_de_passe, nom, date_inscription) VALUES (?, ?, ?, NOW())";
+    private static final String SQL_SELECT_WHITH_EMAIL = "SELECT id, email, name, password FROM user WHERE email = ?";
+    private static final String SQL_INSERT = "INSERT INTO user (email, password, name) VALUES (?, ?, ?)";
 
     UserDaoImpl(DAOFactory daoFactory)
     {
