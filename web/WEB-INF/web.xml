@@ -23,6 +23,14 @@
         <servlet-name>AddAdvert</servlet-name>
         <servlet-class>com.lat.servlets.AddAdvert</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowAdvert</servlet-name>
+        <servlet-class>com.lat.servlets.ShowAdvert</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListAdverts</servlet-name>
+        <servlet-class>com.lat.servlets.ListAdverts</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -40,5 +48,13 @@
     <servlet-mapping>
         <servlet-name>AddAdvert</servlet-name>
         <url-pattern>/add-advert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowAdvert</servlet-name>
+        <url-pattern>/show-advert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListAdverts</servlet-name>
+        <url-pattern>/adverts</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -7,12 +7,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class AdvertDaoImpl implements AdvertDao
 {
     private DAOFactory daoFactory;
-    private static final String SQL_SELECT_WHITH_TITLE = "SELECT id, title, description, date_start, date_end, active FROM advert WHERE title = ?";
+    private static final String SQL_SELECT_WHITH_ID = "SELECT id, title, description, date_start, date_end, active FROM advert WHERE id = ? AND active = true";
+    private static final String SQL_SELECT_ALL = "SELECT id, title, description, date_start, date_end, active FROM advert WHERE active = ?";
     private static final String SQL_INSERT = "INSERT INTO advert (title, description, date_start, date_end, active) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM advert WHERE id = ?";
 
@@ -54,7 +56,34 @@ public class AdvertDaoImpl implements AdvertDao
     }
 
     @Override
-    public Advert find(String title) throws DAOException
+    public ArrayList find() throws DAOException
+    {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Advert advert = null;
+        ArrayList arrayList = new ArrayList();
+
+        try {
+            /* Récupération d'une connexion depuis la Factory */
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_ALL, false, true);
+            resultSet = preparedStatement.executeQuery();
+            /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
+            if (resultSet.next()) {
+                advert = map(resultSet);
+                arrayList.add(advert);
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connexion);
+        }
+
+        return arrayList;
+    }
+
+    public Advert findOneById(int id) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -64,7 +93,7 @@ public class AdvertDaoImpl implements AdvertDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_WHITH_TITLE, false, title);
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_WHITH_ID, false, id);
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
             if (resultSet.next()) {
