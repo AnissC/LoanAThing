@@ -11,6 +11,7 @@
         <ul>
             <li><a href="<c:url value="/register" />">S'inscrire</a></li>
             <li><a href="<c:url value="/login" />">Se connecter</a></li>
+            <li><a href="<c:url value="/add-advert" />">Publier une offre de prêt</a></li>
         </ul>
     </body>
 </html>

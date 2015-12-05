@@ -19,6 +19,11 @@
         <servlet-class>com.lat.servlets.Logout</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>AddAdvert</servlet-name>
+        <servlet-class>com.lat.servlets.AddAdvert</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -30,5 +35,10 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AddAdvert</servlet-name>
+        <url-pattern>/add-advert</url-pattern>
     </servlet-mapping>
 </web-app>
