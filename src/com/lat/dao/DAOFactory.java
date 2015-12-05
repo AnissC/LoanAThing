@@ -71,4 +71,9 @@ public class DAOFactory
     {
         return new UserDaoImpl(this);
     }
+
+    public AdvertDao getAdvertDao()
+    {
+        return new AdvertDaoImpl(this);
+    }
 }

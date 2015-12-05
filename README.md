@@ -32,6 +32,19 @@ CREATE TABLE  user (
 ) ENGINE = INNODB;
 ```
 
+- Create table advert :
+```
+CREATE TABLE advert (
+ id INT(11) NOT NULL AUTO_INCREMENT,
+ title VARCHAR(150) NOT NULL,
+ description VARCHAR(2048) NOT NULL,
+ date_start DATE NOT NULL,
+ date_end DATE,
+ active BOOLEAN NOT NULL,
+ PRIMARY KEY (id)
+) ENGINE = INNODB;
+```
+
 User Stories
 -------------------------------------------
 
@@ -42,3 +55,4 @@ User Stories
 5. En tant qu'utilisateur je souhaite pouvoir accéder à la fiche produit d'un objet (X)
 6. En tant qu'utilisateur je souhaite pouvoir effectuer une demande de prêt (X)
 7. En tant qu'utilisateur je souhaite pouvoir afficher mes prêts (X)
+8. En tant qu'utilisateur je souhaite créer une offre de prêt (V)

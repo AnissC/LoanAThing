@@ -86,7 +86,7 @@ public class UserDaoImpl implements UserDao
     private static User map(ResultSet resultSet) throws SQLException
     {
         User user = new User();
-        user.setId(resultSet.getLong( "id" ));
+        user.setId(resultSet.getLong("id"));
         user.setEmail(resultSet.getString("email"));
         user.setPassword(resultSet.getString("password"));
         user.setName(resultSet.getString("name"));
