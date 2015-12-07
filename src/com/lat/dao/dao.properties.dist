@@ -1,4 +1,4 @@
-url = jdbc:mysql://{URL}:{PORT}/{DATABASE_NAME}
+url = jdbc:{DB_LEGACY_ENGINE}://{DB_LEGACY_HOST}:{DB_LEGACY_PORT}/{DB_LEGACY_NAME}
 driver = com.mysql.jdbc.Driver
-db_username = {DATABASE_USERNAME}
-db_password = {DATABASE_PASSWORD}
+db_username = {DB_LEGACY_USER}
+db_password = {DB_LEGACY_PASS}
