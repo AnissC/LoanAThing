@@ -3,6 +3,7 @@ package com.lat.dao;
 import com.lat.beans.Advert;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface AdvertDao
 {
@@ -10,7 +11,7 @@ public interface AdvertDao
 
     void delete(Advert advert) throws DAOException;
 
-    ArrayList find() throws DAOException;
+    List<Advert> find() throws DAOException;
 
     Advert findOneById(int id) throws DAOException;
 }

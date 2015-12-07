@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListAdverts extends HttpServlet
 {
@@ -27,7 +28,7 @@ public class ListAdverts extends HttpServlet
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        ArrayList adverts = this.advertDao.find();
+        List adverts = this.advertDao.find();
 
         request.setAttribute(ATT_ADVERTS, adverts);
         this.getServletContext().getRequestDispatcher(VUE).forward(request, response);

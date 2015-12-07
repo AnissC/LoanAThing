@@ -8,13 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class AdvertDaoImpl implements AdvertDao
 {
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_WHITH_ID = "SELECT id, title, description, date_start, date_end, active FROM advert WHERE id = ? AND active = true";
-    private static final String SQL_SELECT_ALL = "SELECT id, title, description, date_start, date_end, active FROM advert WHERE active = ?";
+    private static final String SQL_SELECT_ALL = "SELECT id, title, description, date_start, date_end, active FROM advert WHERE active = ? ORDER BY id";
     private static final String SQL_INSERT = "INSERT INTO advert (title, description, date_start, date_end, active) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM advert WHERE id = ?";
 
@@ -56,31 +57,27 @@ public class AdvertDaoImpl implements AdvertDao
     }
 
     @Override
-    public ArrayList find() throws DAOException
+    public List<Advert> find() throws DAOException
     {
-        Connection connexion = null;
+        Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Advert advert = null;
-        ArrayList arrayList = new ArrayList();
+        List<Advert> adverts = new ArrayList<Advert>();
 
         try {
-            /* Récupération d'une connexion depuis la Factory */
-            connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_ALL, false, true);
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_ALL, false, true);
             resultSet = preparedStatement.executeQuery();
-            /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
-            if (resultSet.next()) {
-                advert = map(resultSet);
-                arrayList.add(advert);
+            while ( resultSet.next() ) {
+                adverts.add(map(resultSet));
             }
-        } catch (SQLException e) {
-            throw new DAOException(e);
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
         } finally {
-            silentClosures(resultSet, preparedStatement, connexion);
+            silentClosures(resultSet, preparedStatement, connection);
         }
 
-        return arrayList;
+        return adverts;
     }
 
     public Advert findOneById(int id) throws DAOException

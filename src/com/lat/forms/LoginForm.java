@@ -30,6 +30,7 @@ public final class LoginForm
         /* Récupération des champs du formulaire */
         String email = getFieldValue(request, CHAMP_EMAIL);
         String password = getFieldValue(request, CHAMP_PASS);
+        System.out.println(password.length());
 
         User user = new User();
 
