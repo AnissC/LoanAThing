@@ -1,36 +1,26 @@
 package com.lat.servlets;
 
-import com.lat.beans.Advert;
-import com.lat.dao.AdvertDao;
-import com.lat.dao.DAOFactory;
-import com.lat.forms.AdvertAddForm;
+import com.lat.services.AdvertService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ListAdverts extends HttpServlet
 {
-    public static final String CONF_DAO_FACTORY = "daofactory";
-    public static final String ATT_ADVERTS = "adverts";
-    public static final String VUE = "/WEB-INF/adverts.jsp";
+    private AdvertService advertService;
 
-    private AdvertDao advertDao;
-
-    public void init() throws ServletException {
-        /* Récupération d'une instance de notre DAO Advert */
-        this.advertDao = ((DAOFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)).getAdvertDao();
+    public void init() throws ServletException
+    {
+        this.advertService = AdvertService.getInstance();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        List adverts = this.advertDao.find();
+        request.setAttribute("adverts", this.advertService.getAllAdverts());
 
-        request.setAttribute(ATT_ADVERTS, adverts);
-        this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/adverts.jsp").forward(request, response);
     }
 }

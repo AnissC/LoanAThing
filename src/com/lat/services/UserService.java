@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 public class UserService
 {
-    private static UserService userService = null;
+    private static UserService USER_SERVICE = null;
     private HttpSession session;
     private UserDao userDao;
     private RegisterForm registerForm;
@@ -26,11 +26,12 @@ public class UserService
 
     public static UserService getInstance()
     {
-        if (userService == null)
+        if (USER_SERVICE == null)
         {
-            userService = new UserService();
+            USER_SERVICE = new UserService();
         }
-        return userService;
+
+        return USER_SERVICE;
     }
 
     public RegisterForm getRegisterForm()

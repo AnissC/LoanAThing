@@ -13,7 +13,8 @@ public class Register extends HttpServlet
 {
     private UserService userService;
 
-    public void init() throws ServletException {
+    public void init() throws ServletException
+    {
         this.userService = UserService.getInstance();
     }
 
