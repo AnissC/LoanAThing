@@ -2,6 +2,7 @@ package com.lat.beans;
 
 
 public class State {
+    public static final String AVAILABLE = "available";
     private Long id;
     private String stateName;
 
@@ -22,6 +23,6 @@ public class State {
     }
 
     public boolean isAvailable(){
-        return stateName == "available";
+        return stateName == AVAILABLE;
     }
 }

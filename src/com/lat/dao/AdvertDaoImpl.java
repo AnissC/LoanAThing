@@ -1,6 +1,8 @@
 package com.lat.dao;
 
 import com.lat.beans.Advert;
+import com.lat.beans.State;
+
 import static com.lat.dao.DAOUtilities.*;
 
 import java.sql.Connection;
@@ -35,7 +37,7 @@ public class AdvertDaoImpl implements AdvertDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd(), advert.isActive());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd(), advert.getState().isAvailable());
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
             if (statut == 0) {
@@ -123,7 +125,7 @@ public class AdvertDaoImpl implements AdvertDao
         advert.setDescription(resultSet.getString("description"));
         advert.setDateStart(resultSet.getDate("date_start"));
         advert.setDateEnd(resultSet.getDate("date_end"));
-        advert.setActive(resultSet.getBoolean("active"));
+        advert.getState().setStateName(State.AVAILABLE);
 
         return advert;
     }
