@@ -94,7 +94,7 @@ public final class AdvertAddForm
         } else {
             advert.setDateEnd(null);
         }
-        advert.setActive(true);
+        advert.getState().setStateName("available");
     }
 
     /*
