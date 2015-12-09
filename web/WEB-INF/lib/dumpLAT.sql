@@ -1,3 +1,4 @@
+
 --
 -- Base de données :  `lat`
 --
@@ -5,11 +6,11 @@
 -- --------------------------------------------------------
 
 --
--- Structure de la table `ADVERTS`
+-- Structure de la table `adverts`
 --
 
-CREATE TABLE `ADVERTS` (
-`id` int(11) NOT NULL,
+CREATE TABLE `adverts` (
+  `id` int(11) NOT NULL,
   `title` varchar(150) NOT NULL,
   `description` varchar(2048) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
@@ -24,11 +25,11 @@ CREATE TABLE `ADVERTS` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `APPLY`
+-- Structure de la table `apply`
 --
 
-CREATE TABLE `APPLY` (
-`id` int(11) NOT NULL,
+CREATE TABLE `apply` (
+  `id` int(11) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date DEFAULT NULL,
   `accepted` tinyint(1) NOT NULL,
@@ -39,11 +40,11 @@ CREATE TABLE `APPLY` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `CATEGORY`
+-- Structure de la table `category`
 --
 
-CREATE TABLE `CATEGORY` (
-`id` int(11) NOT NULL,
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
   `category_name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `parent_category` int(11) DEFAULT NULL,
@@ -53,10 +54,10 @@ CREATE TABLE `CATEGORY` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `FRIENDS`
+-- Structure de la table `friends`
 --
 
-CREATE TABLE `FRIENDS` (
+CREATE TABLE `friends` (
   `id_user` int(11) NOT NULL,
   `id_user1` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -64,22 +65,22 @@ CREATE TABLE `FRIENDS` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `GROUPS`
+-- Structure de la table `groups`
 --
 
-CREATE TABLE `GROUPS` (
-`id` int(11) NOT NULL,
+CREATE TABLE `groups` (
+  `id` int(11) NOT NULL,
   `groups_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `LOAN`
+-- Structure de la table `loan`
 --
 
-CREATE TABLE `LOAN` (
-`id` int(11) NOT NULL,
+CREATE TABLE `loan` (
+  `id` int(11) NOT NULL,
   `loan_code` varchar(255) NOT NULL,
   `state_loan_code` tinyint(1) NOT NULL,
   `return_code` varchar(255) NOT NULL,
@@ -90,11 +91,11 @@ CREATE TABLE `LOAN` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `OPINION`
+-- Structure de la table `opinion`
 --
 
-CREATE TABLE `OPINION` (
-`id` int(11) NOT NULL,
+CREATE TABLE `opinion` (
+  `id` int(11) NOT NULL,
   `mark` int(11) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL
@@ -103,11 +104,11 @@ CREATE TABLE `OPINION` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `REPORTING`
+-- Structure de la table `reporting`
 --
 
-CREATE TABLE `REPORTING` (
-`id` int(11) NOT NULL,
+CREATE TABLE `reporting` (
+  `id` int(11) NOT NULL,
   `reason` varchar(255) NOT NULL,
   `more_information` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -115,44 +116,44 @@ CREATE TABLE `REPORTING` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `REPORTING_ADVERT`
+-- Structure de la table `reporting_advert`
 --
 
-CREATE TABLE `REPORTING_ADVERT` (
-`id` int(11) NOT NULL,
+CREATE TABLE `reporting_advert` (
+  `id` int(11) NOT NULL,
   `id_advert` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `REPORTING_USER`
+-- Structure de la table `reporting_user`
 --
 
-CREATE TABLE `REPORTING_USER` (
-`id` int(11) NOT NULL,
+CREATE TABLE `reporting_user` (
+  `id` int(11) NOT NULL,
   `id_users` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `STATE`
+-- Structure de la table `state`
 --
 
-CREATE TABLE `STATE` (
-`id` int(11) NOT NULL,
+CREATE TABLE `state` (
+  `id` int(11) NOT NULL,
   `state_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `USERS`
+-- Structure de la table `users`
 --
 
-CREATE TABLE `USERS` (
-`id` int(11) NOT NULL,
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `first_name` varchar(20) DEFAULT NULL,
   `nick_name` varchar(20) DEFAULT NULL,
@@ -173,11 +174,11 @@ CREATE TABLE `USERS` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `WARNING`
+-- Structure de la table `warning`
 --
 
-CREATE TABLE `WARNING` (
-`id` int(11) NOT NULL,
+CREATE TABLE `warning` (
+  `id` int(11) NOT NULL,
   `reason` varchar(255) NOT NULL,
   `descritpion` varchar(255) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL
@@ -188,213 +189,213 @@ CREATE TABLE `WARNING` (
 --
 
 --
--- Index pour la table `ADVERTS`
+-- Index pour la table `adverts`
 --
-ALTER TABLE `ADVERTS`
- ADD PRIMARY KEY (`id`), ADD KEY `FK_ADVERT` (`id_users`), ADD KEY `FK1_ADVERT` (`id_category`), ADD KEY `FK2_ADVERT` (`id_state`);
+ALTER TABLE `adverts`
+ADD PRIMARY KEY (`id`), ADD KEY `FK_ADVERT` (`id_users`), ADD KEY `FK1_ADVERT` (`id_category`), ADD KEY `FK2_ADVERT` (`id_state`);
 
 --
--- Index pour la table `APPLY`
+-- Index pour la table `apply`
 --
-ALTER TABLE `APPLY`
- ADD PRIMARY KEY (`id`), ADD KEY `FK_APPLY` (`id_user`), ADD KEY `FK1_APPLY` (`id_adverts`);
+ALTER TABLE `apply`
+ADD PRIMARY KEY (`id`), ADD KEY `FK_APPLY` (`id_user`), ADD KEY `FK1_APPLY` (`id_adverts`);
 
 --
--- Index pour la table `CATEGORY`
+-- Index pour la table `category`
 --
-ALTER TABLE `CATEGORY`
- ADD PRIMARY KEY (`id`), ADD KEY `parent_category` (`parent_category`);
+ALTER TABLE `category`
+ADD PRIMARY KEY (`id`), ADD KEY `parent_category` (`parent_category`);
 
 --
--- Index pour la table `FRIENDS`
+-- Index pour la table `friends`
 --
-ALTER TABLE `FRIENDS`
- ADD PRIMARY KEY (`id_user`,`id_user1`), ADD KEY `id_user1` (`id_user1`);
+ALTER TABLE `friends`
+ADD PRIMARY KEY (`id_user`,`id_user1`), ADD KEY `id_user1` (`id_user1`);
 
 --
--- Index pour la table `GROUPS`
+-- Index pour la table `groups`
 --
-ALTER TABLE `GROUPS`
- ADD PRIMARY KEY (`id`);
+ALTER TABLE `groups`
+ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `LOAN`
+-- Index pour la table `loan`
 --
-ALTER TABLE `LOAN`
- ADD PRIMARY KEY (`id`), ADD KEY `id_apply` (`id_apply`);
+ALTER TABLE `loan`
+ADD PRIMARY KEY (`id`), ADD KEY `id_apply` (`id_apply`);
 
 --
--- Index pour la table `OPINION`
+-- Index pour la table `opinion`
 --
-ALTER TABLE `OPINION`
- ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`);
+ALTER TABLE `opinion`
+ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`);
 
 --
--- Index pour la table `REPORTING`
+-- Index pour la table `reporting`
 --
-ALTER TABLE `REPORTING`
- ADD PRIMARY KEY (`id`);
+ALTER TABLE `reporting`
+ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `REPORTING_ADVERT`
+-- Index pour la table `reporting_advert`
 --
-ALTER TABLE `REPORTING_ADVERT`
- ADD PRIMARY KEY (`id`), ADD KEY `id_advert` (`id_advert`);
+ALTER TABLE `reporting_advert`
+ADD PRIMARY KEY (`id`), ADD KEY `id_advert` (`id_advert`);
 
 --
--- Index pour la table `REPORTING_USER`
+-- Index pour la table `reporting_user`
 --
-ALTER TABLE `REPORTING_USER`
- ADD PRIMARY KEY (`id`), ADD KEY `id_users` (`id_users`);
+ALTER TABLE `reporting_user`
+ADD PRIMARY KEY (`id`), ADD KEY `id_users` (`id_users`);
 
 --
--- Index pour la table `STATE`
+-- Index pour la table `state`
 --
-ALTER TABLE `STATE`
- ADD PRIMARY KEY (`id`);
+ALTER TABLE `state`
+ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `USERS`
+-- Index pour la table `users`
 --
-ALTER TABLE `USERS`
- ADD PRIMARY KEY (`id`), ADD KEY `id_groups` (`id_groups`);
+ALTER TABLE `users`
+ADD PRIMARY KEY (`id`), ADD KEY `id_groups` (`id_groups`);
 
 --
--- Index pour la table `WARNING`
+-- Index pour la table `warning`
 --
-ALTER TABLE `WARNING`
- ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`);
+ALTER TABLE `warning`
+ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
 --
 
 --
--- AUTO_INCREMENT pour la table `ADVERTS`
+-- AUTO_INCREMENT pour la table `adverts`
 --
-ALTER TABLE `ADVERTS`
+ALTER TABLE `adverts`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `APPLY`
+-- AUTO_INCREMENT pour la table `apply`
 --
-ALTER TABLE `APPLY`
+ALTER TABLE `apply`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `CATEGORY`
+-- AUTO_INCREMENT pour la table `category`
 --
-ALTER TABLE `CATEGORY`
+ALTER TABLE `category`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `GROUPS`
+-- AUTO_INCREMENT pour la table `groups`
 --
-ALTER TABLE `GROUPS`
+ALTER TABLE `groups`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `LOAN`
+-- AUTO_INCREMENT pour la table `loan`
 --
-ALTER TABLE `LOAN`
+ALTER TABLE `loan`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `OPINION`
+-- AUTO_INCREMENT pour la table `opinion`
 --
-ALTER TABLE `OPINION`
+ALTER TABLE `opinion`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `REPORTING`
+-- AUTO_INCREMENT pour la table `reporting`
 --
-ALTER TABLE `REPORTING`
+ALTER TABLE `reporting`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `REPORTING_ADVERT`
+-- AUTO_INCREMENT pour la table `reporting_advert`
 --
-ALTER TABLE `REPORTING_ADVERT`
+ALTER TABLE `reporting_advert`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `REPORTING_USER`
+-- AUTO_INCREMENT pour la table `reporting_user`
 --
-ALTER TABLE `REPORTING_USER`
+ALTER TABLE `reporting_user`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `STATE`
+-- AUTO_INCREMENT pour la table `state`
 --
-ALTER TABLE `STATE`
+ALTER TABLE `state`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `USERS`
+-- AUTO_INCREMENT pour la table `users`
 --
-ALTER TABLE `USERS`
+ALTER TABLE `users`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `WARNING`
+-- AUTO_INCREMENT pour la table `warning`
 --
-ALTER TABLE `WARNING`
+ALTER TABLE `warning`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Contraintes pour les tables exportées
 --
 
 --
--- Contraintes pour la table `ADVERTS`
+-- Contraintes pour la table `adverts`
 --
-ALTER TABLE `ADVERTS`
+ALTER TABLE `adverts`
 ADD CONSTRAINT `FK_ADVERT` FOREIGN KEY (`id_users`) REFERENCES `USERS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `FK1_ADVERT` FOREIGN KEY (`id_category`) REFERENCES `CATEGORY` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `FK2_ADVERT` FOREIGN KEY (`id_state`) REFERENCES `STATE` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `APPLY`
+-- Contraintes pour la table `apply`
 --
-ALTER TABLE `APPLY`
+ALTER TABLE `apply`
 ADD CONSTRAINT `FK_APPLY` FOREIGN KEY (`id_user`) REFERENCES `USERS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `FK1_APPLY` FOREIGN KEY (`id_adverts`) REFERENCES `ADVERTS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `CATEGORY`
+-- Contraintes pour la table `category`
 --
-ALTER TABLE `CATEGORY`
+ALTER TABLE `category`
 ADD CONSTRAINT `category_ibfk_1` FOREIGN KEY (`parent_category`) REFERENCES `CATEGORY` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `FRIENDS`
+-- Contraintes pour la table `friends`
 --
-ALTER TABLE `FRIENDS`
+ALTER TABLE `friends`
 ADD CONSTRAINT `friends_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `USERS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `friends_ibfk_2` FOREIGN KEY (`id_user1`) REFERENCES `USERS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `LOAN`
+-- Contraintes pour la table `loan`
 --
-ALTER TABLE `LOAN`
+ALTER TABLE `loan`
 ADD CONSTRAINT `loan_ibfk_1` FOREIGN KEY (`id_apply`) REFERENCES `APPLY` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `OPINION`
+-- Contraintes pour la table `opinion`
 --
-ALTER TABLE `OPINION`
+ALTER TABLE `opinion`
 ADD CONSTRAINT `opinion_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `USERS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `REPORTING_ADVERT`
+-- Contraintes pour la table `reporting_advert`
 --
-ALTER TABLE `REPORTING_ADVERT`
+ALTER TABLE `reporting_advert`
 ADD CONSTRAINT `reporting_advert_ibfk_1` FOREIGN KEY (`id`) REFERENCES `REPORTING` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `reporting_advert_ibfk_2` FOREIGN KEY (`id_advert`) REFERENCES `ADVERTS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `REPORTING_USER`
+-- Contraintes pour la table `reporting_user`
 --
-ALTER TABLE `REPORTING_USER`
+ALTER TABLE `reporting_user`
 ADD CONSTRAINT `reporting_user_ibfk_1` FOREIGN KEY (`id`) REFERENCES `REPORTING` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `reporting_user_ibfk_2` FOREIGN KEY (`id_users`) REFERENCES `USERS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `USERS`
+-- Contraintes pour la table `users`
 --
-ALTER TABLE `USERS`
+ALTER TABLE `users`
 ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_groups`) REFERENCES `GROUPS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `WARNING`
+-- Contraintes pour la table `warning`
 --
-ALTER TABLE `WARNING`
+ALTER TABLE `warning`
 ADD CONSTRAINT `warning_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `USERS` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

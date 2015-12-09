@@ -1,7 +1,6 @@
 package com.lat.dao;
 
 import com.lat.beans.Advert;
-import com.lat.beans.State;
 
 import static com.lat.dao.DAOUtilities.*;
 
@@ -16,10 +15,10 @@ import java.util.List;
 public class AdvertDao
 {
     private DAOFactory daoFactory;
-    private static final String SQL_SELECT_WHITH_ID = "SELECT id, title, description, date_start, date_end FROM ADVERTS WHERE id = ?";
-    private static final String SQL_SELECT_ALL = "SELECT id, title, description, date_start, date_end FROM ADVERTS ORDER BY id";
-    private static final String SQL_INSERT = "INSERT INTO ADVERTS (title, description, date_start, date_end) VALUES (?, ?, ?, ?)";
-    private static final String SQL_DELETE = "DELETE FROM ADVERTS WHERE id = ?";
+    private static final String SQL_SELECT_WHITH_ID = "SELECT id, title, description, date_start, date_end FROM adverts WHERE id = ?";
+    private static final String SQL_SELECT_ALL = "SELECT id, title, description, date_start, date_end FROM adverts ORDER BY id";
+    private static final String SQL_INSERT = "INSERT INTO adverts (title, description, date_start, date_end) VALUES (?, ?, ?, ?)";
+    private static final String SQL_DELETE = "DELETE FROM adverts WHERE id = ?";
 
     AdvertDao(DAOFactory daoFactory)
     {
