@@ -1,0 +1,98 @@
+a, p, h1, h2, h3, h4, h5{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /*background: linear-gradient(135deg, #427787, #264269);*/
+    background: url(../images/bg4.jpg) no-repeat center fixed;
+    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+    background-size: cover; /* version standardisée */
+}
+
+body{
+    background-color: transparent;
+    margin-bottom: -60px;
+    height: 100%;
+}
+
+#panel-welcome, #panel-register{
+    margin-top: 40%;
+    background-color: transparent;
+    color: white;
+    border-color: white;
+}
+
+.btn-custom{
+    background-color: transparent;
+    color: white;
+    font-weight: 100;
+    letter-spacing: 0.1em;
+    font-variant: small-caps;
+    transition: all 0.3s;
+    border: 1px solid white;
+}
+
+.btn-custom:hover{
+    color: white;
+    transition: all 0.3s;
+    letter-spacing: 0.2em;
+}
+
+.btn-success-custom{
+    background-color: transparent;
+    border: 1px solid white;
+    font-weight: 100;
+    letter-spacing: 0.1em;
+    font-variant: small-caps;
+    transition: all 0.3s;
+}
+
+.btn-success-custom:hover{
+    background-color: #5cb85c;
+    border: 1px solid #5cb85c;
+    font-weight: 100;
+    letter-spacing: 0.15em;
+    font-variant: small-caps;
+    transition: all 0.3s;
+    color : white;
+}
+
+.btn-danger-custom{
+    background-color: transparent;
+    border: 1px solid white;
+    font-weight: 100;
+    letter-spacing: 0.1em;
+    font-variant: small-caps;
+    transition: all 0.3s;
+}
+
+.btn-danger-custom:hover{
+    background-color: #c9302c;
+    border: 1px solid #c9302c;
+    font-weight: 100;
+    letter-spacing: 0.15em;
+    font-variant: small-caps;
+    transition: all 0.3s;
+    color : white;
+}
+
+footer{
+    background-color: rgba(0,0,0,0.3);
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+}
+
+.form-margin-top{
+    margin-top: 20px;
+}
+
+footer p{
+    margin-top: 20px;
+}
