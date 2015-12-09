@@ -30,6 +30,6 @@ public class Login extends HttpServlet
         request.setAttribute("form", this.userService.getLoginForm());
         request.setAttribute("user", this.userService.connectUser(request));
 
-        this.getServletContext().getRequestDispatcher("/").forward(request, response);
+        response.sendRedirect("/home");
     }
 }

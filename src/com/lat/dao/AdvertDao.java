@@ -122,7 +122,7 @@ public class AdvertDao
         advert.setDescription(resultSet.getString("description"));
         advert.setDateStart(resultSet.getDate("date_start"));
         advert.setDateEnd(resultSet.getDate("date_end"));
-        advert.getState().setStateName(State.AVAILABLE);
+        //advert.getState().setStateName(State.AVAILABLE);
 
         return advert;
     }
