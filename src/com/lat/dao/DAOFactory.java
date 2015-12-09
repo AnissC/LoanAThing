@@ -69,11 +69,11 @@ public class DAOFactory
 
     public UserDao getUserDao()
     {
-        return new UserDaoImpl(this);
+        return new UserDao(this);
     }
 
     public AdvertDao getAdvertDao()
     {
-        return new AdvertDaoImpl(this);
+        return new AdvertDao(this);
     }
 }

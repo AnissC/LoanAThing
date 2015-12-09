@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AdvertDaoImpl implements AdvertDao
+public class AdvertDao
 {
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_WHITH_ID = "SELECT id, title, description, date_start, date_end, active FROM advert WHERE id = ? AND active = true";
@@ -21,13 +21,12 @@ public class AdvertDaoImpl implements AdvertDao
     private static final String SQL_INSERT = "INSERT INTO advert (title, description, date_start, date_end, active) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM advert WHERE id = ?";
 
-    AdvertDaoImpl(DAOFactory daoFactory)
+    AdvertDao(DAOFactory daoFactory)
     {
         this.daoFactory = daoFactory;
     }
 
     /* Implémentation de la méthode définie dans l'interface AdvertDao */
-    @Override
     public void create(Advert advert) throws DAOException
     {
         Connection connexion = null;
@@ -58,7 +57,6 @@ public class AdvertDaoImpl implements AdvertDao
         }
     }
 
-    @Override
     public List<Advert> find() throws DAOException
     {
         Connection connection = null;
@@ -107,7 +105,6 @@ public class AdvertDaoImpl implements AdvertDao
         return advert;
     }
 
-    @Override
     public void delete(Advert advert) throws DAOException
     {
     }

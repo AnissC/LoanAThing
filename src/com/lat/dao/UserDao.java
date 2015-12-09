@@ -8,19 +8,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDaoImpl implements UserDao
+public class UserDao
 {
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_WHITH_EMAIL = "SELECT id, email, name, password FROM user WHERE email = ?";
     private static final String SQL_INSERT = "INSERT INTO user (email, password, name) VALUES (?, ?, ?)";
 
-    UserDaoImpl(DAOFactory daoFactory)
+    UserDao(DAOFactory daoFactory)
     {
         this.daoFactory = daoFactory;
     }
 
     /* Implémentation de la méthode définie dans l'interface UtilisateurDao */
-    @Override
     public void create(User user) throws DAOException
     {
         Connection connexion = null;
@@ -52,7 +51,6 @@ public class UserDaoImpl implements UserDao
     }
 
     /* Implémentation de la méthode définie dans l'interface UtilisateurDao */
-    @Override
     public User find(String email) throws DAOException
     {
         Connection connexion = null;
