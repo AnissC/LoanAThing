@@ -5,10 +5,12 @@ import com.lat.services.UserService;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@WebServlet("/logout")
 public class Logout extends HttpServlet
 {
     private UserService userService;
@@ -22,6 +24,6 @@ public class Logout extends HttpServlet
     {
         this.userService.logout();
 
-        response.sendRedirect("http://localhost:8080/register");
+        response.sendRedirect(request.getContextPath());
     }
 }
