@@ -3,12 +3,14 @@ package com.lat.servlets;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lat.services.UserService;
 
+@WebServlet("/login")
 public class Login extends HttpServlet
 {
     private UserService userService;
@@ -28,6 +30,6 @@ public class Login extends HttpServlet
         request.setAttribute("form", this.userService.getLoginForm());
         request.setAttribute("user", this.userService.connectUser(request));
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/").forward(request, response);
     }
 }

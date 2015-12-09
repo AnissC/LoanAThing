@@ -3,9 +3,11 @@ package com.lat.config;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
 import com.lat.dao.DAOFactory;
 
+@WebListener
 public class InitializeDaoFactory implements ServletContextListener
 {
     private static final String ATT_DAO_FACTORY = "daofactory";

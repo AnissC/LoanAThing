@@ -3,11 +3,13 @@ package com.lat.servlets;
 import com.lat.services.AdvertService;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet("/advert/add")
 public class AddAdvert extends HttpServlet
 {
     private AdvertService advertService;
