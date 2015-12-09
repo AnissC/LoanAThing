@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/adverts")
-public class ListAdverts extends HttpServlet
+@WebServlet("/home")
+public class Home extends HttpServlet
 {
     private AdvertService advertService;
 
@@ -23,6 +23,10 @@ public class ListAdverts extends HttpServlet
     {
         request.setAttribute("adverts", this.advertService.getAllAdverts());
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/adverts.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+    }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
     }
 }

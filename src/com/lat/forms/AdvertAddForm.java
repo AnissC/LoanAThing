@@ -67,7 +67,6 @@ public final class AdvertAddForm
 
     private void checkValues(String title, String description, String dateStart) throws Exception
     {
-        System.out.println(dateStart==null);
         if (title == null || description == null || dateStart == null) {
             throw new FormValidationException("Les champs marqués d'une * ne peuvent être nuls");
         }

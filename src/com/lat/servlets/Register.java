@@ -30,6 +30,6 @@ public class Register extends HttpServlet
         request.setAttribute("form", this.userService.getRegisterForm());
         request.setAttribute("user", this.userService.processUser(request));
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+        response.sendRedirect("/login");
     }
 }
