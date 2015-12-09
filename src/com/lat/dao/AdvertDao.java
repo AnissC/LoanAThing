@@ -16,10 +16,10 @@ import java.util.List;
 public class AdvertDao
 {
     private DAOFactory daoFactory;
-    private static final String SQL_SELECT_WHITH_ID = "SELECT id, title, description, date_start, date_end, active FROM advert WHERE id = ? AND active = true";
-    private static final String SQL_SELECT_ALL = "SELECT id, title, description, date_start, date_end, active FROM advert WHERE active = ? ORDER BY id";
-    private static final String SQL_INSERT = "INSERT INTO advert (title, description, date_start, date_end, active) VALUES (?, ?, ?, ?, ?)";
-    private static final String SQL_DELETE = "DELETE FROM advert WHERE id = ?";
+    private static final String SQL_SELECT_WHITH_ID = "SELECT id, title, description, date_start, date_end FROM ADVERTS WHERE id = ?";
+    private static final String SQL_SELECT_ALL = "SELECT id, title, description, date_start, date_end FROM ADVERTS ORDER BY id";
+    private static final String SQL_INSERT = "INSERT INTO ADVERTS (title, description, date_start, date_end) VALUES (?, ?, ?, ?)";
+    private static final String SQL_DELETE = "DELETE FROM ADVERTS WHERE id = ?";
 
     AdvertDao(DAOFactory daoFactory)
     {
@@ -36,7 +36,7 @@ public class AdvertDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd(), advert.getState().isAvailable());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd());
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
             if (statut == 0) {
@@ -66,9 +66,9 @@ public class AdvertDao
 
         try {
             connection = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_ALL, false, true);
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_ALL, false);
             resultSet = preparedStatement.executeQuery();
-            while ( resultSet.next() ) {
+            while (resultSet.next()) {
                 adverts.add(map(resultSet));
             }
         } catch ( SQLException e ) {
