@@ -1,6 +1,6 @@
 package com.lat.services;
 
-import com.lat.beans.Advert;
+import com.lat.beans.Adverts;
 import com.lat.dao.AdvertDao;
 import com.lat.dao.DAOFactory;
 import com.lat.dao.UserDao;
@@ -35,7 +35,7 @@ public class AdvertService
         return ADVERT_SERVICE;
     }
 
-    public List<Advert> getAllAdverts()
+    public List<Adverts> getAllAdverts()
     {
         return this.advertDao.find();
     }
@@ -45,12 +45,12 @@ public class AdvertService
         return this.advertAddForm;
     }
 
-    public Advert processAdvert(HttpServletRequest request)
+    public Adverts processAdvert(HttpServletRequest request)
     {
         return this.advertAddForm.processAdvert(request);
     }
 
-    public Advert getAdvert(int id)
+    public Adverts getAdvert(int id)
     {
         return this.advertDao.findOneById(id);
     }

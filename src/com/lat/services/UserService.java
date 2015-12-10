@@ -1,6 +1,6 @@
 package com.lat.services;
 
-import com.lat.beans.User;
+import com.lat.beans.Users;
 import com.lat.dao.DAOFactory;
 import com.lat.dao.UserDao;
 import com.lat.forms.LoginForm;
@@ -44,15 +44,15 @@ public class UserService
         return this.loginForm;
     }
 
-    public User processUser(HttpServletRequest request)
+    public Users processUser(HttpServletRequest request)
     {
         return this.registerForm.processUser(request);
     }
 
-    public User connectUser(HttpServletRequest request)
+    public Users connectUser(HttpServletRequest request)
     {
         this.session = request.getSession();
-        User user = this.loginForm.connectUser(request);
+        Users user = this.loginForm.connectUser(request);
 
         if (this.loginForm.getErrors().isEmpty()) {
             session.setAttribute("userSession", user);

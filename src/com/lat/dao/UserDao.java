@@ -1,6 +1,7 @@
 package com.lat.dao;
 
-import com.lat.beans.User;
+import com.lat.beans.Users;
+
 import static com.lat.dao.DAOUtilities.*;
 
 import java.sql.Connection;
@@ -20,7 +21,7 @@ public class UserDao
     }
 
     /* Implémentation de la méthode définie dans l'interface UtilisateurDao */
-    public void create(User user) throws DAOException
+    public void create(Users user) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -51,12 +52,12 @@ public class UserDao
     }
 
     /* Implémentation de la méthode définie dans l'interface UtilisateurDao */
-    public User find(String email) throws DAOException
+    public Users find(String email) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        User user = null;
+        Users user = null;
 
         try {
             /* Récupération d'une connexion depuis la Factory */
@@ -81,9 +82,9 @@ public class UserDao
      * mapping) entre une ligne issue de la table des utilisateurs (un
      * ResultSet) et un bean Utilisateur.
      */
-    private static User map(ResultSet resultSet) throws SQLException
+    private static Users map(ResultSet resultSet) throws SQLException
     {
-        User user = new User();
+        Users user = new Users();
         user.setId(resultSet.getLong("id"));
         user.setEmail(resultSet.getString("email"));
         user.setPassword(resultSet.getString("password"));

@@ -1,11 +1,11 @@
 package com.lat.forms;
 
+import com.lat.beans.Users;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-
-import com.lat.beans.User;
 
 public final class LoginForm
 {
@@ -25,13 +25,13 @@ public final class LoginForm
         return errors;
     }
 
-    public User connectUser(HttpServletRequest request)
+    public Users connectUser(HttpServletRequest request)
     {
         /* Récupération des champs du formulaire */
         String email = getFieldValue(request, CHAMP_EMAIL);
         String password = getFieldValue(request, CHAMP_PASS);
 
-        User user = new User();
+        Users user = new Users();
 
         /* Validation du champ email. */
         try {

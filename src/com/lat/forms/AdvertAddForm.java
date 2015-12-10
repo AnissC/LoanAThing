@@ -1,6 +1,6 @@
 package com.lat.forms;
 
-import com.lat.beans.Advert;
+import com.lat.beans.Adverts;
 import com.lat.dao.DAOException;
 import com.lat.dao.AdvertDao;
 
@@ -37,14 +37,14 @@ public final class AdvertAddForm
         return errors;
     }
 
-    public Advert processAdvert(HttpServletRequest request)
+    public Adverts processAdvert(HttpServletRequest request)
     {
         String title = getFieldValue(request, TITLE_FIELD);
         String description = getFieldValue(request, DESCRIPTION_FIELD);
         String dateStart = getFieldValue(request, DATE_START_FIELD);
         String dateEnd = getFieldValue(request, DATE_END_FIELD);
 
-        Advert advert = new Advert();
+        Adverts advert = new Adverts();
 
         try {
             checkValues(advert, title, description, dateStart, dateEnd);
@@ -72,7 +72,7 @@ public final class AdvertAddForm
         }
     }
 
-    private void checkValues(Advert advert, String title, String description, String dateStart, String dateEnd) throws Exception {
+    private void checkValues(Adverts advert, String title, String description, String dateStart, String dateEnd) throws Exception {
         try {
             checkValues(title, description, dateStart);
         } catch (FormValidationException e) {
