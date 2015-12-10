@@ -1,11 +1,9 @@
 package com.lat.beans;
 
+
 import java.util.Date;
 
-public class Advert
-{
-
-    /* ======> Debut Attributs de classe <====== */
+public class Adverts {
 
     private Long id;
     private String title;
@@ -14,17 +12,10 @@ public class Advert
     private Date dateStart;
     private Date dateEnd;
     private String simpleDescription;
-    private User user;
+    private Users user;
     private Category category;
     private State state;
 
-    /* ======> Fin Attributs de classe <====== */
-
-
-
-
-
-    /* ======> Debut Getters & Setters de classe <====== */
 
     public Long getId() {
         return id;
@@ -82,11 +73,11 @@ public class Advert
         this.simpleDescription = simpleDescription;
     }
 
-    public User getUser() {
+    public Users getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Users user) {
         this.user = user;
     }
 
@@ -106,5 +97,4 @@ public class Advert
         this.state = state;
     }
 
-    /* ======> Fin Getters & Setters de classe <====== */
 }

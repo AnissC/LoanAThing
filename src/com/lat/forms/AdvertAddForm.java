@@ -1,11 +1,10 @@
 package com.lat.forms;
 
-import com.lat.beans.Advert;
-import com.lat.beans.User;
+import com.lat.beans.Adverts;
+import com.lat.beans.Users;
 import com.lat.dao.DAOException;
 import com.lat.dao.AdvertDao;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,9 +32,9 @@ public final class AdvertAddForm
         return errors;
     }
 
-    public Advert processAdvert(String title, String description, String dateStart, String dateEnd, User user)
+    public Adverts processAdvert(String title, String description, String dateStart, String dateEnd, Users user)
     {
-        Advert advert = new Advert();
+        Adverts advert = new Adverts();
 
         try {
             checkValues(advert, title, description, dateStart, dateEnd);
@@ -63,7 +62,7 @@ public final class AdvertAddForm
         }
     }
 
-    private void checkValues(Advert advert, String title, String description, String dateStart, String dateEnd) throws Exception {
+    private void checkValues(Adverts advert, String title, String description, String dateStart, String dateEnd) throws Exception {
         try {
             checkValues(title, description, dateStart);
         } catch (FormValidationException e) {
