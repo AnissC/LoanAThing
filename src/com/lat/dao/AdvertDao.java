@@ -27,7 +27,8 @@ public class AdvertDao
         this.daoFactory = daoFactory;
     }
     
-    public int count(){
+    public int count()
+    {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -36,15 +37,17 @@ public class AdvertDao
             connection = daoFactory.getConnection();
             preparedStatement = initialisationRequetePreparee(connection, SQL_COUNT_ADVERT, false);
             resultSet = preparedStatement.executeQuery();
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
+        } catch (SQLException e) {
+            throw new DAOException(e);
         } finally {
             silentClosures(resultSet, preparedStatement, connection);
         }
 
         return resultSet;
     }
-    public int countByCategory(Category category){
+    
+    public int countByCategory(Category category)
+    {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -53,8 +56,8 @@ public class AdvertDao
             connection = daoFactory.getConnection();
             preparedStatement = initialisationRequetePreparee(connection, SQL_COUNT_ADVERT, false, category.getId(), category.getId());
             resultSet = preparedStatement.executeQuery();
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
+        } catch (SQLException e) {
+            throw new DAOException(e);
         } finally {
             silentClosures(resultSet, preparedStatement, connection);
         }
@@ -107,8 +110,8 @@ public class AdvertDao
             while (resultSet.next()) {
                 adverts.add(map(resultSet));
             }
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
+        } catch (SQLException e) {
+            throw new DAOException(e);
         } finally {
             silentClosures(resultSet, preparedStatement, connection);
         }
