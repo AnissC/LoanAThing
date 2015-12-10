@@ -1,5 +1,6 @@
 package com.lat.dao;
 
+import com.lat.beans.Users;
 import com.lat.beans.Adverts;
 
 import static com.lat.dao.DAOUtilities.*;
@@ -17,7 +18,7 @@ public class AdvertDao
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_WHITH_ID = "SELECT id, title, description, date_start, date_end FROM adverts WHERE id = ?";
     private static final String SQL_SELECT_ALL = "SELECT id, title, description, date_start, date_end FROM adverts ORDER BY id";
-    private static final String SQL_INSERT = "INSERT INTO adverts (title, description, date_start, date_end) VALUES (?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO adverts (title, description, date_start, date_end, id_users) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM adverts WHERE id = ?";
     private static final String SQL_COUNT_ADVERT = "SELECT COUNT(*) FROM adverts";
     private static final String SQL_COUNT_ADVERT_BY_CATEGORY = "SELECT COUNT(*) FROM adverts A, category C WHERE A.id_category = ? OR (? = C.parent_category AND A.id_category = C.id)";
@@ -66,7 +67,7 @@ public class AdvertDao
     }
 
     /* Implémentation de la méthode définie dans l'interface AdvertDao */
-    public void create(Adverts advert) throws DAOException
+    public void create(Adverts advert, Users user) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -75,7 +76,7 @@ public class AdvertDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd(), user.getId());
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
             if (statut == 0) {

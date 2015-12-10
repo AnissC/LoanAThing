@@ -1,10 +1,10 @@
 package com.lat.forms;
 
 import com.lat.beans.Adverts;
+import com.lat.beans.Users;
 import com.lat.dao.DAOException;
 import com.lat.dao.AdvertDao;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,11 +12,6 @@ import java.text.SimpleDateFormat;
 
 public final class AdvertAddForm
 {
-    private static final String TITLE_FIELD = "title";
-    private static final String DESCRIPTION_FIELD = "description";
-    private static final String DATE_START_FIELD = "dateStart";
-    private static final String DATE_END_FIELD = "dateEnd";
-
     private AdvertDao advertDao;
 
     private String results;
@@ -37,20 +32,15 @@ public final class AdvertAddForm
         return errors;
     }
 
-    public Adverts processAdvert(HttpServletRequest request)
+    public Adverts processAdvert(String title, String description, String dateStart, String dateEnd, Users user)
     {
-        String title = getFieldValue(request, TITLE_FIELD);
-        String description = getFieldValue(request, DESCRIPTION_FIELD);
-        String dateStart = getFieldValue(request, DATE_START_FIELD);
-        String dateEnd = getFieldValue(request, DATE_END_FIELD);
-
         Adverts advert = new Adverts();
 
         try {
             checkValues(advert, title, description, dateStart, dateEnd);
 
             if (errors.isEmpty()) {
-                advertDao.create(advert);
+                advertDao.create(advert, user);
                 results = "Offre de prêt publiée.";
             } else {
                 results = "Échec lors de la création de l'offre de prêt.";
@@ -93,7 +83,7 @@ public final class AdvertAddForm
         } else {
             advert.setDateEnd(null);
         }
-        advert.getState().setStateName("available");
+        //advert.getState().setStateName("available");
     }
 
     /*
@@ -102,19 +92,5 @@ public final class AdvertAddForm
     private void setError(String field, String message)
     {
         errors.put(field, message);
-    }
-
-    /*
-     * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
-     * sinon.
-     */
-    private static String getFieldValue(HttpServletRequest request, String fieldName)
-    {
-        String value = request.getParameter(fieldName);
-        if (value == null || value.trim().length() == 0) {
-            return null;
-        } else {
-            return value.trim();
-        }
     }
 }
