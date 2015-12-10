@@ -5,10 +5,9 @@
     <head>
         <meta charset="utf-8" />
         <title>Publier une offre de prêt</title>
-        <link type="text/css" rel="stylesheet" href="../form.css" />
     </head>
     <body>
-        <form method="post" action="add-advert">
+        <form method="post" action="<c:url value="/advert/add" />">
             <fieldset>
                 <legend>Publier une offre de prêt</legend>
 

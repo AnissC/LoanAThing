@@ -1,6 +1,7 @@
 package com.lat.services;
 
 import com.lat.beans.Advert;
+import com.lat.beans.User;
 import com.lat.dao.AdvertDao;
 import com.lat.dao.DAOFactory;
 import com.lat.dao.UserDao;
@@ -27,8 +28,7 @@ public class AdvertService
 
     public static AdvertService getInstance()
     {
-        if (ADVERT_SERVICE == null)
-        {
+        if (ADVERT_SERVICE == null) {
             ADVERT_SERVICE = new AdvertService();
         }
 
@@ -47,11 +47,33 @@ public class AdvertService
 
     public Advert processAdvert(HttpServletRequest request)
     {
-        return this.advertAddForm.processAdvert(request);
+        this.session = request.getSession();
+        User user = ((User) session.getAttribute("userSession"));
+        user = this.userDao.find(user.getEmail());
+        String title = getFieldValue(request, "title");
+        String description = getFieldValue(request, "description");
+        String dateStart = getFieldValue(request, "dateStart");
+        String dateEnd = getFieldValue(request, "dateEnd");
+
+        return this.advertAddForm.processAdvert(title, description, dateStart, dateEnd, user);
     }
 
     public Advert getAdvert(int id)
     {
         return this.advertDao.findOneById(id);
+    }
+
+    /*
+     * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
+     * sinon.
+     */
+    private static String getFieldValue(HttpServletRequest request, String fieldName)
+    {
+        String value = request.getParameter(fieldName);
+        if (value == null || value.trim().length() == 0) {
+            return null;
+        } else {
+            return value.trim();
+        }
     }
 }
