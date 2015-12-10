@@ -31,7 +31,7 @@ public final class LoginForm
         String email = getFieldValue(request, CHAMP_EMAIL);
         String password = getFieldValue(request, CHAMP_PASS);
 
-        Users users = new Users();
+        Users user = new Users();
 
         /* Validation du champ email. */
         try {
@@ -39,7 +39,7 @@ public final class LoginForm
         } catch (Exception e) {
             setErrors(CHAMP_EMAIL, e.getMessage());
         }
-        users.setEmail(email);
+        user.setEmail(email);
 
         /* Validation du champ mot de passe. */
         try {
@@ -47,7 +47,7 @@ public final class LoginForm
         } catch (Exception e) {
             setErrors(CHAMP_PASS, e.getMessage());
         }
-        users.setPassword(password);
+        user.setPassword(password);
 
         /* Initialisation du résultat global de la validation. */
         if (errors.isEmpty()) {
@@ -56,7 +56,7 @@ public final class LoginForm
             results = "Échec de la connexion.";
         }
 
-        return users;
+        return user;
     }
 
     /**

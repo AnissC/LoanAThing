@@ -4,7 +4,7 @@ package com.lat.beans;
 public class ReportingUser extends Reporting{
 
     private String references;
-    private Users users;
+    private Users user;
 
     public String getReferences() {
         return references;
@@ -15,10 +15,10 @@ public class ReportingUser extends Reporting{
     }
 
     public Users getUser() {
-        return users;
+        return user;
     }
 
     public void setUser(Users user) {
-        this.users = user;
+        this.user = user;
     }
 }

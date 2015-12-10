@@ -5,7 +5,7 @@ public class Warning {
     private Long id;
     private String reason;
     private String description;
-    private Users users;
+    private Users user;
 
 
     public Long getId() {
@@ -33,10 +33,10 @@ public class Warning {
     }
 
     public Users getUser() {
-        return users;
+        return user;
     }
 
     public void setUser(Users users) {
-        this.users = users;
+        this.user = users;
     }
 }

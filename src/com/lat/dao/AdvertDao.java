@@ -115,14 +115,14 @@ public class AdvertDao
      */
     private static Adverts map(ResultSet resultSet) throws SQLException
     {
-        Adverts adverts = new Adverts();
-        adverts.setId(resultSet.getLong("id"));
-        adverts.setTitle(resultSet.getString("title"));
-        adverts.setDescription(resultSet.getString("description"));
-        adverts.setDateStart(resultSet.getDate("date_start"));
-        adverts.setDateEnd(resultSet.getDate("date_end"));
+        Adverts advert = new Adverts();
+        advert.setId(resultSet.getLong("id"));
+        advert.setTitle(resultSet.getString("title"));
+        advert.setDescription(resultSet.getString("description"));
+        advert.setDateStart(resultSet.getDate("date_start"));
+        advert.setDateEnd(resultSet.getDate("date_end"));
         //advert.getState().setStateName(State.AVAILABLE);
 
-        return adverts;
+        return advert;
     }
 }

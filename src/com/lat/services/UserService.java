@@ -52,15 +52,15 @@ public class UserService
     public Users connectUser(HttpServletRequest request)
     {
         this.session = request.getSession();
-        Users users = this.loginForm.connectUser(request);
+        Users user = this.loginForm.connectUser(request);
 
         if (this.loginForm.getErrors().isEmpty()) {
-            session.setAttribute("userSession", users);
+            session.setAttribute("userSession", user);
         } else {
             session.setAttribute("userSession", null);
         }
 
-        return users;
+        return user;
     }
 
     public void logout()

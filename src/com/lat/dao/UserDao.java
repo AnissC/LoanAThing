@@ -57,7 +57,7 @@ public class UserDao
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Users users = null;
+        Users user = null;
 
         try {
             /* Récupération d'une connexion depuis la Factory */
@@ -66,7 +66,7 @@ public class UserDao
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
             if (resultSet.next()) {
-                users = map(resultSet);
+                user = map(resultSet);
             }
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -74,7 +74,7 @@ public class UserDao
             silentClosures(resultSet, preparedStatement, connexion);
         }
 
-        return users;
+        return user;
     }
 
     /*
@@ -84,12 +84,12 @@ public class UserDao
      */
     private static Users map(ResultSet resultSet) throws SQLException
     {
-        Users users = new Users();
-        users.setId(resultSet.getLong("id"));
-        users.setEmail(resultSet.getString("email"));
-        users.setPassword(resultSet.getString("password"));
-        users.setName(resultSet.getString("name"));
+        Users user = new Users();
+        user.setId(resultSet.getLong("id"));
+        user.setEmail(resultSet.getString("email"));
+        user.setPassword(resultSet.getString("password"));
+        user.setName(resultSet.getString("name"));
 
-        return users;
+        return user;
     }
 }

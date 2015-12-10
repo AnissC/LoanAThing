@@ -45,15 +45,15 @@ public final class RegisterForm
         String valid = getFieldValue(request, CHAMP_VALID);
         String name = getFieldValue(request, CHAMP_NAME);
 
-        Users users = new Users();
+        Users user = new Users();
 
         try {
-            checkEmail(email, users);
-            checkPassword(password, valid, users);
-            checkName(name, users);
+            checkEmail(email, user);
+            checkPassword(password, valid, user);
+            checkName(name, user);
 
             if (errors.isEmpty()) {
-                userDao.create(users);
+                userDao.create(user);
                 results = "Succès de l'inscription.";
             } else {
                 results = "Échec de l'inscription.";
@@ -65,7 +65,7 @@ public final class RegisterForm
             e.printStackTrace();
         }
 
-        return users;
+        return user;
     }
 
     private void checkEmail(String email) throws Exception
@@ -81,7 +81,7 @@ public final class RegisterForm
         }
     }
 
-    private void checkEmail(String email, Users users)
+    private void checkEmail(String email, Users user)
     {
         try {
             checkEmail(email);
@@ -91,7 +91,7 @@ public final class RegisterForm
             e.printStackTrace();
         }
 
-        users.setEmail(email);
+        user.setEmail(email);
     }
 
     private void checkPassword(String password, String valid) throws Exception
@@ -136,12 +136,12 @@ public final class RegisterForm
         user.setPassword(encryptedPassword);
     }
 
-    private void checkName(String name, Users users) throws Exception
+    private void checkName(String name, Users user) throws Exception
     {
         if (name != null && name.length() < 3) {
             throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
         } else {
-            users.setName(name);
+            user.setName(name);
         }
     }
 

@@ -44,13 +44,13 @@ public final class AdvertAddForm
         String dateStart = getFieldValue(request, DATE_START_FIELD);
         String dateEnd = getFieldValue(request, DATE_END_FIELD);
 
-        Adverts adverts = new Adverts();
+        Adverts advert = new Adverts();
 
         try {
-            checkValues(adverts, title, description, dateStart, dateEnd);
+            checkValues(advert, title, description, dateStart, dateEnd);
 
             if (errors.isEmpty()) {
-                advertDao.create(adverts);
+                advertDao.create(advert);
                 results = "Offre de prêt publiée.";
             } else {
                 results = "Échec lors de la création de l'offre de prêt.";
@@ -62,7 +62,7 @@ public final class AdvertAddForm
             e.printStackTrace();
         }
 
-        return adverts;
+        return advert;
     }
 
     private void checkValues(String title, String description, String dateStart) throws Exception
@@ -72,7 +72,7 @@ public final class AdvertAddForm
         }
     }
 
-    private void checkValues(Adverts adverts, String title, String description, String dateStart, String dateEnd) throws Exception {
+    private void checkValues(Adverts advert, String title, String description, String dateStart, String dateEnd) throws Exception {
         try {
             checkValues(title, description, dateStart);
         } catch (FormValidationException e) {
@@ -84,16 +84,16 @@ public final class AdvertAddForm
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date startDate = formatter.parse(dateStart);
 
-        adverts.setTitle(title);
-        adverts.setDescription(description);
-        adverts.setDateStart(startDate);
+        advert.setTitle(title);
+        advert.setDescription(description);
+        advert.setDateStart(startDate);
         if (dateEnd != null) {
             Date endDate = formatter.parse(dateEnd);
-            adverts.setDateEnd(endDate);
+            advert.setDateEnd(endDate);
         } else {
-            adverts.setDateEnd(null);
+            advert.setDateEnd(null);
         }
-        adverts.getState().setStateName("available");
+        advert.getState().setStateName("available");
     }
 
     /*
