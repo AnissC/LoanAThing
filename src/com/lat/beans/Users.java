@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Users {
     private Long id;
-    private String lastName;
-    private String firstName;
-    private String nickName;
+    private String lastname;
+    private String firstname;
+    private String nickname;
     private String email;
     private int nbStreet;
     private String address;
@@ -53,28 +53,28 @@ public class Users {
 
     public void setName(String lastNamename)
     {
-        this.lastName = lastNamename;
+        this.lastname = lastNamename;
     }
 
     public String getName()
     {
-        return lastName;
+        return lastname;
     }
 
     public String getFirstName() {
-        return firstName;
+        return firstname;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstname = firstName;
     }
 
     public String getNickName() {
-        return nickName;
+        return nickname;
     }
 
     public void setNickName(String nickName) {
-        this.nickName = nickName;
+        this.nickname = nickName;
     }
 
     public int getNbStreet() {
