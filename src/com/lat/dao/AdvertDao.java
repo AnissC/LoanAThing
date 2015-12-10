@@ -20,7 +20,7 @@ public class AdvertDao
     private static final String SQL_INSERT = "INSERT INTO adverts (title, description, date_start, date_end) VALUES (?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM adverts WHERE id = ?";
     private static final String SQL_COUNT_ADVERT = "SELECT COUNT(*) FROM adverts";
-    private static final String SQL_COUNT_ADVERT_BY_CATEGORY = "SELECT COUNT(*) FROM adverts A, category C WHERE A.id_category = C.id OR A.id_category = C.parent_category";
+    private static final String SQL_COUNT_ADVERT_BY_CATEGORY = "SELECT COUNT(*) FROM adverts A, category C WHERE A.id_category = ? OR (? = C.parent_category AND A.id_category = C.id)";
 
     AdvertDao(DAOFactory daoFactory)
     {
@@ -35,6 +35,23 @@ public class AdvertDao
         try {
             connection = daoFactory.getConnection();
             preparedStatement = initialisationRequetePreparee(connection, SQL_COUNT_ADVERT, false);
+            resultSet = preparedStatement.executeQuery();
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return resultSet;
+    }
+    public int countByCategory(Category category){
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_COUNT_ADVERT, false, category.getId(), category.getId());
             resultSet = preparedStatement.executeQuery();
         } catch ( SQLException e ) {
             throw new DAOException( e );
