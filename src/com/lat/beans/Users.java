@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Users {
     private Long id;
-    private String name;
+    private String lastName;
     private String firstName;
     private String nickName;
     private String email;
@@ -13,7 +13,7 @@ public class Users {
     private String city;
     private int zipCode;
     private String password;
-    private String birthDay;
+    private String birthday;
     private String preferences;
     private String schoolDomain;
     private String educationFormation;
@@ -51,14 +51,14 @@ public class Users {
         return password;
     }
 
-    public void setName(String name)
+    public void setName(String lastNamename)
     {
-        this.name = name;
+        this.lastName = lastNamename;
     }
 
     public String getName()
     {
-        return name;
+        return lastName;
     }
 
     public String getFirstName() {
@@ -110,11 +110,11 @@ public class Users {
     }
 
     public String getBirthDay() {
-        return birthDay;
+        return birthday;
     }
 
     public void setBirthDay(String birthDay) {
-        this.birthDay = birthDay;
+        this.birthday = birthDay;
     }
 
     public String getPreferences() {

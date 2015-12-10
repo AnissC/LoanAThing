@@ -77,8 +77,8 @@ public class Adverts {
         return user;
     }
 
-    public void setUser(Users users) {
-        this.user = users;
+    public void setUser(Users user) {
+        this.user = user;
     }
 
     public Category getCategory() {
