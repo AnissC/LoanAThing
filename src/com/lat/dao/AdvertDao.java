@@ -1,5 +1,6 @@
 package com.lat.dao;
 
+import com.lat.beans.Category;
 import com.lat.beans.Users;
 import com.lat.beans.Adverts;
 
@@ -11,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class AdvertDao
 {
@@ -28,7 +28,7 @@ public class AdvertDao
         this.daoFactory = daoFactory;
     }
     
-    public int count()
+    public ResultSet count()
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -47,7 +47,7 @@ public class AdvertDao
         return resultSet;
     }
     
-    public int countByCategory(Category category)
+    public ResultSet countByCategory(Category category)
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -66,7 +66,6 @@ public class AdvertDao
         return resultSet;
     }
 
-    /* Implémentation de la méthode définie dans l'interface AdvertDao */
     public void create(Adverts advert, Users user) throws DAOException
     {
         Connection connexion = null;
@@ -160,8 +159,8 @@ public class AdvertDao
         advert.setId(resultSet.getLong("id"));
         advert.setTitle(resultSet.getString("title"));
         advert.setDescription(resultSet.getString("description"));
-        advert.setDateStart(resultSet.getDate("date_start"));
-        advert.setDateEnd(resultSet.getDate("date_end"));
+        advert.setDateStart(resultSet.getString("date_start"));
+        advert.setDateEnd(resultSet.getString("date_end"));
         //advert.getState().setStateName(State.AVAILABLE);
 
         return advert;

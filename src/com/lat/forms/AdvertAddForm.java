@@ -5,10 +5,11 @@ import com.lat.beans.Users;
 import com.lat.dao.DAOException;
 import com.lat.dao.AdvertDao;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
-import java.text.SimpleDateFormat;
 
 public final class AdvertAddForm
 {
@@ -71,24 +72,21 @@ public final class AdvertAddForm
             e.printStackTrace();
         }
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        Date startDate = formatter.parse(dateStart);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.FRANCE);
+        LocalDate startDate = LocalDate.parse(dateStart, formatter);
 
         advert.setTitle(title);
         advert.setDescription(description);
-        advert.setDateStart(startDate);
+        advert.setDateStart(startDate.toString());
         if (dateEnd != null) {
-            Date endDate = formatter.parse(dateEnd);
-            advert.setDateEnd(endDate);
+            LocalDate endDate = LocalDate.parse(dateEnd, formatter);
+            advert.setDateEnd(endDate.toString());
         } else {
             advert.setDateEnd(null);
         }
         //advert.getState().setStateName("available");
     }
 
-    /*
-     * Ajoute un message correspondant au champ spécifié à la map des erreurs.
-     */
     private void setError(String field, String message)
     {
         errors.put(field, message);

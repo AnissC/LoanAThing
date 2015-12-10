@@ -43,9 +43,9 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="col-xs-12 input--shoko">
-                                        <input class="input__field input__field--shoko" type="text" id="name" name="name"
-                                               value="<c:out value="${user.name}"/>" size="20" maxlength="20"/>
-                                        <label class="input__label input__label--shoko" for="name">
+                                        <input class="input__field input__field--shoko" type="text" id="lastname" name="lastname"
+                                               value="<c:out value="${user.lastname}"/>" size="20" maxlength="20"/>
+                                        <label class="input__label input__label--shoko" for="lastname">
                                             <span class="input__label-content input__label-content--shoko">Nom d'utilisateur</span>
                                         </label>
                                         <svg class="graphic graphic--shoko" width="300%" height="100%" viewBox="0 0 1200 60"
