@@ -1,6 +1,6 @@
 package com.lat.forms;
 
-import com.lat.beans.Advert;
+import com.lat.beans.Adverts;
 import com.lat.dao.DAOException;
 import com.lat.dao.AdvertDao;
 
@@ -37,20 +37,20 @@ public final class AdvertAddForm
         return errors;
     }
 
-    public Advert processAdvert(HttpServletRequest request)
+    public Adverts processAdvert(HttpServletRequest request)
     {
         String title = getFieldValue(request, TITLE_FIELD);
         String description = getFieldValue(request, DESCRIPTION_FIELD);
         String dateStart = getFieldValue(request, DATE_START_FIELD);
         String dateEnd = getFieldValue(request, DATE_END_FIELD);
 
-        Advert advert = new Advert();
+        Adverts adverts = new Adverts();
 
         try {
-            checkValues(advert, title, description, dateStart, dateEnd);
+            checkValues(adverts, title, description, dateStart, dateEnd);
 
             if (errors.isEmpty()) {
-                advertDao.create(advert);
+                advertDao.create(adverts);
                 results = "Offre de prêt publiée.";
             } else {
                 results = "Échec lors de la création de l'offre de prêt.";
@@ -62,7 +62,7 @@ public final class AdvertAddForm
             e.printStackTrace();
         }
 
-        return advert;
+        return adverts;
     }
 
     private void checkValues(String title, String description, String dateStart) throws Exception
@@ -72,7 +72,7 @@ public final class AdvertAddForm
         }
     }
 
-    private void checkValues(Advert advert, String title, String description, String dateStart, String dateEnd) throws Exception {
+    private void checkValues(Adverts adverts, String title, String description, String dateStart, String dateEnd) throws Exception {
         try {
             checkValues(title, description, dateStart);
         } catch (FormValidationException e) {
@@ -84,16 +84,16 @@ public final class AdvertAddForm
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Date startDate = formatter.parse(dateStart);
 
-        advert.setTitle(title);
-        advert.setDescription(description);
-        advert.setDateStart(startDate);
+        adverts.setTitle(title);
+        adverts.setDescription(description);
+        adverts.setDateStart(startDate);
         if (dateEnd != null) {
             Date endDate = formatter.parse(dateEnd);
-            advert.setDateEnd(endDate);
+            adverts.setDateEnd(endDate);
         } else {
-            advert.setDateEnd(null);
+            adverts.setDateEnd(null);
         }
-        advert.getState().setStateName("available");
+        adverts.getState().setStateName("available");
     }
 
     /*

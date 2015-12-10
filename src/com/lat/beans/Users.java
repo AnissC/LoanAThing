@@ -2,8 +2,7 @@ package com.lat.beans;
 
 import java.util.ArrayList;
 
-public class User
-{
+public class Users {
     private Long id;
     private String name;
     private String firstName;
@@ -19,7 +18,7 @@ public class User
     private String schoolDomain;
     private String educationFormation;
     private String img;
-    private ArrayList<User> friends;
+    private ArrayList<Users> friends;
     private Group group;
 
 
@@ -34,32 +33,32 @@ public class User
 
     public void setEmail(String email)
     {
-	    this.email = email;
+        this.email = email;
     }
 
     public String getEmail()
     {
-	    return email;
+        return email;
     }
 
     public void setPassword(String password)
     {
-	    this.password = password;
+        this.password = password;
     }
 
     public String getPassword()
     {
-	    return password;
+        return password;
     }
 
     public void setName(String name)
     {
-	    this.name = name;
+        this.name = name;
     }
 
     public String getName()
     {
-	    return name;
+        return name;
     }
 
     public String getFirstName() {
@@ -150,11 +149,11 @@ public class User
         this.img = img;
     }
 
-    public ArrayList<User> getFriends() {
+    public ArrayList<Users> getFriends() {
         return friends;
     }
 
-    public void setFriends(ArrayList<User> friends) {
+    public void setFriends(ArrayList<Users> friends) {
         this.friends = friends;
     }
 

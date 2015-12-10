@@ -1,6 +1,6 @@
 package com.lat.dao;
 
-import com.lat.beans.Advert;
+import com.lat.beans.Adverts;
 
 import static com.lat.dao.DAOUtilities.*;
 
@@ -26,7 +26,7 @@ public class AdvertDao
     }
 
     /* Implémentation de la méthode définie dans l'interface AdvertDao */
-    public void create(Advert advert) throws DAOException
+    public void create(Adverts advert) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -56,12 +56,12 @@ public class AdvertDao
         }
     }
 
-    public List<Advert> find() throws DAOException
+    public List<Adverts> find() throws DAOException
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        List<Advert> adverts = new ArrayList<Advert>();
+        List<Adverts> adverts = new ArrayList<Adverts>();
 
         try {
             connection = daoFactory.getConnection();
@@ -79,12 +79,12 @@ public class AdvertDao
         return adverts;
     }
 
-    public Advert findOneById(int id) throws DAOException
+    public Adverts findOneById(int id) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Advert advert = null;
+        Adverts advert = null;
 
         try {
             /* Récupération d'une connexion depuis la Factory */
@@ -104,7 +104,7 @@ public class AdvertDao
         return advert;
     }
 
-    public void delete(Advert advert) throws DAOException
+    public void delete(Adverts advert) throws DAOException
     {
     }
 
@@ -113,16 +113,16 @@ public class AdvertDao
      * mapping) entre une ligne issue de la table advert (un
      * ResultSet) et un bean Advert.
      */
-    private static Advert map(ResultSet resultSet) throws SQLException
+    private static Adverts map(ResultSet resultSet) throws SQLException
     {
-        Advert advert = new Advert();
-        advert.setId(resultSet.getLong("id"));
-        advert.setTitle(resultSet.getString("title"));
-        advert.setDescription(resultSet.getString("description"));
-        advert.setDateStart(resultSet.getDate("date_start"));
-        advert.setDateEnd(resultSet.getDate("date_end"));
+        Adverts adverts = new Adverts();
+        adverts.setId(resultSet.getLong("id"));
+        adverts.setTitle(resultSet.getString("title"));
+        adverts.setDescription(resultSet.getString("description"));
+        adverts.setDateStart(resultSet.getDate("date_start"));
+        adverts.setDateEnd(resultSet.getDate("date_end"));
         //advert.getState().setStateName(State.AVAILABLE);
 
-        return advert;
+        return adverts;
     }
 }

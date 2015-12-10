@@ -1,6 +1,7 @@
 package com.lat.dao;
 
-import com.lat.beans.User;
+import com.lat.beans.Users;
+
 import static com.lat.dao.DAOUtilities.*;
 
 import java.sql.Connection;
@@ -20,7 +21,7 @@ public class UserDao
     }
 
     /* Implémentation de la méthode définie dans l'interface UtilisateurDao */
-    public void create(User user) throws DAOException
+    public void create(Users user) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -51,12 +52,12 @@ public class UserDao
     }
 
     /* Implémentation de la méthode définie dans l'interface UtilisateurDao */
-    public User find(String email) throws DAOException
+    public Users find(String email) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        User user = null;
+        Users users = null;
 
         try {
             /* Récupération d'une connexion depuis la Factory */
@@ -65,7 +66,7 @@ public class UserDao
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
             if (resultSet.next()) {
-                user = map(resultSet);
+                users = map(resultSet);
             }
         } catch (SQLException e) {
             throw new DAOException(e);
@@ -73,7 +74,7 @@ public class UserDao
             silentClosures(resultSet, preparedStatement, connexion);
         }
 
-        return user;
+        return users;
     }
 
     /*
@@ -81,14 +82,14 @@ public class UserDao
      * mapping) entre une ligne issue de la table des utilisateurs (un
      * ResultSet) et un bean Utilisateur.
      */
-    private static User map(ResultSet resultSet) throws SQLException
+    private static Users map(ResultSet resultSet) throws SQLException
     {
-        User user = new User();
-        user.setId(resultSet.getLong("id"));
-        user.setEmail(resultSet.getString("email"));
-        user.setPassword(resultSet.getString("password"));
-        user.setName(resultSet.getString("name"));
+        Users users = new Users();
+        users.setId(resultSet.getLong("id"));
+        users.setEmail(resultSet.getString("email"));
+        users.setPassword(resultSet.getString("password"));
+        users.setName(resultSet.getString("name"));
 
-        return user;
+        return users;
     }
 }

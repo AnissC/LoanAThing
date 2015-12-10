@@ -7,8 +7,8 @@ public class Apply {
     private Date startDate;
     private Date endDate;
     private boolean accepted;
-    private User user;
-    private Advert advert;
+    private Users users;
+    private Adverts adverts;
 
 
     public Long getId() {
@@ -43,19 +43,19 @@ public class Apply {
         this.accepted = accepted;
     }
 
-    public User getUser() {
-        return user;
+    public Users getUser() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(Users user) {
+        this.users = user;
     }
 
-    public Advert getAdvert() {
-        return advert;
+    public Adverts getAdvert() {
+        return adverts;
     }
 
-    public void setAdvert(Advert advert) {
-        this.advert = advert;
+    public void setAdvert(Adverts advert) {
+        this.adverts = advert;
     }
 }

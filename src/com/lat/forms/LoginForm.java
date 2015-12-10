@@ -1,11 +1,11 @@
 package com.lat.forms;
 
+import com.lat.beans.Users;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-
-import com.lat.beans.User;
 
 public final class LoginForm
 {
@@ -25,13 +25,13 @@ public final class LoginForm
         return errors;
     }
 
-    public User connectUser(HttpServletRequest request)
+    public Users connectUser(HttpServletRequest request)
     {
         /* Récupération des champs du formulaire */
         String email = getFieldValue(request, CHAMP_EMAIL);
         String password = getFieldValue(request, CHAMP_PASS);
 
-        User user = new User();
+        Users users = new Users();
 
         /* Validation du champ email. */
         try {
@@ -39,7 +39,7 @@ public final class LoginForm
         } catch (Exception e) {
             setErrors(CHAMP_EMAIL, e.getMessage());
         }
-        user.setEmail(email);
+        users.setEmail(email);
 
         /* Validation du champ mot de passe. */
         try {
@@ -47,7 +47,7 @@ public final class LoginForm
         } catch (Exception e) {
             setErrors(CHAMP_PASS, e.getMessage());
         }
-        user.setPassword(password);
+        users.setPassword(password);
 
         /* Initialisation du résultat global de la validation. */
         if (errors.isEmpty()) {
@@ -56,7 +56,7 @@ public final class LoginForm
             results = "Échec de la connexion.";
         }
 
-        return user;
+        return users;
     }
 
     /**
