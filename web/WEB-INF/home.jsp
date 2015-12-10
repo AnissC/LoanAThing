@@ -30,11 +30,11 @@
         <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
         <div class="menu__wrap">
             <ul data-menu="main" class="menu__level">
-                <li class="menu__item"><a class="menu__link" data-submenu="submenu-1" href="#">Offres</a></li>
-                <li class="menu__item"><a class="menu__link" data-submenu="submenu-2" href="#">Demandes</a></li>
-                <li class="menu__item"><a class="menu__link" data-submenu="submenu-3" href="#">Profil</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
-                <li class="menu__item"><a class="menu__link" href="<c:url value="/logout" />">Se déconnecter</a></li>
+                <li class="menu__item"><a class="menu__link" data-submenu="submenu-1" href="#"><i class="fa fa-shopping-basket"></i> Offres</a></li>
+                <li class="menu__item"><a class="menu__link" data-submenu="submenu-2" href="#"><i class="fa fa-question-circle"></i> Demandes</a></li>
+                <li class="menu__item"><a class="menu__link" data-submenu="submenu-3" href="#"><i class="fa fa-user"></i> Profil</a></li>
+                <li class="menu__item"><a class="menu__link" href="#"><i class="fa fa-envelope"></i> Contact</a></li>
+                <li class="menu__item"><a class="menu__link" id="logout"><i class="fa fa-power-off"></i> Se déconnecter</a></li>
             </ul>
             <!-- Submenu 1 -->
             <ul data-menu="submenu-1" class="menu__level">
@@ -135,6 +135,8 @@
 <script src="../inc/js/classie.js"></script>
 <script src="../inc/js/dummydata.js"></script>
 <script src="../inc/js/main.js"></script>
+<script src="../inc/js/jquery-1.11.3.min.js"></script>
+<script src="../inc/js/ajax-calls.js"></script>
 <script>
     (function() {
         var menuEl = document.getElementById('ml-menu'),
