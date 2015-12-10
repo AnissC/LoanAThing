@@ -61,14 +61,14 @@ public class AdvertDao
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        List<Adverts> adverts = new ArrayList<Adverts>();
+        List<Adverts> advert = new ArrayList<Adverts>();
 
         try {
             connection = daoFactory.getConnection();
             preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_ALL, false);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                adverts.add(map(resultSet));
+                advert.add(map(resultSet));
             }
         } catch ( SQLException e ) {
             throw new DAOException( e );
@@ -76,7 +76,7 @@ public class AdvertDao
             silentClosures(resultSet, preparedStatement, connection);
         }
 
-        return adverts;
+        return advert;
     }
 
     public Adverts findOneById(int id) throws DAOException

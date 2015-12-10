@@ -12,7 +12,7 @@ public class Adverts {
     private Date dateStart;
     private Date dateEnd;
     private String simpleDescription;
-    private Users users;
+    private Users user;
     private Category category;
     private State state;
 
@@ -74,11 +74,11 @@ public class Adverts {
     }
 
     public Users getUser() {
-        return users;
+        return user;
     }
 
     public void setUser(Users users) {
-        this.users = users;
+        this.user = users;
     }
 
     public Category getCategory() {
