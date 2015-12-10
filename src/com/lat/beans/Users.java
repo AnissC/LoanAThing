@@ -51,30 +51,36 @@ public class Users {
         return password;
     }
 
-    public void setName(String lastNamename)
-    {
-        this.lastname = lastNamename;
-    }
-
-    public String getName()
-    {
+    public String getLastname() {
         return lastname;
     }
 
-    public String getFirstName() {
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getFirstname() {
         return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstname = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getNickName() {
+    public String getNickname() {
         return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickname = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public int getNbStreet() {
@@ -107,14 +113,6 @@ public class Users {
 
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
-    }
-
-    public String getBirthDay() {
-        return birthday;
-    }
-
-    public void setBirthDay(String birthDay) {
-        this.birthday = birthDay;
     }
 
     public String getPreferences() {
