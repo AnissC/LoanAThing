@@ -37,14 +37,13 @@
                 <li class="menu__item"><a class="menu__link" id="logout"><i class="fa fa-power-off"></i> Se déconnecter</a></li>
             </ul>
             <!-- Submenu 1 -->
+
+
             <ul data-menu="submenu-1" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#" data-submenu="submenu-1-0">Toutes les offres</a></li>
-                <li class="menu__item"><a class="menu__link" href="#" data-submenu="submenu-1-1">Informatique</a></li>
-                <li class="menu__item"><a class="menu__link" href="#" data-submenu="submenu-1-2">Electroménager</a></li>
-                <li class="menu__item"><a class="menu__link" href="#" data-submenu="submenu-1-3">Sport</a></li>
-                <li class="menu__item"><a class="menu__link" href="#" >Bricolage</a></li>
-                <li class="menu__item"><a class="menu__link" href="#" data-submenu="submenu-1-4">Chaussures</a></li>
-                <li class="menu__item"><a class="menu__link" href="#" data-submenu="submenu-1-5">Livres</a></li>
+                <li class="menu__item"><a class="menu__link" href="#">Toutes les offres</a></li>
+                <c:forEach var="category"  items="${requestScope['categories']}" >
+                    <li class="menu__item"><a class="menu__link" href="#" data-submenu="submenu-1-<c:out value='${category.id}'/>"> <c:out value='${category.categoryName}'/></a></li>
+                </c:forEach>
             </ul>
             <!-- Submenu 1-1 -->
             <ul data-menu="submenu-1-1" class="menu__level">
@@ -115,9 +114,8 @@
         </div>
     </nav>
     <div class="content">
-        <p class="info">Please choose a category</p>
         <!-- Ajax loaded content here -->
-        <h1>Toutes les offres de prêt :</h1>
+        <h1 class="text-center">Toutes les offres de prêt :</h1>
         <c:forEach var="advert"  items="${requestScope['adverts']}" >
             <a href="<c:url value="${'/advert?id='}${advert.id}"/>">
                 <div>
