@@ -1,18 +1,15 @@
 package com.lat.services;
 
 
-import com.lat.beans.Adverts;
 import com.lat.dao.AdvertDao;
 import com.lat.dao.ApplyDao;
 import com.lat.dao.DAOFactory;
 import com.lat.dao.UserDao;
-import com.lat.forms.AdvertAddForm;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.ResultSet;
 
-public class ApplyService {
+public class ApplyService
+{
     private static ApplyService APPLY_SERVICE = null;
     private HttpSession session;
     private UserDao userDao;

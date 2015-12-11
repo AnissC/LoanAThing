@@ -11,7 +11,8 @@ import java.sql.SQLException;
 import static com.lat.dao.DAOUtilities.initialisationRequetePreparee;
 import static com.lat.dao.DAOUtilities.silentClosures;
 
-public class ApplyDao {
+public class ApplyDao
+{
 
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as Nb_Applies FROM apply";
@@ -21,6 +22,7 @@ public class ApplyDao {
     ApplyDao(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
+
     public ResultSet countApplies() throws DAOException
     {
         Connection connection = null;
@@ -59,7 +61,8 @@ public class ApplyDao {
     }
 
 
-    public Apply create(Apply apply) throws DAOException {
+    public Apply create(Apply apply) throws DAOException
+    {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet valeursAutoGenerees = null;
