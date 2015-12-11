@@ -12,8 +12,8 @@ import java.sql.SQLException;
 public class UserDao
 {
     private DAOFactory daoFactory;
-    private static final String SQL_SELECT_WHITH_EMAIL = "SELECT id, email, name, password FROM users WHERE email = ?";
-    private static final String SQL_INSERT = "INSERT INTO users (email, password, name) VALUES (?, ?, ?)";
+    private static final String SQL_SELECT_WITH_EMAIL = "SELECT id, email, lastname, password FROM users WHERE email = ?";
+    private static final String SQL_INSERT = "INSERT INTO users (email, password, lastname) VALUES (?, ?, ?)";
 
     UserDao(DAOFactory daoFactory)
     {
@@ -30,7 +30,7 @@ public class UserDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, user.getEmail(), user.getPassword(), user.getName());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, user.getEmail(), user.getPassword(), user.getLastname());
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
             if (statut == 0) {
@@ -40,7 +40,7 @@ public class UserDao
             valeursAutoGenerees = preparedStatement.getGeneratedKeys();
             if (valeursAutoGenerees.next()) {
                 /* Puis initialisation de la propriété id du bean Utilisateur avec sa valeur */
-                user.setId( valeursAutoGenerees.getLong(1));
+                user.setId(valeursAutoGenerees.getLong(1));
             } else {
                 throw new DAOException("Échec de la création de l'utilisateur en base, aucun ID auto-généré retourné.");
             }
@@ -62,7 +62,7 @@ public class UserDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_WHITH_EMAIL, false, email);
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_WITH_EMAIL, false, email);
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
             if (resultSet.next()) {
@@ -88,7 +88,7 @@ public class UserDao
         user.setId(resultSet.getLong("id"));
         user.setEmail(resultSet.getString("email"));
         user.setPassword(resultSet.getString("password"));
-        user.setName(resultSet.getString("name"));
+        user.setLastname(resultSet.getString("lastname"));
 
         return user;
     }
