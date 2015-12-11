@@ -15,7 +15,8 @@ import static com.lat.dao.DAOUtilities.silentClosures;
 /**
  * Created by Nico on 10/12/2015.
  */
-public class CategoryDao {
+public class CategoryDao 
+{
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_WHITH_ID = "SELECT id, category_name, description FROM category WHERE id = ?";
     private static final String SQL_SELECT_ALL = "SELECT id, category_name, description FROM category ORDER BY id";
