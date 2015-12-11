@@ -91,8 +91,8 @@ public class UserDao
         return user;
     }
 
-    public Users findById(long id){
-
+    public Users findById(long id)
+    {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
