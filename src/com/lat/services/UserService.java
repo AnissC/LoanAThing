@@ -26,8 +26,7 @@ public class UserService
 
     public static UserService getInstance()
     {
-        if (USER_SERVICE == null)
-        {
+        if (USER_SERVICE == null) {
             USER_SERVICE = new UserService();
         }
 

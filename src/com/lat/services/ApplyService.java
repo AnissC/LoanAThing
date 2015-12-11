@@ -34,7 +34,7 @@ public class ApplyService {
     }
 
 
-    
+
     public ResultSet nbOfApplies()
     {
         return this.applyDao.countApplies();

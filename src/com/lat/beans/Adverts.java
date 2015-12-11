@@ -9,8 +9,8 @@ public class Adverts {
     private String title;
     private String description;
     private String img;
-    private Date dateStart;
-    private Date dateEnd;
+    private String dateStart;
+    private String dateEnd;
     private String simpleDescription;
     private Users user;
     private Category category;
@@ -41,19 +41,19 @@ public class Adverts {
         this.description = description;
     }
 
-    public Date getDateStart() {
+    public String getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(Date dateStart) {
+    public void setDateStart(String dateStart) {
         this.dateStart = dateStart;
     }
 
-    public Date getDateEnd() {
+    public String getDateEnd() {
         return dateEnd;
     }
 
-    public void setDateEnd(Date dateEnd) {
+    public void setDateEnd(String dateEnd) {
         this.dateEnd = dateEnd;
     }
 
