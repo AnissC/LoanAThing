@@ -2,6 +2,7 @@ package com.lat.services;
 
 import com.lat.beans.Adverts;
 import com.lat.dao.AdvertDao;
+import com.lat.dao.ApplyDao;
 import com.lat.dao.DAOFactory;
 import com.lat.dao.UserDao;
 import com.lat.forms.AdvertAddForm;
@@ -16,12 +17,14 @@ public class AdvertService
     private HttpSession session;
     private UserDao userDao;
     private AdvertDao advertDao;
+    private ApplyDao applyDao;
     private AdvertAddForm advertAddForm;
 
     private AdvertService()
     {
         this.userDao = DAOFactory.getInstance().getUserDao();
         this.advertDao = DAOFactory.getInstance().getAdvertDao();
+        this.applyDao = DAOFactory.getInstance().getApplyDao();
         this.advertAddForm = new AdvertAddForm(this.advertDao);
     }
 

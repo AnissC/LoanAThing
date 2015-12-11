@@ -141,7 +141,7 @@ public final class RegisterForm
         if (name != null && name.length() < 3) {
             throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
         } else {
-            user.setName(name);
+            user.setLastname(name);
         }
     }
 

@@ -76,4 +76,6 @@ public class DAOFactory
     {
         return new AdvertDao(this);
     }
+
+    public ApplyDao getApplyDao() { return new ApplyDao(this);}
 }
