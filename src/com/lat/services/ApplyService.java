@@ -16,13 +16,15 @@ public class ApplyService
     private AdvertDao advertDao;
     private ApplyDao applyDao;
 
-    private ApplyService() {
+    private ApplyService()
+    {
         this.userDao = DAOFactory.getInstance().getUserDao();
         this.advertDao = DAOFactory.getInstance().getAdvertDao();
         this.applyDao = DAOFactory.getInstance().getApplyDao();
     }
 
-    public static ApplyService getInstance() {
+    public static ApplyService getInstance()
+    {
         if (APPLY_SERVICE == null) {
             APPLY_SERVICE = new ApplyService();
         }
