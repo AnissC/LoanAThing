@@ -9,7 +9,6 @@ import java.util.List;
 
 public class CategoryService
 {
-
         private static CategoryService CATEGORY_SERVICE = null;
         private HttpSession session;
         private CategoryDao categoryDao;
