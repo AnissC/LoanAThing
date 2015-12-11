@@ -1,6 +1,8 @@
 package com.lat.dao;
 
-import com.lat.beans.Advert;
+import com.lat.beans.Category;
+import com.lat.beans.Users;
+import com.lat.beans.Adverts;
 
 import static com.lat.dao.DAOUtilities.*;
 
@@ -11,22 +13,60 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class AdvertDao
 {
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_WHITH_ID = "SELECT id, title, description, date_start, date_end FROM adverts WHERE id = ?";
     private static final String SQL_SELECT_ALL = "SELECT id, title, description, date_start, date_end FROM adverts ORDER BY id";
-    private static final String SQL_INSERT = "INSERT INTO adverts (title, description, date_start, date_end) VALUES (?, ?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO adverts (title, description, date_start, date_end, id_users) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM adverts WHERE id = ?";
+    private static final String SQL_COUNT_ADVERT = "SELECT COUNT(*) FROM adverts";
+    private static final String SQL_COUNT_ADVERT_BY_CATEGORY = "SELECT COUNT(*) FROM adverts A, category C WHERE A.id_category = ? OR (? = C.parent_category AND A.id_category = C.id)";
 
     AdvertDao(DAOFactory daoFactory)
     {
         this.daoFactory = daoFactory;
     }
+    
+    public ResultSet count()
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
 
-    /* Implémentation de la méthode définie dans l'interface AdvertDao */
-    public void create(Advert advert) throws DAOException
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_COUNT_ADVERT, false);
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return resultSet;
+    }
+    
+    public ResultSet countByCategory(Category category)
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_COUNT_ADVERT, false, category.getId(), category.getId());
+            resultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return resultSet;
+    }
+
+    public void create(Adverts advert, Users user) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -35,7 +75,7 @@ public class AdvertDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd(), user.getId());
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
             if (statut == 0) {
@@ -56,12 +96,12 @@ public class AdvertDao
         }
     }
 
-    public List<Advert> find() throws DAOException
+    public List<Adverts> find() throws DAOException
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        List<Advert> adverts = new ArrayList<Advert>();
+        List<Adverts> adverts = new ArrayList<Adverts>();
 
         try {
             connection = daoFactory.getConnection();
@@ -70,8 +110,8 @@ public class AdvertDao
             while (resultSet.next()) {
                 adverts.add(map(resultSet));
             }
-        } catch ( SQLException e ) {
-            throw new DAOException( e );
+        } catch (SQLException e) {
+            throw new DAOException(e);
         } finally {
             silentClosures(resultSet, preparedStatement, connection);
         }
@@ -79,12 +119,12 @@ public class AdvertDao
         return adverts;
     }
 
-    public Advert findOneById(int id) throws DAOException
+    public Adverts findOneById(int id) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Advert advert = null;
+        Adverts advert = null;
 
         try {
             /* Récupération d'une connexion depuis la Factory */
@@ -104,7 +144,7 @@ public class AdvertDao
         return advert;
     }
 
-    public void delete(Advert advert) throws DAOException
+    public void delete(Adverts advert) throws DAOException
     {
     }
 
@@ -113,14 +153,14 @@ public class AdvertDao
      * mapping) entre une ligne issue de la table advert (un
      * ResultSet) et un bean Advert.
      */
-    private static Advert map(ResultSet resultSet) throws SQLException
+    private static Adverts map(ResultSet resultSet) throws SQLException
     {
-        Advert advert = new Advert();
+        Adverts advert = new Adverts();
         advert.setId(resultSet.getLong("id"));
         advert.setTitle(resultSet.getString("title"));
         advert.setDescription(resultSet.getString("description"));
-        advert.setDateStart(resultSet.getDate("date_start"));
-        advert.setDateEnd(resultSet.getDate("date_end"));
+        advert.setDateStart(resultSet.getString("date_start"));
+        advert.setDateEnd(resultSet.getString("date_end"));
         //advert.getState().setStateName(State.AVAILABLE);
 
         return advert;

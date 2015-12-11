@@ -1,6 +1,6 @@
 package com.lat.forms;
 
-import com.lat.beans.User;
+import com.lat.beans.Users;
 import com.lat.dao.DAOException;
 import com.lat.dao.UserDao;
 import org.jasypt.util.password.ConfigurablePasswordEncryptor;
@@ -15,7 +15,7 @@ public final class RegisterForm
     private static final String CHAMP_EMAIL = "email";
     private static final String CHAMP_PASS = "password";
     private static final String CHAMP_VALID = "valid";
-    private static final String CHAMP_NAME = "name";
+    private static final String CHAMP_NAME = "lastname";
     private static final String ALGO_CHIFFREMENT = "SHA-256";
 
     private UserDao userDao;
@@ -38,19 +38,19 @@ public final class RegisterForm
         return errors;
     }
 
-    public User processUser(HttpServletRequest request)
+    public Users processUser(HttpServletRequest request)
     {
         String email = getFieldValue(request, CHAMP_EMAIL);
         String password = getFieldValue(request, CHAMP_PASS);
         String valid = getFieldValue(request, CHAMP_VALID);
-        String name = getFieldValue(request, CHAMP_NAME);
+        String lastname = getFieldValue(request, CHAMP_NAME);
 
-        User user = new User();
+        Users user = new Users();
 
         try {
             checkEmail(email, user);
             checkPassword(password, valid, user);
-            checkName(name, user);
+            checkName(lastname, user);
 
             if (errors.isEmpty()) {
                 userDao.create(user);
@@ -81,7 +81,7 @@ public final class RegisterForm
         }
     }
 
-    private void checkEmail(String email, User user)
+    private void checkEmail(String email, Users user)
     {
         try {
             checkEmail(email);
@@ -107,7 +107,7 @@ public final class RegisterForm
         }
     }
 
-    private void checkPassword(String password, String valid, User user)
+    private void checkPassword(String password, String valid, Users user)
     {
         try {
             checkPassword(password, valid);
@@ -136,12 +136,12 @@ public final class RegisterForm
         user.setPassword(encryptedPassword);
     }
 
-    private void checkName(String name, User user) throws Exception
+    private void checkName(String lastname, Users user) throws Exception
     {
-        if (name != null && name.length() < 3) {
+        if (lastname != null && lastname.length() < 3) {
             throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
         } else {
-            user.setName(name);
+            user.setLastname(lastname);
         }
     }
 

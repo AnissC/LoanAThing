@@ -81,4 +81,6 @@ public class DAOFactory
     {
         return new CategoryDao(this);
     }
+
+    public ApplyDao getApplyDao() { return new ApplyDao(this);}
 }

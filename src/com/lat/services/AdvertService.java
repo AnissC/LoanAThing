@@ -1,7 +1,10 @@
 package com.lat.services;
 
-import com.lat.beans.Advert;
+import com.lat.beans.Adverts;
+import com.lat.beans.Users;
+
 import com.lat.dao.AdvertDao;
+import com.lat.dao.ApplyDao;
 import com.lat.dao.DAOFactory;
 import com.lat.dao.UserDao;
 import com.lat.forms.AdvertAddForm;
@@ -16,26 +19,27 @@ public class AdvertService
     private HttpSession session;
     private UserDao userDao;
     private AdvertDao advertDao;
+    private ApplyDao applyDao;
     private AdvertAddForm advertAddForm;
 
     private AdvertService()
     {
         this.userDao = DAOFactory.getInstance().getUserDao();
         this.advertDao = DAOFactory.getInstance().getAdvertDao();
+        this.applyDao = DAOFactory.getInstance().getApplyDao();
         this.advertAddForm = new AdvertAddForm(this.advertDao);
     }
 
     public static AdvertService getInstance()
     {
-        if (ADVERT_SERVICE == null)
-        {
+        if (ADVERT_SERVICE == null) {
             ADVERT_SERVICE = new AdvertService();
         }
 
         return ADVERT_SERVICE;
     }
 
-    public List<Advert> getAllAdverts()
+    public List<Adverts> getAllAdverts()
     {
         return this.advertDao.find();
     }
@@ -45,13 +49,35 @@ public class AdvertService
         return this.advertAddForm;
     }
 
-    public Advert processAdvert(HttpServletRequest request)
+    public Adverts processAdvert(HttpServletRequest request)
     {
-        return this.advertAddForm.processAdvert(request);
+        this.session = request.getSession();
+        Users user = ((Users) session.getAttribute("userSession"));
+        user = this.userDao.find(user.getEmail());
+        String title = getFieldValue(request, "title");
+        String description = getFieldValue(request, "description");
+        String dateStart = getFieldValue(request, "dateStart");
+        String dateEnd = getFieldValue(request, "dateEnd");
+
+        return this.advertAddForm.processAdvert(title, description, dateStart, dateEnd, user);
     }
 
-    public Advert getAdvert(int id)
+    public Adverts getAdvert(int id)
     {
         return this.advertDao.findOneById(id);
+    }
+
+    /*
+     * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
+     * sinon.
+     */
+    private static String getFieldValue(HttpServletRequest request, String fieldName)
+    {
+        String value = request.getParameter(fieldName);
+        if (value == null || value.trim().length() == 0) {
+            return null;
+        } else {
+            return value.trim();
+        }
     }
 }

@@ -4,11 +4,11 @@ import java.util.Date;
 
 public class Apply {
     private Long id;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private boolean accepted;
-    private User user;
-    private Advert advert;
+    private Users user;
+    private Adverts advert;
 
 
     public Long getId() {
@@ -19,19 +19,19 @@ public class Apply {
         this.id = id;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 
@@ -43,19 +43,19 @@ public class Apply {
         this.accepted = accepted;
     }
 
-    public User getUser() {
+    public Users getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Users user) {
         this.user = user;
     }
 
-    public Advert getAdvert() {
+    public Adverts getAdvert() {
         return advert;
     }
 
-    public void setAdvert(Advert advert) {
+    public void setAdvert(Adverts advert) {
         this.advert = advert;
     }
 }
