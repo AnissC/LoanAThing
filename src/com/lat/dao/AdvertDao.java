@@ -16,9 +16,9 @@ import java.util.List;
 public class AdvertDao
 {
     private DAOFactory daoFactory;
-    private static final String SQL_SELECT_WHITH_ID = "SELECT id, title, description, date_start, date_end FROM adverts WHERE id = ?";
-    private static final String SQL_SELECT_ALL = "SELECT id, title, description, date_start, date_end FROM adverts ORDER BY id";
-    private static final String SQL_INSERT = "INSERT INTO adverts (title, description, date_start, date_end, id_users) VALUES (?, ?, ?, ?, ?)";
+    private static final String SQL_SELECT_WHITH_ID = "SELECT id, title, description, date_start, date_end, id_category FROM adverts WHERE id = ?";
+    private static final String SQL_SELECT_ALL = "SELECT id, title, description, date_start, date_end, id_category FROM adverts ORDER BY id";
+    private static final String SQL_INSERT = "INSERT INTO adverts (title, description, date_start, date_end, id_category, id_users) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM adverts WHERE id = ?";
     private static final String SQL_COUNT_ADVERT = "SELECT COUNT(*) FROM adverts";
     private static final String SQL_COUNT_ADVERT_BY_CATEGORY = "SELECT COUNT(*) FROM adverts A, category C WHERE A.id_category = ? OR (? = C.parent_category AND A.id_category = C.id)";
@@ -75,7 +75,7 @@ public class AdvertDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd(), user.getId());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd(), advert.getCategoryId(), user.getId());
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
             if (statut == 0) {
@@ -148,11 +148,6 @@ public class AdvertDao
     {
     }
 
-    /*
-     * Simple méthode utilitaire permettant de faire la correspondance (le
-     * mapping) entre une ligne issue de la table advert (un
-     * ResultSet) et un bean Advert.
-     */
     private static Adverts map(ResultSet resultSet) throws SQLException
     {
         Adverts advert = new Adverts();
@@ -161,7 +156,7 @@ public class AdvertDao
         advert.setDescription(resultSet.getString("description"));
         advert.setDateStart(resultSet.getString("date_start"));
         advert.setDateEnd(resultSet.getString("date_end"));
-        //advert.getState().setStateName(State.AVAILABLE);
+        advert.setCategoryId(resultSet.getString("id_category"));
 
         return advert;
     }

@@ -12,6 +12,7 @@ public class UserDao
     private DAOFactory daoFactory;
 
     private static final String SQL_SELECT_WITH_EMAIL = "SELECT id, email, lastname, password FROM users WHERE email = ?";
+    private static final String SQL_SELECT_WITH_EMAIL_AND_PASSWORD = "SELECT id, email, lastname, password FROM users WHERE email = ? AND password = ?";
     private static final String SQL_SELECT_WITH_ID = "SELECT id, email, name, password FROM users WHERE id = ?";
     private static final String SQL_INSERT = "INSERT INTO users (email, password, lastname) VALUES (?, ?, ?)";
 
@@ -76,22 +77,7 @@ public class UserDao
         return user;
     }
 
-    /*
-     * Simple méthode utilitaire permettant de faire la correspondance (le
-     * mapping) entre une ligne issue de la table des utilisateurs (un
-     * ResultSet) et un bean Utilisateur.
-     */
-    private static Users map(ResultSet resultSet) throws SQLException
-    {
-        Users user = new Users();
-        user.setId(resultSet.getLong("id"));
-        user.setEmail(resultSet.getString("email"));
-        user.setPassword(resultSet.getString("password"));
-        user.setLastname(resultSet.getString("lastname"));
-        return user;
-    }
-
-    public Users findById(long id)
+    public Users findOneById(long id)
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -112,6 +98,46 @@ public class UserDao
         } finally {
             silentClosures(resultSet, preparedStatement, connexion);
         }
+
+        return user;
+    }
+
+    public Users findOneByEmailAndPassword(Users user) throws DAOException
+    {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            /* Récupération d'une connexion depuis la Factory */
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_WITH_EMAIL_AND_PASSWORD, false, user.getEmail(), user.getPassword());
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                user = map(resultSet);
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connexion);
+        }
+
+        return user;
+    }
+
+    /*
+     * Simple méthode utilitaire permettant de faire la correspondance (le
+     * mapping) entre une ligne issue de la table des utilisateurs (un
+     * ResultSet) et un bean Utilisateur.
+     */
+    private static Users map(ResultSet resultSet) throws SQLException
+    {
+        Users user = new Users();
+        user.setId(resultSet.getLong("id"));
+        user.setEmail(resultSet.getString("email"));
+        user.setPassword(resultSet.getString("password"));
+        user.setLastname(resultSet.getString("lastname"));
 
         return user;
     }

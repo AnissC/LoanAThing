@@ -31,6 +31,15 @@
                 <span class="error">${form.errors['dateEnd']}</span>
                 <br />
 
+                <label>Catégorie</label>
+                <select name="categoryId" class="form-control">
+                    <c:forEach var="category"  items="${requestScope['categories']}" >
+                        <option value="<c:url value="${category.id}"/>"><c:url value="${category.name}"/></option>
+                    </c:forEach>
+                </select>
+                <span class="error">${form.errors['category']}</span>
+                <br />
+
                 <input type="submit" value="AddAdvert" class="sansLabel" />
                 <br />
                 

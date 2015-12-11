@@ -22,7 +22,7 @@ CREATE TABLE `apply` (
 
 CREATE TABLE `category` (
   `id` int(11) NOT NULL,
-  `category_name` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `parent_category` int(11) DEFAULT NULL,
   `type_category` int(11) DEFAULT NULL

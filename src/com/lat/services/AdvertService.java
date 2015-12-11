@@ -1,16 +1,15 @@
 package com.lat.services;
 
 import com.lat.beans.Adverts;
+import com.lat.beans.Category;
 import com.lat.beans.Users;
 
-import com.lat.dao.AdvertDao;
-import com.lat.dao.ApplyDao;
-import com.lat.dao.DAOFactory;
-import com.lat.dao.UserDao;
+import com.lat.dao.*;
 import com.lat.forms.AdvertAddForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdvertService
@@ -20,6 +19,7 @@ public class AdvertService
     private UserDao userDao;
     private AdvertDao advertDao;
     private ApplyDao applyDao;
+    private CategoryDao categoryDao;
     private AdvertAddForm advertAddForm;
 
     private AdvertService()
@@ -27,6 +27,7 @@ public class AdvertService
         this.userDao = DAOFactory.getInstance().getUserDao();
         this.advertDao = DAOFactory.getInstance().getAdvertDao();
         this.applyDao = DAOFactory.getInstance().getApplyDao();
+        this.categoryDao = DAOFactory.getInstance().getCategoryDao();
         this.advertAddForm = new AdvertAddForm(this.advertDao);
     }
 
@@ -53,18 +54,23 @@ public class AdvertService
     {
         this.session = request.getSession();
         Users user = ((Users) session.getAttribute("userSession"));
-        user = this.userDao.find(user.getEmail());
         String title = getFieldValue(request, "title");
         String description = getFieldValue(request, "description");
         String dateStart = getFieldValue(request, "dateStart");
         String dateEnd = getFieldValue(request, "dateEnd");
+        String categoryId = getFieldValue(request, "categoryId");
 
-        return this.advertAddForm.processAdvert(title, description, dateStart, dateEnd, user);
+        return this.advertAddForm.processAdvert(title, description, dateStart, dateEnd, categoryId, user);
     }
 
     public Adverts getAdvert(int id)
     {
         return this.advertDao.findOneById(id);
+    }
+
+    public List<Category> getCategories()
+    {
+        return this.categoryDao.find();
     }
 
     /*

@@ -1,10 +1,6 @@
 package com.lat.beans;
 
-
-import java.util.Date;
-
 public class Adverts {
-
     private Long id;
     private String title;
     private String description;
@@ -13,7 +9,7 @@ public class Adverts {
     private String dateEnd;
     private String simpleDescription;
     private Users user;
-    private Category category;
+    private String categoryId;
     private State state;
 
 
@@ -81,12 +77,12 @@ public class Adverts {
         this.user = user;
     }
 
-    public Category getCategory() {
-        return category;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public State getState() {

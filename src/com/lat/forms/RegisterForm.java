@@ -8,19 +8,10 @@ import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 public final class RegisterForm
 {
-    private static final String CHAMP_EMAIL = "email";
-    private static final String CHAMP_PASS = "password";
-    private static final String CHAMP_VALID = "valid";
-    private static final String CHAMP_NAME = "lastname";
-    private static final String ALGO_CHIFFREMENT = "SHA-256";
-
     private UserDao userDao;
-
-    private String results;
+    private String result;
     private Map<String, String> errors = new HashMap<String, String>();
 
     public RegisterForm(UserDao userDao)
@@ -28,9 +19,9 @@ public final class RegisterForm
         this.userDao = userDao;
     }
 
-    public String getResults()
+    public String getResult()
     {
-        return results;
+        return result;
     }
 
     public Map<String, String> getErrors()
@@ -38,28 +29,22 @@ public final class RegisterForm
         return errors;
     }
 
-    public Users processUser(HttpServletRequest request)
+    public Users processUser(String email, String password, String valid, String lastname)
     {
-        String email = getFieldValue(request, CHAMP_EMAIL);
-        String password = getFieldValue(request, CHAMP_PASS);
-        String valid = getFieldValue(request, CHAMP_VALID);
-        String lastname = getFieldValue(request, CHAMP_NAME);
-
         Users user = new Users();
 
         try {
             checkEmail(email, user);
             checkPassword(password, valid, user);
-            checkName(lastname, user);
+            checkLastname(lastname, user);
 
             if (errors.isEmpty()) {
                 userDao.create(user);
-                results = "Succès de l'inscription.";
             } else {
-                results = "Échec de l'inscription.";
+                setError("registerFail", "Échec de l'inscription.");
             }
         } catch (DAOException e) {
-            results = "Échec de l'inscription : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+            result = "Échec de l'inscription : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,7 +71,7 @@ public final class RegisterForm
         try {
             checkEmail(email);
         } catch (FormValidationException e) {
-            setError(CHAMP_EMAIL, e.getMessage());
+            setError("email", e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,34 +97,25 @@ public final class RegisterForm
         try {
             checkPassword(password, valid);
         } catch (FormValidationException e) {
-            setError(CHAMP_PASS, e.getMessage());
-            setError(CHAMP_VALID, null);
+            setError("password", e.getMessage());
+            setError("valid", null);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        /*
-         * Utilisation de la bibliothèque Jasypt pour chiffrer le mot de passe
-         * efficacement.
-         *
-         * L'algorithme SHA-256 est ici utilisé, avec par défaut un salage
-         * aléatoire et un grand nombre d'itérations de la fonction de hashage.
-         *
-         * La String retournée est de longueur 56 et contient le hash en Base64.
-         */
         ConfigurablePasswordEncryptor passwordEncryptor;
         passwordEncryptor = new ConfigurablePasswordEncryptor();
-        passwordEncryptor.setAlgorithm(ALGO_CHIFFREMENT);
-        passwordEncryptor.setPlainDigest(false);
+        passwordEncryptor.setAlgorithm("SHA-256");
+        passwordEncryptor.setPlainDigest(true);
         String encryptedPassword = passwordEncryptor.encryptPassword(password);
 
         user.setPassword(encryptedPassword);
     }
 
-    private void checkName(String lastname, Users user) throws Exception
+    private void checkLastname(String lastname, Users user)
     {
         if (lastname != null && lastname.length() < 3) {
-            throw new Exception("Le nom d'utilisateur doit contenir au moins 3 caractères.");
+            setError("lastname", "Le nom d'utilisateur doit contenir au moins 3 caractères.");
         } else {
             user.setLastname(lastname);
         }
@@ -153,17 +129,8 @@ public final class RegisterForm
         errors.put(field, message);
     }
 
-    /*
-     * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
-     * sinon.
-     */
-    private static String getFieldValue(HttpServletRequest request, String fieldName)
+    public void resetError()
     {
-        String value = request.getParameter(fieldName);
-        if (value == null || value.trim().length() == 0) {
-            return null;
-        } else {
-            return value.trim();
-        }
+        errors.clear();
     }
 }

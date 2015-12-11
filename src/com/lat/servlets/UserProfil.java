@@ -1,7 +1,7 @@
 package com.lat.servlets;
 
 import com.google.gson.Gson;
-import com.lat.beans.User;
+import com.lat.beans.Users;
 import com.lat.services.UserService;
 
 import javax.servlet.ServletException;
@@ -25,7 +25,7 @@ public class UserProfil extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         long idCurrentUser = Long.parseLong(request.getParameter("id"));
-        User user = this.userService.getUserById(idCurrentUser);
+        Users user = this.userService.getUserById(idCurrentUser);
         request.setAttribute("User", user);
         return;
     }
@@ -33,7 +33,7 @@ public class UserProfil extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        User user = userService.getUserById(Long.parseLong(request.getParameter("id")));
+        Users user = userService.getUserById(Long.parseLong(request.getParameter("id")));
         String json = new Gson().toJson(user);
 
         response.setContentType("application/json");
