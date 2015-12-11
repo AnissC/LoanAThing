@@ -66,4 +66,9 @@ public class UserService
     {
         this.session.invalidate();
     }
+
+    public User getUserById(long id)
+    {
+        return userDao.findById(id);
+    }
 }

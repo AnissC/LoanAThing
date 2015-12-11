@@ -10,8 +10,11 @@ import java.sql.SQLException;
 public class UserDao
 {
     private DAOFactory daoFactory;
+
     private static final String SQL_SELECT_WITH_EMAIL = "SELECT id, email, lastname, password FROM users WHERE email = ?";
+    private static final String SQL_SELECT_WITH_ID = "SELECT id, email, name, password FROM users WHERE id = ?";
     private static final String SQL_INSERT = "INSERT INTO users (email, password, lastname) VALUES (?, ?, ?)";
+
     UserDao(DAOFactory daoFactory)
     {
         this.daoFactory = daoFactory;
@@ -85,6 +88,31 @@ public class UserDao
         user.setEmail(resultSet.getString("email"));
         user.setPassword(resultSet.getString("password"));
         user.setLastname(resultSet.getString("lastname"));
+        return user;
+    }
+
+    public Users findById(long id)
+    {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Users user = null;
+
+        try {
+            /* Récupération d'une connexion depuis la Factory */
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_WITH_ID, false, id);
+            resultSet = preparedStatement.executeQuery();
+            /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
+            if (resultSet.next()) {
+                user = map(resultSet);
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connexion);
+        }
+
         return user;
     }
 }
