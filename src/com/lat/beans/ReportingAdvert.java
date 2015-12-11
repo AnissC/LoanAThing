@@ -2,13 +2,13 @@ package com.lat.beans;
 
 
 public class ReportingAdvert extends Reporting {
-    private Adverts advert;
+    private Advert advert;
 
-    public Adverts getAdvert() {
+    public Advert getAdvert() {
         return advert;
     }
 
-    public void setAdvert(Adverts advert) {
+    public void setAdvert(Advert advert) {
         this.advert = advert;
     }
 }

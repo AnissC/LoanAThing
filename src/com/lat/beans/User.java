@@ -2,53 +2,30 @@ package com.lat.beans;
 
 import java.util.ArrayList;
 
-public class Users {
-    private Long id;
+public class User {
+    private Integer id;
     private String lastname;
     private String firstname;
     private String nickname;
     private String email;
-    private int nbStreet;
     private String address;
     private String city;
-    private int zipCode;
+    private Integer zipCode;
     private String password;
     private String birthday;
     private String preferences;
     private String schoolDomain;
     private String educationFormation;
-    private String img;
-    private ArrayList<Users> friends;
-    private Group group;
+    private String image;
+    private ArrayList<User> friends;
+    private Integer groupId;
 
-
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
-
-    public String getPassword()
-    {
-        return password;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getLastname() {
@@ -75,20 +52,12 @@ public class Users {
         this.nickname = nickname;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getEmail() {
+        return email;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public int getNbStreet() {
-        return nbStreet;
-    }
-
-    public void setNbStreet(int nbStreet) {
-        this.nbStreet = nbStreet;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {
@@ -107,12 +76,28 @@ public class Users {
         this.city = city;
     }
 
-    public int getZipCode() {
+    public Integer getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(Integer zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public String getPreferences() {
@@ -139,27 +124,27 @@ public class Users {
         this.educationFormation = educationFormation;
     }
 
-    public String getImg() {
-        return img;
+    public String getImage() {
+        return image;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public ArrayList<Users> getFriends() {
+    public ArrayList<User> getFriends() {
         return friends;
     }
 
-    public void setFriends(ArrayList<Users> friends) {
+    public void setFriends(ArrayList<User> friends) {
         this.friends = friends;
     }
 
-    public Group getGroup() {
-        return group;
+    public Integer getGroupId() {
+        return groupId;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
     }
 }

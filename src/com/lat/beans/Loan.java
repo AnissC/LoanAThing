@@ -1,21 +1,18 @@
 package com.lat.beans;
 
-
 public class Loan {
-
-
-    private Long id;
+    private Integer id;
     private String loanCode;
-    private boolean stateLoanCode;
+    private Boolean stateCode;
     private String returnCode;
-    private boolean stateReturnCode;
-    private Apply apply;
+    private Boolean stateReturnCode;
+    private Integer applyId;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -27,12 +24,12 @@ public class Loan {
         this.loanCode = loanCode;
     }
 
-    public boolean isStateLoanCode() {
-        return stateLoanCode;
+    public Boolean getStateCode() {
+        return stateCode;
     }
 
-    public void setStateLoanCode(boolean stateLoanCode) {
-        this.stateLoanCode = stateLoanCode;
+    public void setStateCode(Boolean stateCode) {
+        this.stateCode = stateCode;
     }
 
     public String getReturnCode() {
@@ -43,19 +40,19 @@ public class Loan {
         this.returnCode = returnCode;
     }
 
-    public boolean isStateReturnCode() {
+    public Boolean getStateReturnCode() {
         return stateReturnCode;
     }
 
-    public void setStateReturnCode(boolean stateReturnCode) {
+    public void setStateReturnCode(Boolean stateReturnCode) {
         this.stateReturnCode = stateReturnCode;
     }
 
-    public Apply getApply() {
-        return apply;
+    public Integer getApplyId() {
+        return applyId;
     }
 
-    public void setApply(Apply apply) {
-        this.apply = apply;
+    public void setApplyId(Integer applyId) {
+        this.applyId = applyId;
     }
 }

@@ -1,23 +1,27 @@
 package com.lat.forms;
 
-import com.lat.beans.Users;
+import com.lat.beans.User;
+import com.lat.dao.DAOException;
+import com.lat.dao.UserDao;
+import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 public final class LoginForm
 {
-    private static final String CHAMP_EMAIL = "email";
-    private static final String CHAMP_PASS  = "password";
-
-    private String results;
+    private UserDao userDao;
+    private String result;
     private Map<String, String> errors = new HashMap<String, String>();
 
-    public String getResults()
+    public LoginForm(UserDao userDao)
     {
-        return results;
+        this.userDao = userDao;
+    }
+
+    public String getResult()
+    {
+        return result;
     }
 
     public Map<String, String> getErrors()
@@ -25,43 +29,33 @@ public final class LoginForm
         return errors;
     }
 
-    public Users connectUser(HttpServletRequest request)
+    public User connectUser(String email, String password)
     {
-        /* Récupération des champs du formulaire */
-        String email = getFieldValue(request, CHAMP_EMAIL);
-        String password = getFieldValue(request, CHAMP_PASS);
+        User user = new User();
 
-        Users user = new Users();
-
-        /* Validation du champ email. */
         try {
-            checkEmail(email);
-        } catch (Exception e) {
-            setErrors(CHAMP_EMAIL, e.getMessage());
-        }
-        user.setEmail(email);
+            checkEmail(email, user);
+            checkPassword(password, user);
 
-        /* Validation du champ mot de passe. */
-        try {
-            checkPassword(password);
-        } catch (Exception e) {
-            setErrors(CHAMP_PASS, e.getMessage());
-        }
-        user.setPassword(password);
+            if (errors.isEmpty()) {
+                user = userDao.findOneByEmailAndPassword(user);
 
-        /* Initialisation du résultat global de la validation. */
-        if (errors.isEmpty()) {
-            results = "Succès de la connexion.";
-        } else {
-            results = "Échec de la connexion.";
+                if (user.getId() == null) {
+                    setError("loginFail", "Mauvais email ou mot de passe");
+                }
+            } else {
+                setError("loginFail", "Échec de la connexion.");
+            }
+        } catch (DAOException e) {
+            result = "Échec de la connexion : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return user;
     }
 
-    /**
-     * Valide l'adresse email saisie.
-     */
     private void checkEmail(String email) throws Exception
     {
         if (email != null && !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" )) {
@@ -69,9 +63,19 @@ public final class LoginForm
         }
     }
 
-    /**
-     * Valide le mot de passe saisi.
-     */
+    private void checkEmail(String email, User user)
+    {
+        try {
+            checkEmail(email);
+        } catch (FormValidationException e) {
+            setError("email", e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        user.setEmail(email);
+    }
+
     private void checkPassword(String password) throws Exception
     {
         if (password != null) {
@@ -83,25 +87,32 @@ public final class LoginForm
         }
     }
 
-    /*
-     * Ajoute un message correspondant au champ spécifié à la map des erreurs.
-     */
-    private void setErrors(String field, String message)
+    private void checkPassword(String password, User user)
+    {
+        try {
+            checkPassword(password);
+        } catch (FormValidationException e) {
+            setError("password", e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ConfigurablePasswordEncryptor passwordEncryptor;
+        passwordEncryptor = new ConfigurablePasswordEncryptor();
+        passwordEncryptor.setAlgorithm("SHA-256");
+        passwordEncryptor.setPlainDigest(true);
+        String encryptedPassword = passwordEncryptor.encryptPassword(password);
+
+        user.setPassword(encryptedPassword);
+    }
+
+    private void setError(String field, String message)
     {
         errors.put(field, message);
     }
 
-    /*
-     * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
-     * sinon.
-     */
-    private static String getFieldValue(HttpServletRequest request, String fieldName)
+    public void resetError()
     {
-        String value = request.getParameter(fieldName);
-        if (value == null || value.trim().length() == 0) {
-            return null;
-        } else {
-            return value;
-        }
+        errors.clear();
     }
 }

@@ -1,6 +1,5 @@
 package com.lat.servlets;
 
-import com.lat.beans.Category;
 import com.lat.services.AdvertService;
 import com.lat.services.CategoryService;
 

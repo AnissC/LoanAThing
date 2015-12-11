@@ -24,7 +24,7 @@ public class UserProfil extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        long idCurrentUser = Long.parseLong(request.getParameter("id"));
+        Integer idCurrentUser = Integer.parseInt(request.getParameter("id"));
         User user = this.userService.getUserById(idCurrentUser);
         request.setAttribute("User", user);
         return;
@@ -33,7 +33,7 @@ public class UserProfil extends HttpServlet
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        User user = userService.getUserById(Long.parseLong(request.getParameter("id")));
+        User user = userService.getUserById(Integer.parseInt(request.getParameter("id")));
         String json = new Gson().toJson(user);
 
         response.setContentType("application/json");

@@ -1,6 +1,6 @@
 package com.lat.dao;
 
-import com.lat.beans.Users;
+import com.lat.beans.User;
 import static com.lat.dao.DAOUtilities.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,9 +11,10 @@ public class UserDao
 {
     private DAOFactory daoFactory;
 
-    private static final String SQL_SELECT_WITH_EMAIL = "SELECT id, email, lastname, password FROM users WHERE email = ?";
-    private static final String SQL_SELECT_WITH_ID = "SELECT id, email, name, password FROM users WHERE id = ?";
-    private static final String SQL_INSERT = "INSERT INTO users (email, password, lastname) VALUES (?, ?, ?)";
+    private static final String SQL_SELECT_WITH_EMAIL = "SELECT * FROM user WHERE email = ?";
+    private static final String SQL_SELECT_WITH_EMAIL_AND_PASSWORD = "SELECT * FROM user WHERE email = ? AND password = ?";
+    private static final String SQL_SELECT_WITH_ID = "SELECT * FROM user WHERE id = ?";
+    private static final String SQL_INSERT = "INSERT INTO user (email, password, lastname) VALUES (?, ?, ?)";
 
     UserDao(DAOFactory daoFactory)
     {
@@ -21,7 +22,7 @@ public class UserDao
     }
 
     /* Implémentation de la méthode définie dans l'interface UtilisateurDao */
-    public void create(Users user) throws DAOException
+    public void create(User user) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -39,7 +40,7 @@ public class UserDao
             valeursAutoGenerees = preparedStatement.getGeneratedKeys();
             if (valeursAutoGenerees.next()) {
                 /* Puis initialisation de la propriété id du bean Utilisateur avec sa valeur */
-                user.setId(valeursAutoGenerees.getLong(1));
+                user.setId(valeursAutoGenerees.getInt(1));
             } else {
                 throw new DAOException("Échec de la création de l'utilisateur en base, aucun ID auto-généré retourné.");
             }
@@ -51,12 +52,12 @@ public class UserDao
     }
 
     /* Implémentation de la méthode définie dans l'interface UtilisateurDao */
-    public Users find(String email) throws DAOException
+    public User find(String email) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Users user = null;
+        User user = null;
 
         try {
             /* Récupération d'une connexion depuis la Factory */
@@ -76,27 +77,12 @@ public class UserDao
         return user;
     }
 
-    /*
-     * Simple méthode utilitaire permettant de faire la correspondance (le
-     * mapping) entre une ligne issue de la table des utilisateurs (un
-     * ResultSet) et un bean Utilisateur.
-     */
-    private static Users map(ResultSet resultSet) throws SQLException
-    {
-        Users user = new Users();
-        user.setId(resultSet.getLong("id"));
-        user.setEmail(resultSet.getString("email"));
-        user.setPassword(resultSet.getString("password"));
-        user.setLastname(resultSet.getString("lastname"));
-        return user;
-    }
-
-    public Users findById(long id)
+    public User findOneById(Integer id)
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        Users user = null;
+        User user = null;
 
         try {
             /* Récupération d'une connexion depuis la Factory */
@@ -112,6 +98,53 @@ public class UserDao
         } finally {
             silentClosures(resultSet, preparedStatement, connexion);
         }
+
+        return user;
+    }
+
+    public User findOneByEmailAndPassword(User user) throws DAOException
+    {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            /* Récupération d'une connexion depuis la Factory */
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_WITH_EMAIL_AND_PASSWORD, false, user.getEmail(), user.getPassword());
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                user = map(resultSet);
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connexion);
+        }
+
+        return user;
+    }
+
+    private static User map(ResultSet resultSet) throws SQLException
+    {
+        User user = new User();
+
+        user.setId(resultSet.getInt("id"));
+        user.setLastname(resultSet.getString("lastname"));
+        user.setFirstname(resultSet.getString("firstname"));
+        user.setNickname(resultSet.getString("nickname"));
+        user.setEmail(resultSet.getString("email"));
+        user.setGroupId(resultSet.getInt("group_id"));
+        user.setAddress(resultSet.getString("address"));
+        user.setCity(resultSet.getString("city"));
+        user.setZipCode(resultSet.getInt("zipcode"));
+        user.setPassword(resultSet.getString("password"));
+        user.setBirthday(resultSet.getString("birthday"));
+        user.setPreferences(resultSet.getString("preferences"));
+        user.setSchoolDomain(resultSet.getString("school_domain"));
+        user.setEducationFormation(resultSet.getString("education_formation"));
+        user.setImage(resultSet.getString("image"));
 
         return user;
     }

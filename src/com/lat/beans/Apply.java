@@ -1,21 +1,18 @@
 package com.lat.beans;
 
-import java.util.Date;
-
 public class Apply {
-    private Long id;
+    private Integer id;
     private String startDate;
     private String endDate;
-    private boolean accepted;
-    private Users user;
-    private Adverts advert;
+    private Boolean accepted;
+    private Integer userId;
+    private Integer advertId;
 
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -35,27 +32,27 @@ public class Apply {
         this.endDate = endDate;
     }
 
-    public boolean isAccepted() {
+    public Boolean getAccepted() {
         return accepted;
     }
 
-    public void setAccepted(boolean accepted) {
+    public void setAccepted(Boolean accepted) {
         this.accepted = accepted;
     }
 
-    public Users getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(Users user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public Adverts getAdvert() {
-        return advert;
+    public Integer getAdvertId() {
+        return advertId;
     }
 
-    public void setAdvert(Adverts advert) {
-        this.advert = advert;
+    public void setAdvertId(Integer advertId) {
+        this.advertId = advertId;
     }
 }
