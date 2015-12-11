@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/profil")
-public class UserProfil extends HttpServlet{
-
+public class UserProfil extends HttpServlet
+{
     private UserService userService;
 
     public void init() throws ServletException
@@ -31,7 +31,8 @@ public class UserProfil extends HttpServlet{
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    {
         User user = userService.getUserById(Long.parseLong(request.getParameter("id")));
         String json = new Gson().toJson(user);
 
