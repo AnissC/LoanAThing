@@ -19,7 +19,8 @@ public class ApplyDao
     private static final String SQL_INSERT = "INSERT INTO apply (start_date, end_date, accepted) VALUES (?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM apply WHERE id = ?";
 
-    ApplyDao(DAOFactory daoFactory) {
+    ApplyDao(DAOFactory daoFactory)
+    {
         this.daoFactory = daoFactory;
     }
 
@@ -97,8 +98,8 @@ public class ApplyDao
         Apply apply = new Apply();
         apply.setId(resultSet.getLong("id"));
         apply.setAccepted(resultSet.getBoolean("accepted"));
-        apply.setStartDate(resultSet.getDate("start_date"));
-        apply.setEndDate(resultSet.getDate("end_date"));
+        apply.setStartDate(resultSet.getString("start_date"));
+        apply.setEndDate(resultSet.getString("end_date"));
 
         return apply;
     }
