@@ -1,8 +1,6 @@
 package com.lat.dao;
 
-
 import com.lat.beans.Apply;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +11,6 @@ import static com.lat.dao.DAOUtilities.silentClosures;
 
 public class ApplyDao
 {
-
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as Nb_Applies FROM apply";
     private static final String SQL_INSERT = "INSERT INTO apply (start_date, end_date, accepted) VALUES (?, ?, ?)";

@@ -1,9 +1,7 @@
 package com.lat.dao;
 
 import com.lat.beans.Users;
-
 import static com.lat.dao.DAOUtilities.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +10,6 @@ import java.sql.SQLException;
 public class UserDao
 {
     private DAOFactory daoFactory;
-
     private static final String SQL_SELECT_WITH_EMAIL = "SELECT id, email, lastname, password FROM users WHERE email = ?";
     private static final String SQL_INSERT = "INSERT INTO users (email, password, lastname) VALUES (?, ?, ?)";
     UserDao(DAOFactory daoFactory)
@@ -26,7 +23,6 @@ public class UserDao
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
         ResultSet valeursAutoGenerees = null;
-
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
@@ -89,7 +85,6 @@ public class UserDao
         user.setEmail(resultSet.getString("email"));
         user.setPassword(resultSet.getString("password"));
         user.setLastname(resultSet.getString("lastname"));
-
         return user;
     }
 }

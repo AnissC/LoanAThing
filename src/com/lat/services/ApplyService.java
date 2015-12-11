@@ -1,6 +1,5 @@
 package com.lat.services;
 
-
 import com.lat.dao.AdvertDao;
 import com.lat.dao.ApplyDao;
 import com.lat.dao.DAOFactory;
@@ -31,8 +30,6 @@ public class ApplyService
 
         return APPLY_SERVICE;
     }
-
-
 
     public ResultSet nbApplies()
     {
