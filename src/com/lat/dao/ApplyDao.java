@@ -13,7 +13,7 @@ public class ApplyDao
 {
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as nbApplies FROM apply";
-    private static final String SQL_INSERT = "INSERT INTO apply (start_date, end_date, accepted) VALUES (?, ?, ?)";
+    private static final String SQL_INSERT = "INSERT INTO apply (date_start, date_end, accepted, user_id, advert_id) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM apply WHERE id = ?";
 
     ApplyDao(DAOFactory daoFactory)
@@ -68,7 +68,7 @@ public class ApplyDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, apply.getStartDate(), apply.getEndDate(), apply.getAccepted());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, apply.getDateStart(), apply.getDateEnd(), apply.getAccepted(), apply.getUserId(), apply.getAdvertId());
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
             if (statut == 0) {
@@ -96,8 +96,8 @@ public class ApplyDao
 
         apply.setId(resultSet.getInt("id"));
         apply.setAccepted(resultSet.getBoolean("accepted"));
-        apply.setStartDate(resultSet.getString("start_date"));
-        apply.setEndDate(resultSet.getString("end_date"));
+        apply.setDateStart(resultSet.getString("date_start"));
+        apply.setDateEnd(resultSet.getString("date_end"));
 
         return apply;
     }
