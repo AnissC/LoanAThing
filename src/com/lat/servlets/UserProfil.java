@@ -22,6 +22,22 @@ public class UserProfil extends HttpServlet
 
     }
 
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        User user = userService.getUserInSession();
+
+        /* TODO : Nico */
+        /*String json = new Gson().toJson(user);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);*/
+
+        request.setAttribute("user", user);
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
+    }
+
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         Integer idCurrentUser = Integer.parseInt(request.getParameter("id"));
@@ -29,16 +45,4 @@ public class UserProfil extends HttpServlet
         request.setAttribute("User", user);
         return;
     }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-    {
-        User user = userService.getUserById(Integer.parseInt(request.getParameter("id")));
-        String json = new Gson().toJson(user);
-
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
-    }
-
 }
