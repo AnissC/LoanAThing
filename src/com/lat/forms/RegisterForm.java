@@ -121,9 +121,6 @@ public final class RegisterForm
         }
     }
 
-    /*
-     * Ajoute un message correspondant au champ spécifié à la map des erreurs.
-     */
     private void setError(String field, String message)
     {
         errors.put(field, message);

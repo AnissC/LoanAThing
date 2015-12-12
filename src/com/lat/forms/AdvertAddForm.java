@@ -66,7 +66,8 @@ public final class AdvertAddForm
         }
     }
 
-    private void checkValues(Advert advert, String title, String description, String dateStart, String dateEnd, Integer categoryId, Integer userId) throws Exception {
+    private void checkValues(Advert advert, String title, String description, String dateStart, String dateEnd, Integer categoryId, Integer userId) throws Exception
+    {
         try {
             checkValues(title, description, dateStart, categoryId);
         } catch (FormValidationException e) {
