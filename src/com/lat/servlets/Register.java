@@ -30,10 +30,7 @@ public class Register extends HttpServlet
         request.setAttribute("form", this.userService.getRegisterForm());
         request.setAttribute("user", this.userService.processUser(request));
 
-<<<<<<< HEAD
         /* TODO : Find a better way to redirect the user */
-=======
->>>>>>> 3624deab39b88165de301dee545d91c5413d4b87
         if (request.getAttribute("user") == null) {
             response.sendRedirect("/register");
         } else {
