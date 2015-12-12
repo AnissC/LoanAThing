@@ -12,7 +12,7 @@ import static com.lat.dao.DAOUtilities.silentClosures;
 public class ApplyDao
 {
     private DAOFactory daoFactory;
-    private static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as Nb_Applies FROM apply";
+    private static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as nbApplies FROM apply";
     private static final String SQL_INSERT = "INSERT INTO apply (start_date, end_date, accepted) VALUES (?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM apply WHERE id = ?";
 
@@ -49,7 +49,7 @@ public class ApplyDao
 
         try {
             connection = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connection, SQL_DELETE, true);
+            preparedStatement = initialisationRequetePreparee(connection, SQL_DELETE, false);
             resultSet = preparedStatement.executeQuery();
         } catch ( SQLException e ) {
             throw new DAOException( e );
@@ -68,7 +68,7 @@ public class ApplyDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, apply.getStartDate(), apply.getEndDate(), apply.isAccepted());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, apply.getStartDate(), apply.getEndDate(), apply.getAccepted());
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
             if (statut == 0) {
@@ -78,7 +78,7 @@ public class ApplyDao
             valeursAutoGenerees = preparedStatement.getGeneratedKeys();
             if (valeursAutoGenerees.next()) {
                 /* Puis initialisation de la propriété id du bean Advert avec sa valeur */
-                apply.setId(valeursAutoGenerees.getLong(1));
+                apply.setId(valeursAutoGenerees.getInt(1));
             } else {
                 throw new DAOException("Échec de la création de la demande de prêt en base, aucun ID auto-généré retourné.");
             }
@@ -93,7 +93,8 @@ public class ApplyDao
     private static Apply map(ResultSet resultSet) throws SQLException
     {
         Apply apply = new Apply();
-        apply.setId(resultSet.getLong("id"));
+
+        apply.setId(resultSet.getInt("id"));
         apply.setAccepted(resultSet.getBoolean("accepted"));
         apply.setStartDate(resultSet.getString("start_date"));
         apply.setEndDate(resultSet.getString("end_date"));

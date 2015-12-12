@@ -43,7 +43,7 @@
             <ul data-menu="submenu-1" class="menu__level">
                 <li class="menu__item"><a class="menu__link" href="#">Toutes les offres</a></li>
                 <c:forEach var="category"  items="${requestScope['categories']}" >
-                    <li class="menu__item"><a class="menu__link" href="#" data-submenu="submenu-1-<c:out value='${category.id}'/>"> <c:out value='${category.categoryName}'/></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-submenu="submenu-1-<c:out value='${category.id}'/>"> <c:out value='${category.name}'/></a></li>
                 </c:forEach>
             </ul>
 

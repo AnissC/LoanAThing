@@ -1,26 +1,24 @@
 package com.lat.beans;
 
-
 public class Opinion {
-    private Long id;
-    private int mark;
+    private Integer id;
+    private Integer mark;
     private String description;
-    private Users user;
+    private Integer userId;
 
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getMark() {
+    public Integer getMark() {
         return mark;
     }
 
-    public void setMark(int mark) {
+    public void setMark(Integer mark) {
         this.mark = mark;
     }
 
@@ -32,11 +30,11 @@ public class Opinion {
         this.description = description;
     }
 
-    public Users getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser(Users user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

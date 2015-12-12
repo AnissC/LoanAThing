@@ -1,6 +1,6 @@
 package com.lat.services;
 
-import com.lat.beans.Users;
+import com.lat.beans.User;
 import com.lat.dao.DAOFactory;
 import com.lat.dao.UserDao;
 import com.lat.forms.LoginForm;
@@ -21,7 +21,7 @@ public class UserService
     {
         this.userDao = DAOFactory.getInstance().getUserDao();
         this.registerForm = new RegisterForm(this.userDao);
-        this.loginForm = new LoginForm();
+        this.loginForm = new LoginForm(this.userDao);
     }
 
     public static UserService getInstance()
@@ -43,21 +43,31 @@ public class UserService
         return this.loginForm;
     }
 
-    public Users processUser(HttpServletRequest request)
+    public User processUser(HttpServletRequest request)
     {
-        return this.registerForm.processUser(request);
+        String email = getFieldValue(request, "email");
+        String password = getFieldValue(request, "password");
+        String valid = getFieldValue(request, "valid");
+        String lastname = getFieldValue(request, "lastname");
+
+        return this.registerForm.processUser(email, password, valid, lastname);
     }
 
-    public Users connectUser(HttpServletRequest request)
+    public User connectUser(HttpServletRequest request)
     {
         this.session = request.getSession();
-        Users user = this.loginForm.connectUser(request);
+        String email = getFieldValue(request, "email");
+        String password = getFieldValue(request, "password");
+
+        User user = this.loginForm.connectUser(email, password);
 
         if (this.loginForm.getErrors().isEmpty()) {
             session.setAttribute("userSession", user);
         } else {
             session.setAttribute("userSession", null);
         }
+
+        this.loginForm.resetError();
 
         return user;
     }
@@ -67,8 +77,18 @@ public class UserService
         this.session.invalidate();
     }
 
-    public User getUserById(long id)
+    public User getUserById(Integer id)
     {
-        return userDao.findById(id);
+        return userDao.findOneById(id);
+    }
+
+    private static String getFieldValue(HttpServletRequest request, String fieldName)
+    {
+        String value = request.getParameter(fieldName);
+        if (value == null || value.trim().length() == 0) {
+            return null;
+        } else {
+            return value.trim();
+        }
     }
 }

@@ -1,12 +1,10 @@
 package com.lat.services;
 
-import com.lat.beans.Adverts;
-import com.lat.beans.Users;
+import com.lat.beans.Advert;
+import com.lat.beans.Category;
+import com.lat.beans.User;
 
-import com.lat.dao.AdvertDao;
-import com.lat.dao.ApplyDao;
-import com.lat.dao.DAOFactory;
-import com.lat.dao.UserDao;
+import com.lat.dao.*;
 import com.lat.forms.AdvertAddForm;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +18,7 @@ public class AdvertService
     private UserDao userDao;
     private AdvertDao advertDao;
     private ApplyDao applyDao;
+    private CategoryDao categoryDao;
     private AdvertAddForm advertAddForm;
 
     private AdvertService()
@@ -27,6 +26,7 @@ public class AdvertService
         this.userDao = DAOFactory.getInstance().getUserDao();
         this.advertDao = DAOFactory.getInstance().getAdvertDao();
         this.applyDao = DAOFactory.getInstance().getApplyDao();
+        this.categoryDao = DAOFactory.getInstance().getCategoryDao();
         this.advertAddForm = new AdvertAddForm(this.advertDao);
     }
 
@@ -39,7 +39,7 @@ public class AdvertService
         return ADVERT_SERVICE;
     }
 
-    public List<Adverts> getAllAdverts()
+    public List<Advert> getAllAdverts()
     {
         return this.advertDao.find();
     }
@@ -49,28 +49,32 @@ public class AdvertService
         return this.advertAddForm;
     }
 
-    public Adverts processAdvert(HttpServletRequest request)
+    public Advert processAdvert(HttpServletRequest request)
     {
         this.session = request.getSession();
-        Users user = ((Users) session.getAttribute("userSession"));
-        user = this.userDao.find(user.getEmail());
+        User user = ((User) session.getAttribute("userSession"));
+
         String title = getFieldValue(request, "title");
         String description = getFieldValue(request, "description");
         String dateStart = getFieldValue(request, "dateStart");
         String dateEnd = getFieldValue(request, "dateEnd");
+        Integer categoryId = Integer.parseInt(getFieldValue(request, "categoryId"));
+        Integer userId = user.getId();
 
-        return this.advertAddForm.processAdvert(title, description, dateStart, dateEnd, user);
+        return this.advertAddForm.processAdvert(title, description, dateStart, dateEnd, categoryId, userId);
     }
 
-    public Adverts getAdvert(int id)
+    public Advert getAdvert(HttpServletRequest request)
     {
+        Integer id = Integer.parseInt(getFieldValue(request, "id"));
         return this.advertDao.findOneById(id);
     }
 
-    /*
-     * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
-     * sinon.
-     */
+    public List<Category> getCategories()
+    {
+        return this.categoryDao.find();
+    }
+
     private static String getFieldValue(HttpServletRequest request, String fieldName)
     {
         String value = request.getParameter(fieldName);
