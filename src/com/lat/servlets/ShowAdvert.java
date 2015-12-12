@@ -25,4 +25,12 @@ public class ShowAdvert extends HttpServlet
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/showAdvert.jsp").forward(request, response);
     }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        request.setAttribute("form", this.advertService.getAdvertForm());
+        this.advertService.processApply(request);
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/showAdvert.jsp").forward(request, response);
+    }
 }

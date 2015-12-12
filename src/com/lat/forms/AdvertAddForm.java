@@ -47,7 +47,7 @@ public final class AdvertAddForm
                     setError("advertFail", "Tous les champs doivent être remplis");
                 }
             } else {
-                setError("loginFail", "Échec lors de la création de l'offre de prêt.");
+                setError("advertFail", "Échec lors de la création de l'offre de prêt.");
             }
         } catch (DAOException e) {
             results = "Échec lors de la création de l'offre de prêt : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";

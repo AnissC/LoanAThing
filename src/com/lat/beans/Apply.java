@@ -2,8 +2,8 @@ package com.lat.beans;
 
 public class Apply {
     private Integer id;
-    private String startDate;
-    private String endDate;
+    private String dateStart;
+    private String dateEnd;
     private Boolean accepted;
     private Integer userId;
     private Integer advertId;
@@ -16,20 +16,20 @@ public class Apply {
         this.id = id;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getDateStart() {
+        return dateStart;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setDateStart(String dateStart) {
+        this.dateStart = dateStart;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public String getDateEnd() {
+        return dateEnd;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
+    public void setDateEnd(String dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
     public Boolean getAccepted() {

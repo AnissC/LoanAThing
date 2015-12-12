@@ -14,8 +14,8 @@ CREATE TABLE `advert` (
 
 CREATE TABLE `apply` (
   `id` int(11) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date DEFAULT NULL,
+  `date_start` date NOT NULL,
+  `date_end` date DEFAULT NULL,
   `accepted` tinyint(1) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `advert_id` int(11) DEFAULT NULL

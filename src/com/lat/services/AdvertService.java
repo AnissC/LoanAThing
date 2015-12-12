@@ -1,11 +1,13 @@
 package com.lat.services;
 
 import com.lat.beans.Advert;
+import com.lat.beans.Apply;
 import com.lat.beans.Category;
 import com.lat.beans.User;
 
 import com.lat.dao.*;
 import com.lat.forms.AdvertAddForm;
+import com.lat.forms.ApplyForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,7 @@ public class AdvertService
     private ApplyDao applyDao;
     private CategoryDao categoryDao;
     private AdvertAddForm advertAddForm;
+    private ApplyForm applyForm;
 
     private AdvertService()
     {
@@ -28,6 +31,7 @@ public class AdvertService
         this.applyDao = DAOFactory.getInstance().getApplyDao();
         this.categoryDao = DAOFactory.getInstance().getCategoryDao();
         this.advertAddForm = new AdvertAddForm(this.advertDao);
+        this.applyForm = new ApplyForm(this.applyDao);
     }
 
     public static AdvertService getInstance()
@@ -62,6 +66,18 @@ public class AdvertService
         Integer userId = user.getId();
 
         return this.advertAddForm.processAdvert(title, description, dateStart, dateEnd, categoryId, userId);
+    }
+
+    public Apply processApply(HttpServletRequest request) {
+        this.session = request.getSession();
+        User user = ((User) session.getAttribute("userSession"));
+
+        String dateStart = getFieldValue(request, "dateStart");
+        String dateEnd = getFieldValue(request, "dateEnd");
+        Integer advertId = Integer.parseInt(getFieldValue(request, "advertId"));
+        Integer userId = user.getId();
+
+        return this.applyForm.processApply(dateStart, dateEnd, advertId, userId);
     }
 
     public Advert getAdvert(HttpServletRequest request)
