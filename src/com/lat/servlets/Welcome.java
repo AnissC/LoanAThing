@@ -12,7 +12,7 @@ public class Welcome extends HttpServlet
 {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/welcome.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/views/connect/welcome.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

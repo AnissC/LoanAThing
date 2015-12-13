@@ -16,15 +16,18 @@
 <div class="container">
     <div class="row" style="background-color: #ffffff">
         <h1><c:out value="${advert.title}"/></h1>
+        <h1><c:out value="${advert.user.lastname}"/></h1>
         <h1><c:out value="${advert.id}"/></h1>
         <p><c:out value="${advert.description}"/></p>
         <p><c:out value="${advert.dateStart}"/></p>
         <p><c:out value="${advert.dateEnd}"/></p>
     </div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loan">
-        Emprunter
-    </button>
+    <c:if test="${advert.id != sessionScope.userSession.id}">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loan">
+            Emprunter
+        </button>
+    </c:if>
 
     <!-- Modal -->
     <div class="modal fade" id="loan" tabindex="-1" role="dialog" aria-labelledby="loan">

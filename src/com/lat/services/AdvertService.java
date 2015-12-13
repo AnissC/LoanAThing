@@ -1,13 +1,11 @@
 package com.lat.services;
 
-import com.lat.beans.Advert;
-import com.lat.beans.Apply;
-import com.lat.beans.Category;
-import com.lat.beans.User;
+import com.lat.beans.*;
 
 import com.lat.dao.*;
 import com.lat.forms.AdvertAddForm;
 import com.lat.forms.ApplyForm;
+import com.lat.forms.LoanForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,21 +15,23 @@ public class AdvertService
 {
     private static AdvertService ADVERT_SERVICE = null;
     private HttpSession session;
-    private UserDao userDao;
     private AdvertDao advertDao;
     private ApplyDao applyDao;
     private CategoryDao categoryDao;
     private AdvertAddForm advertAddForm;
     private ApplyForm applyForm;
+    private LoanDao loanDao;
+    private LoanForm loanForm;
 
     private AdvertService()
     {
-        this.userDao = DAOFactory.getInstance().getUserDao();
         this.advertDao = DAOFactory.getInstance().getAdvertDao();
-        this.applyDao = DAOFactory.getInstance().getApplyDao();
         this.categoryDao = DAOFactory.getInstance().getCategoryDao();
         this.advertAddForm = new AdvertAddForm(this.advertDao);
+        this.applyDao = DAOFactory.getInstance().getApplyDao();
         this.applyForm = new ApplyForm(this.applyDao);
+        this.loanDao = DAOFactory.getInstance().getLoanDao();
+        this.loanForm = new LoanForm(this.loanDao);
     }
 
     public static AdvertService getInstance()
@@ -89,6 +89,41 @@ public class AdvertService
     public List<Category> getCategories()
     {
         return this.categoryDao.find();
+    }
+
+    public LoanForm getLoanForm()
+    {
+        return this.loanForm;
+    }
+
+    public Loan processLoan(HttpServletRequest request)
+    {
+        Integer applyId = Integer.parseInt(getFieldValue(request, "applyId"));
+
+        return this.loanForm.processLoan(applyId);
+    }
+
+    public Loan getLoan(HttpServletRequest request)
+    {
+        Integer id = Integer.parseInt(getFieldValue(request, "id"));
+
+        return this.loanDao.findOneById(id);
+    }
+
+    public List<Apply> getPendingRequests(HttpServletRequest request)
+    {
+        this.session = request.getSession();
+        User user = ((User) session.getAttribute("userSession"));
+
+        return this.applyDao.findPendingRequests(user);
+    }
+
+    public List<Apply> getInboxRequests(HttpServletRequest request)
+    {
+        this.session = request.getSession();
+        User user = ((User) session.getAttribute("userSession"));
+
+        return this.applyDao.findInboxRequests(user);
     }
 
     private static String getFieldValue(HttpServletRequest request, String fieldName)

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/profil")
-public class UserProfil extends HttpServlet
+public class Profil extends HttpServlet
 {
     private UserService userService;
 
@@ -35,7 +35,7 @@ public class UserProfil extends HttpServlet
 
         request.setAttribute("user", user);
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/views/profil/profil.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

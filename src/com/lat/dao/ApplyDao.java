@@ -1,10 +1,14 @@
 package com.lat.dao;
 
 import com.lat.beans.Apply;
+import com.lat.beans.User;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.lat.dao.DAOUtilities.initialisationRequetePreparee;
 import static com.lat.dao.DAOUtilities.silentClosures;
@@ -13,6 +17,8 @@ public class ApplyDao
 {
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as nbApplies FROM apply";
+    private static final String SQL_SELECT_PENDING_REQUESTS = "SELECT * FROM apply WHERE user_id = ?";
+    private static final String SQL_SELECT_INBOX_REQUESTS = "SELECT * FROM apply WHERE user_id = ?";
     private static final String SQL_INSERT = "INSERT INTO apply (date_start, date_end, accepted, user_id, advert_id) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM apply WHERE id = ?";
 
@@ -40,6 +46,51 @@ public class ApplyDao
         return resultSet;
     }
 
+    public List<Apply> findPendingRequests(User user) throws DAOException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Apply> applyRequests = new ArrayList<Apply>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_PENDING_REQUESTS, false, user.getId());
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                applyRequests.add(map(resultSet));
+            }
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return applyRequests;
+    }
+
+    public List<Apply> findInboxRequests(User user) throws DAOException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Apply> applyRequests = new ArrayList<Apply>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_INBOX_REQUESTS, false, user.getId());
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                applyRequests.add(map(resultSet));
+            }
+        } catch ( SQLException e ) {
+            throw new DAOException( e );
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return applyRequests;
+    }
 
     public void delete(Apply apply) throws DAOException
     {
@@ -68,7 +119,7 @@ public class ApplyDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, apply.getDateStart(), apply.getDateEnd(), apply.getAccepted(), apply.getUserId(), apply.getAdvertId());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, apply.getDateStart(), apply.getDateEnd(), apply.getAccepted(), apply.getUser().getId(), apply.getAdvert().getId());
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
             if (statut == 0) {
@@ -90,14 +141,18 @@ public class ApplyDao
         return apply;
     }
 
-    private static Apply map(ResultSet resultSet) throws SQLException
+    private Apply map(ResultSet resultSet) throws SQLException
     {
         Apply apply = new Apply();
+        UserDao userDao = this.daoFactory.getUserDao();
+        AdvertDao advertDao = this.daoFactory.getAdvertDao();
 
         apply.setId(resultSet.getInt("id"));
         apply.setAccepted(resultSet.getBoolean("accepted"));
         apply.setDateStart(resultSet.getString("date_start"));
         apply.setDateEnd(resultSet.getString("date_end"));
+        apply.setUser(userDao.findOneById(resultSet.getInt("user_id")));
+        apply.setAdvert(advertDao.findOneById(resultSet.getInt("advert_id")));
 
         return apply;
     }

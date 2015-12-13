@@ -2,7 +2,7 @@ package com.lat.beans;
 
 public class Loan {
     private Integer id;
-    private String loanCode;
+    private String code;
     private Boolean stateCode;
     private String returnCode;
     private Boolean stateReturnCode;
@@ -16,12 +16,12 @@ public class Loan {
         this.id = id;
     }
 
-    public String getLoanCode() {
-        return loanCode;
+    public String getCode() {
+        return code;
     }
 
-    public void setLoanCode(String loanCode) {
-        this.loanCode = loanCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public Boolean getStateCode() {

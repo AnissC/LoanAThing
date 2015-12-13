@@ -8,10 +8,19 @@ $(document).ready(function () {
             },
         });
     })
+    $("#user").click(function () {
+        $.ajax({
+            method: "GET",
+            url: "/profil",
+            success: function () {
+                location.reload();
+            },
+        });
+    })
 })
 
 
-function loadUserProfil($content, idUser){
+/*function loadUserProfil($content, idUser){
     $.post("/profil",
         { id: 1},
         function(result){
@@ -27,4 +36,4 @@ function loadUserProfil($content, idUser){
                 .append($("<td>").text(user.name));    // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
         });
     });
-}
+}*/

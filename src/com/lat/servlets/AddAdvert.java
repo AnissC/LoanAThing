@@ -23,7 +23,7 @@ public class AddAdvert extends HttpServlet
     {
         request.setAttribute("categories", this.advertService.getCategories());
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/addAdvert.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/views/advert/add-advert.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -31,6 +31,6 @@ public class AddAdvert extends HttpServlet
         request.setAttribute("form", this.advertService.getAdvertForm());
         request.setAttribute("advert", this.advertService.processAdvert(request));
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/addAdvert.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/views/advert/add-advert.jsp").forward(request, response);
     }
 }

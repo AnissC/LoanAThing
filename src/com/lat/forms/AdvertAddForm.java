@@ -1,6 +1,8 @@
 package com.lat.forms;
 
 import com.lat.beans.Advert;
+import com.lat.beans.Category;
+import com.lat.beans.User;
 import com.lat.dao.DAOException;
 import com.lat.dao.AdvertDao;
 
@@ -76,14 +78,20 @@ public final class AdvertAddForm
             e.printStackTrace();
         }
 
+        Category category = new Category();
+        category.setId(categoryId);
+
+        User user = new User();
+        user.setId(userId);
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.FRANCE);
         LocalDate startDate = LocalDate.parse(dateStart, formatter);
 
         advert.setTitle(title);
         advert.setDescription(description);
         advert.setDateStart(startDate.toString());
-        advert.setCategoryId(categoryId);
-        advert.setUserId(userId);
+        advert.setCategory(category);
+        advert.setUser(user);
 
         if (dateEnd != null) {
             LocalDate endDate = LocalDate.parse(dateEnd, formatter);

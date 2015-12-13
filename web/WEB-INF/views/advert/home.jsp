@@ -33,7 +33,7 @@
             <ul data-menu="main" class="menu__level">
                 <li class="menu__item"><a class="menu__link" data-submenu="submenu-1" href="#"><i class="fa fa-shopping-basket"></i> Offres</a></li>
                 <li class="menu__item"><a class="menu__link" data-submenu="submenu-2" href="#"><i class="fa fa-question-circle"></i> Demandes</a></li>
-                <li class="menu__item"><a class="menu__link" id="user" href="#"><i class="fa fa-user"></i> Profil</a></li>
+                <li class="menu__item"><a class="menu__link" id="user"><i class="fa fa-user"></i> Profil</a></li>
                 <li class="menu__item"><a class="menu__link" href="#"><i class="fa fa-envelope"></i> Contact</a></li>
                 <li class="menu__item"><a class="menu__link" id="logout"><i class="fa fa-power-off"></i> Se déconnecter</a></li>
             </ul>
@@ -114,7 +114,7 @@
         <!-- Ajax loaded content here -->
         <h1 class="text-center">Toutes les offres de prêt :</h1>
         <c:forEach var="advert"  items="${requestScope['adverts']}" >
-            <a href="<c:url value="${'/advert?id='}${advert.id}"/>">
+            <a href="<c:url value="${'/advert/view?id='}${advert.id}"/>">
                 <div>
                     <p><c:out value='${advert.title}'/></p>
                 </div>
