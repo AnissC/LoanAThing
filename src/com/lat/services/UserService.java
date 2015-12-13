@@ -33,6 +33,11 @@ public class UserService
         return USER_SERVICE;
     }
 
+    public User getUserInSession()
+    {
+        return ((User) this.session.getAttribute("userSession"));
+    }
+
     public RegisterForm getRegisterForm()
     {
         return this.registerForm;
