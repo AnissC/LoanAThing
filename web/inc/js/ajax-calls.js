@@ -19,21 +19,16 @@ $(document).ready(function () {
     })
 })
 
-
-/*function loadUserProfil($content, idUser){
-    $.post("/profil",
-        { id: 1},
-        function(result){
-            alert(result);
-        }
-    );
-
-    $.get("/profil", function(responseJson) {          // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
-        var $table = $("<table>").appendTo($("#user-profil")); // Create HTML <table> element and append it to HTML DOM element with ID "somediv".
-        $.each(responseJson, function(index, user) {    // Iterate over the JSON array.
-            $("<tr>").appendTo($table)                     // Create HTML <tr> element, set its text content with currently iterated item and append it to the <table>.
-                .append($("<td>").text(user.id))        // Create HTML <td> element, set its text content with id of currently iterated product and append it to the <tr>.
-                .append($("<td>").text(user.name));    // Create HTML <td> element, set its text content with price of currently iterated product and append it to the <tr>.
-        });
+function loadUserProfil($content, idUser){
+    $.get("/profil", function(responseJson) {
+        user = JSON.parse(responseJson);
+        $content.append("<h1 class='text-center'>Profil</h1>");
+        if (user.hasOwnProperty("lastname")) { $content.lastChild().after("<p>Prenom : "+ user.lastname +"</p>") };
+        if (user.hasOwnProperty("fisrtname")) { $content.lastChild().after("<p>Nom : "+ user.firstname +"</p>") };
+        if (user.hasOwnProperty("email")) { $content.lastChild().after("<p>Email : "+ user.email +"</p>") };
+        if (user.hasOwnProperty("address")) { $content.lastChild().after("<p>Adresse : "+ user.address +"</p>") };
+        if (user.hasOwnProperty("city")) { $content.lastChild().after("<p>Ville : "+ user.city +"</p>") };
+        if (user.hasOwnProperty("zipCode")) { $content.lastChild().after("<p>Code Postal : "+ user.zipCode +"</p>") };
+        if (user.hasOwnProperty("birthday")) { $content.lastChild().after("<p>Date de naissance : "+ user.birthday +"</p>") };
     });
-}*/
+}

@@ -1,0 +1,25 @@
+.advert{
+    background-color: rgba(255,255,255,0.1);
+    padding: 20px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.advert:hover{
+    background-color: rgba(255,255,255,0.2);
+    transition: background-color 0.3s;
+}
+
+
+
+.advert:first-child{
+    margin-top: 50px;
+}
+
+.advert h2{
+    border-bottom: 1px solid #ffffff;
+    padding-bottom: 30px ;
+    margin-bottom: 30px;
+}

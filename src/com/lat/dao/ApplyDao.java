@@ -1,5 +1,6 @@
 package com.lat.dao;
 
+import com.lat.beans.Advert;
 import com.lat.beans.Apply;
 import com.lat.beans.User;
 
@@ -21,6 +22,7 @@ public class ApplyDao
     private static final String SQL_SELECT_INBOX_REQUESTS = "SELECT * FROM apply WHERE user_id = ?";
     private static final String SQL_INSERT = "INSERT INTO apply (date_start, date_end, accepted, user_id, advert_id) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM apply WHERE id = ?";
+    private static final String SQL_SELECT_ALL = "SELECT * FROM apply ORDER BY id";
 
     ApplyDao(DAOFactory daoFactory)
     {
@@ -153,6 +155,29 @@ public class ApplyDao
         apply.setDateEnd(resultSet.getString("date_end"));
         apply.setUser(userDao.findOneById(resultSet.getInt("user_id")));
         apply.setAdvert(advertDao.findOneById(resultSet.getInt("advert_id")));
+
+        return apply;
+    }
+
+    public List<Apply> find() throws DAOException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Apply> apply = new ArrayList<Apply>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_ALL, false);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                apply.add(map(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
 
         return apply;
     }
