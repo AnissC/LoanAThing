@@ -7,7 +7,7 @@
         <title>Publier une offre de prêt</title>
     </head>
     <body>
-        <form method="post" action="<c:url value="/advert/add" />">
+        <form method="post" action="<c:url value="/advert/add" />" enctype="multipart/form-data">
             <fieldset>
                 <legend>Publier une offre de prêt</legend>
 
@@ -40,7 +40,11 @@
                 <span class="error">${form.errors['category']}</span>
                 <br />
 
-                <input type="submit" value="AddAdvert" class="sansLabel" />
+                <label for="file">Image</label>
+                <input type="file" id="file" name="file" />
+                <br />
+
+                <input type="submit" value="Publier annonce" class="sansLabel" />
                 <br />
                 
                 <p class="${empty form.errors ? 'success' : 'error'}">${form.results}</p>
