@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,181 +10,96 @@
     <link href="../inc/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
     <link href="../inc/css/style.css" rel='stylesheet' type='text/css'>
-
+    <link href="../inc/slideOnSideBar/css/component.css" rel='stylesheet' type='text/css'>
     <link href="../inc/css/multi-level-menu/component.css" rel="stylesheet">
     <link href="../inc/css/multi-level-menu/demo.css" rel="stylesheet">
     <link href="../inc/css/multi-level-menu/organicfoodicons.css" rel="stylesheet">
+    <link href="../inc/css/transformicons.css" rel="stylesheet">
+    <link href="../inc/css/annonce.css" rel="stylesheet">
+    <link href="../inc/css/buttonStyle.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <!-- Blueprint header -->
-    <header class="bp-header cf">
-        <div class="dummy-logo">
-            <div class="header-logo">
-                <img src="../inc/images/LatLogoHeader.png" alt="" class="img-responsive center-block" style="max-width: 33%;">
-            </div>
-            <h2 class="dummy-heading">Loan a Thing</h2>
-            <p class="hidden" id="idCurrentUser"><c:out value="${userSession.id}"/></p>
-        </div>
-    </header>
-    <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
-    <nav id="ml-menu" class="menu">
-        <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
-        <div class="menu__wrap">
-            <ul data-menu="main" class="menu__level">
-                <li class="menu__item"><a class="menu__link" data-submenu="submenu-1" href="#"><i class="fa fa-shopping-basket"></i> Offres</a></li>
-                <li class="menu__item"><a class="menu__link" data-submenu="submenu-2" href="#"><i class="fa fa-question-circle"></i> Demandes</a></li>
-                <li class="menu__item"><a class="menu__link" id="user" href="#"><i class="fa fa-user"></i> Profil</a></li>
-                <li class="menu__item"><a class="menu__link" href="#"><i class="fa fa-envelope"></i> Contact</a></li>
-                <li class="menu__item"><a class="menu__link" id="logout"><i class="fa fa-power-off"></i> Se déconnecter</a></li>
-            </ul>
-            <!-- Submenu 1 -->
 
 
-            <ul data-menu="submenu-1" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#">Toutes les offres</a></li>
-                <c:forEach var="category"  items="${requestScope['categories']}" >
-                    <li class="menu__item"><a class="menu__link" href="#" data-submenu="submenu-1-<c:out value='${category.id}'/>"> <c:out value='${category.name}'/></a></li>
-                </c:forEach>
-            </ul>
 
-            <!-- Submenu 1-1 -->
-            <ul data-menu="submenu-1-1" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#">Ordinateur</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Souris</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Clavier</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Écran</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Raspberry Pi</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Cables</a></li>
-            </ul>
+<div id="st-container" class="st-container">
 
-            <!-- Submenu 1-2 -->
-            <ul data-menu="submenu-1-2" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#">Ustensiles de cuisine</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Fours</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Micro-Onde</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Grilles Pain</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Machines à café</a></li>
-            </ul>
+            <nav class="st-menu st-effect-4" id="menu-4">
+                <a href="/home"><h2 class="icon icon-lab"><img src="../inc/images/LatLogoWhite.png" alt="" class="img-responsive center-block"></h2></a>
+                <ul>
+                    <li><a class="icon" href="/home"><i class="fa fa-shopping-basket"></i> Offres <span class="badge pull-right">${nbAdverts}</span></a></li>
+                    <!--<li><a class="icon" href="/home"><i class="fa fa-comment-o"></i> Demandes<span class="badge pull-right">??</span></a></li>-->
+                    <li><a class="icon" href="/home"><i class="fa fa-user"></i> Profil</a></li>
+                    <li><a class="icon" href="/home"><i class="fa fa-question-circle"></i> Contact</a></li>
+                    <li><a class="icon" href="/logout"><i class="fa fa-power-off"></i> Deconnexion</a></li>
+                </ul>
+            </nav>
 
-            <!-- Submenu 1-3 -->
-            <ul data-menu="submenu-1-3" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#">Sports d'hiver</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Sports sur pelouse</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Sports sur glace</a></li>
-            </ul>
+    <!-- content push wrapper -->
+    <div class="st-pusher">
+        <div class="st-content"><!-- this is the wrapper for the content -->
+            <div class="st-content-inner"><!-- extra div for emulating position:fixed of the menu -->
+                <div class="main clearfix">
+                    <div id="st-trigger-effects" class="column">
+                        <!-- <button class="sideBarButton" data-effect="st-effect-4"> <i class="fa fa-bars"></i></button>-->
 
-            <!-- Submenu 1-4 -->
-            <ul data-menu="submenu-1-4" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#">Chaussures hommme</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Chaussures femme</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Chaussures à talon</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Chaussures de sport</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Chaussures d'hiver</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Chaussures d'été</a></li>
-            </ul>
+                        <button type="button" class="tcon tcon-menu--arrow tcon-menu--arrowleft" aria-label="toggle menu"  data-effect="st-effect-4">
+                            <span class="tcon-menu__lines" aria-hidden="true"></span>
+                            <span class="tcon-visuallyhidden">toggle menu</span>
+                        </button>
 
-            <!-- Submenu 1-5 -->
-            <ul data-menu="submenu-1-5" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#">Livres scolaires</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Littérature</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Poésie</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Théâtre</a></li>
-            </ul>
-
-            <!-- Submenu 2 -->
-            <ul data-menu="submenu-2" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#">Citrus Fruits</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Berries</a></li>
-                <li class="menu__item"><a class="menu__link" data-submenu="submenu-2-1" href="#">Special Selection</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Tropical Fruits</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Melons</a></li>
-            </ul>
-            <!-- Submenu 2-1 -->
-            <ul data-menu="submenu-2-1" class="menu__level">
-                <li class="menu__item"><a class="menu__link" href="#">Exotic Mixes</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Wild Pick</a></li>
-                <li class="menu__item"><a class="menu__link" href="#">Vitamin Boosters</a></li>
-            </ul>
-
-
-        </div>
-    </nav>
-    <div class="content">
-
-        <!-- Ajax loaded content here -->
-        <h1 class="text-center">Toutes les offres de prêt :</h1>
-        <c:forEach var="advert"  items="${requestScope['adverts']}" >
-            <a href="<c:url value="${'/advert?id='}${advert.id}"/>">
-                <div>
-                    <p><c:out value='${advert.title}'/></p>
-                </div>
-            </a>
-        </c:forEach>
-
-    </div>
-</div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h1 class="text-center">Nouvelles Offres</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <c:forEach items="${adverts}" var="advert">
+                                <div class="col-xs-3">
+                                    <div class="advert text-center">
+                                        <img src="../inc/images/girafe.png" alt="" class="img-responsive">
+                                        <div class="annonce-content" style="margin-bottom: 20px">
+                                            <h2 class=""><c:out value="${advert.title}" /></h2>
+                                            <p><c:out value="${advert.description}" /></p>
+                                            <p><c:out value="${advert.dateStart}" /> <i class="fa fa-arrow-right"></i> <c:out value="${advert.dateEnd}" /></p>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <button type="submit" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
+                                                    <span>Details</span>
+                                                    <i class="fa fa-search button__icon"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /main -->
+            </div><!-- /st-content-inner -->
+        </div><!-- /st-content -->
+    </div><!-- /st-pusher -->
+</div><!-- /st-container -->
 <!-- /view -->
-<script src="../inc/js/modernizr-custom.js"></script>
-<script src="../inc/js/classie.js"></script>
-<script src="../inc/js/dummydata.js"></script>
-<script src="../inc/js/main.js"></script>
-<script src="../inc/js/classie.js"></script>
-<script src="../inc/js/dummydata.js"></script>
-<script src="../inc/js/main.js"></script>
+
+
 <script src="../inc/js/jquery-1.11.3.min.js"></script>
-<script src="../inc/js/ajax-calls.js"></script>
+<script src="../inc/slideOnSideBar/js/classie.js"></script>
+<script src="../inc/slideOnSideBar/js/sidebarEffects.js"></script>
+<script src="../inc/js/transformicon.js"></script>
+<script src="../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
+
 <script>
-    (function() {
-        var menuEl = document.getElementById('ml-menu'),
-                mlmenu = new MLMenu(menuEl, {
-                    // breadcrumbsCtrl : true, // show breadcrumbs
-                    // initialBreadcrumb : 'all', // initial breadcrumb text
-                    backCtrl : false, // show back button
-                    // itemsDelayInterval : 60, // delay between each menu item sliding animation
-                    onItemClick: loadDummyData//loadDummyData // callback: item that doesn´t have a submenu gets clicked - onItemClick([event], [inner HTML of the clicked item])
-                });
-
-        // mobile menu toggle
-        var openMenuCtrl = document.querySelector('.action--open'),
-                closeMenuCtrl = document.querySelector('.action--close');
-
-        openMenuCtrl.addEventListener('click', openMenu);
-        closeMenuCtrl.addEventListener('click', closeMenu);
-
-        function openMenu() {
-            classie.add(menuEl, 'menu--open');
-        }
-
-        function closeMenu() {
-            classie.remove(menuEl, 'menu--open');
-        }
-
-        // simulate grid content loading
-        var gridWrapper = document.querySelector('.content');
-
-        function loadDummyData(ev, itemName) {
-            ev.preventDefault();
-
-            closeMenu();
-            gridWrapper.innerHTML = '';
-            classie.add(gridWrapper, 'content--loading');
-            setTimeout(function() {
-                classie.remove(gridWrapper, 'content--loading');
-
-                if (itemName.split("/i> ")[1] == "Profil"){
-                    idUser = $(".idCurrentUser").text();
-                    gridWrapper.innerHTML = '<div id="user-profil"></div>';
-                    loadUserProfil($('#user-profil'), idUser);
-                }
-
-                else{
-                    gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '<ul>';
-                }
-
-            }, 700);
-        }
-    })();
+    transformicons.add('.tcon', {
+    transform: "mouseover",
+    revert: "mouseout"
+});
+    $(function() {
+        $('.annonce-content').matchHeight();
+    });
 </script>
 </body>
 </html>

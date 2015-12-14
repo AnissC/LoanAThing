@@ -26,59 +26,7 @@ body{
     border-color: white;
 }
 
-.btn-custom{
-    background-color: transparent;
-    color: white;
-    font-weight: 100;
-    letter-spacing: 0.1em;
-    font-variant: small-caps;
-    transition: all 0.3s;
-    border: 1px solid white;
-}
 
-.btn-custom:hover{
-    color: white;
-    transition: all 0.3s;
-    letter-spacing: 0.2em;
-}
-
-.btn-success-custom{
-    background-color: transparent;
-    border: 1px solid white;
-    font-weight: 100;
-    letter-spacing: 0.1em;
-    font-variant: small-caps;
-    transition: all 0.3s;
-}
-
-.btn-success-custom:hover{
-    background-color: #5cb85c;
-    border: 1px solid #5cb85c;
-    font-weight: 100;
-    letter-spacing: 0.15em;
-    font-variant: small-caps;
-    transition: all 0.3s;
-    color : white;
-}
-
-.btn-danger-custom{
-    background-color: transparent;
-    border: 1px solid white;
-    font-weight: 100;
-    letter-spacing: 0.1em;
-    font-variant: small-caps;
-    transition: all 0.3s;
-}
-
-.btn-danger-custom:hover{
-    background-color: #c9302c;
-    border: 1px solid #c9302c;
-    font-weight: 100;
-    letter-spacing: 0.15em;
-    font-variant: small-caps;
-    transition: all 0.3s;
-    color : white;
-}
 
 footer{
     background-color: rgba(0,0,0,0.3);
@@ -96,3 +44,4 @@ footer{
 footer p{
     margin-top: 20px;
 }
+

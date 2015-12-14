@@ -1,11 +1,13 @@
 package com.lat.services;
 
+import com.lat.beans.Apply;
 import com.lat.dao.AdvertDao;
 import com.lat.dao.ApplyDao;
 import com.lat.dao.DAOFactory;
 import com.lat.dao.UserDao;
 import javax.servlet.http.HttpSession;
 import java.sql.ResultSet;
+import java.util.List;
 
 public class ApplyService
 {
@@ -34,6 +36,11 @@ public class ApplyService
     public ResultSet nbApplies()
     {
         return this.applyDao.countApplies();
+    }
+
+    public List<Apply> getAllApplies()
+    {
+        return this.applyDao.find();
     }
 }
 
