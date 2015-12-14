@@ -21,7 +21,7 @@ public class Adverts extends HttpServlet
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("advert", this.advertService.getAdvert(request));
+        request.setAttribute("adverts", this.advertService.getAdvertsWithId(request));
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/views/profil/adverts.jsp").forward(request, response);
     }

@@ -86,6 +86,15 @@ public class AdvertService
         return this.advertDao.findOneById(id);
     }
 
+    public List<Advert> getAdvertsWithId(HttpServletRequest request)
+    {
+        this.session = request.getSession();
+        User user = ((User) session.getAttribute("userSession"));
+        Integer userId = user.getId();
+
+        return this.advertDao.findAllByUserId(userId);
+    }
+
     public List<Category> getCategories()
     {
         return this.categoryDao.find();

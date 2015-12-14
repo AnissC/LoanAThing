@@ -26,7 +26,7 @@
         <ul>
             <li><a class="icon" href="/home"><i class="fa fa-shopping-basket"></i> Offres <span class="badge pull-right">${nbAdverts}</span></a></li>
             <!--<li><a class="icon" href="/home"><i class="fa fa-comment-o"></i> Demandes<span class="badge pull-right">??</span></a></li>-->
-            <li><a class="icon" href="/home"><i class="fa fa-user"></i> Profil</a></li>
+            <li><a class="icon" href="/profil"><i class="fa fa-user"></i> Profil</a></li>
             <li><a class="icon" href="/home"><i class="fa fa-question-circle"></i> Contact</a></li>
             <li><a class="icon" href="/logout"><i class="fa fa-power-off"></i> Deconnexion</a></li>
         </ul>
@@ -59,14 +59,14 @@
                                             <div class="annonce-content" style="margin-bottom: 20px">
                                                 <h2 class=""><c:out value="${advert.title}" /></h2>
                                                 <p><c:out value="${advert.description}" /></p>
-                                                <p><c:out value="${advert.dateStart}" /> <i class="fa fa-arrow-right"></i> <c:out value="${advert.dateEnd}" /></p>
+                                                <p><c:out value="${advert.dateStart}" /> <i class="fa fa-arrows-h"></i> <c:out value="${advert.dateEnd}" /></p>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <button type="submit" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
+                                                    <a href="/advert/view?id=${advert.id}" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
                                                         <span>Details</span>
                                                         <i class="fa fa-search button__icon"></i>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
