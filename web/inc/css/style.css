@@ -22,3 +22,17 @@ a, p, h1, h2, h3, h4, h5{
 .user-profil h1{
     margin-top: 40px;
 }
+
+.badge {
+    background-color: rgba(0,0,0,0.2);
+    color: rgba(255,255,255,0.2);
+    text-transform: lowercase;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+}
+
+.main.clearfix{
+    background: url(../images/bg4.jpg) no-repeat center fixed;
+    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+    background-size: cover; /* version standardisée */
+}

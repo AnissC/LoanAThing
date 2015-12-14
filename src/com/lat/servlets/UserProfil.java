@@ -27,15 +27,13 @@ public class UserProfil extends HttpServlet
         User user = userService.getUserInSession();
 
         /* TODO : Nico */
-        /*String json = new Gson().toJson(user);
+        String json = new Gson().toJson(user);
 
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);*/
+        response.getWriter().write(json);
 
-        request.setAttribute("user", user);
+        //request.setAttribute("user", user);
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
+        //this.getServletContext().getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
