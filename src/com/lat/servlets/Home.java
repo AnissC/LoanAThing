@@ -17,7 +17,6 @@ import java.util.ArrayList;
 public class Home extends HttpServlet
 {
     private AdvertService advertService;
-    private ApplyService applyService;
     private CategoryService categoryService;
 
     public void init() throws ServletException

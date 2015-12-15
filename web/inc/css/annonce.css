@@ -12,7 +12,9 @@
     transition: background-color 0.3s;
 }
 
-
+.advert .btn span{
+    font-weight: 500;
+}
 
 .advert:first-child{
     margin-top: 50px;

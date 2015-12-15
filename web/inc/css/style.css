@@ -36,3 +36,15 @@ a, p, h1, h2, h3, h4, h5{
     -webkit-background-size: cover; /* pour anciens Chrome et Safari */
     background-size: cover; /* version standardisée */
 }
+
+.btn:focus{
+    color: white;
+}
+
+.modal .modal-body .row{
+    padding: 20px;
+}
+
+.modal .modal-heading h4{
+    color: #5c5edc;
+}
