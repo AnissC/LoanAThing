@@ -1,12 +1,12 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
+<%@ taglib tagdir="/WEB-INF/tags" prefix="lat" %>
+
+<lat:baseLayout>
+    <jsp:attribute name="header">
         <title>Publier une offre de prêt</title>
-    </head>
-    <body>
+    </jsp:attribute>
+    <jsp:attribute name="content">
         <form method="post" action="<c:url value="/advert/add" />" enctype="multipart/form-data">
             <fieldset>
                 <legend>Publier une offre de prêt</legend>
@@ -50,5 +50,5 @@
                 <p class="${empty form.errors ? 'success' : 'error'}">${form.results}</p>
             </fieldset>
         </form>
-    </body>
-</html>
+    </jsp:attribute>
+</lat:baseLayout>
