@@ -11,7 +11,6 @@
     <link href="../inc/css/inputfield.css" rel="stylesheet">
     <link href="../inc/css/buttonStyle.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
-    <script src="../inc/js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 
@@ -113,6 +112,7 @@
         </div>
     </div>
 </body>
+<script src="../inc/js/jquery-1.11.3.min.js"></script>
 <script src="../inc/js/classie.js"></script>
 <script>
     (function () {
