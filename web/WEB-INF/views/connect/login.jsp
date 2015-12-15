@@ -75,10 +75,6 @@
     <jsp:attribute name="js">
         <script src="../../../inc/js/classie.js"></script>
         <script>
-            $('.back').click(function(){
-                parent.history.back();
-                return false;
-            });
             (function () {
                 // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
                 if (!String.prototype.trim) {
@@ -112,7 +108,21 @@
                     }
                 }
 
+
             })();
+
+            /**
+             * Quickfix pour les inputfields quand les credentials sont enregistrés dans le browser
+             */
+            $(".input__field").each(function () {
+                $(this).focus();
+                $(this).blur();
+            });
+
+            $('.back').click(function(){
+                parent.history.back();
+                return false;
+            });
         </script>
     </jsp:attribute>
 </lat:baseLayout>

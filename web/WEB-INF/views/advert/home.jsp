@@ -47,14 +47,14 @@
                                                     <div class="annonce-content" style="margin-bottom: 20px">
                                                         <h2 class=""><c:out value="${advert.title}" /></h2>
                                                         <p><c:out value="${advert.description}" /></p>
-                                                        <p><c:out value="${advert.dateStart}" /> <i class="fa fa-arrows-h"></i> <c:out value="${advert.dateEnd}" /></p>
+                                                        <p><c:out value="${advert.dateStart}" /> <i class="fa fa-arrow-right"></i> <c:out value="${advert.dateEnd}" /></p>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <a href="/advert/view?id=${advert.id}" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
+                                                            <button type="submit" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
                                                                 <span>Details</span>
                                                                 <i class="fa fa-search button__icon"></i>
-                                                            </a>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -68,8 +68,6 @@
                 </div><!-- /st-content -->
             </div><!-- /st-pusher -->
         </div><!-- /st-container -->
-        <!-- /view -->
-
     </jsp:attribute>
     <jsp:attribute name="js">
         <script src="../../../inc/slideOnSideBar/js/classie.js"></script>

@@ -1,7 +1,7 @@
 package com.lat.servlets;
 
-import com.google.gson.Gson;
 import com.lat.beans.User;
+import com.lat.services.AdvertService;
 import com.lat.services.UserService;
 
 import javax.servlet.ServletException;
@@ -15,10 +15,12 @@ import java.io.IOException;
 public class Profil extends HttpServlet
 {
     private UserService userService;
+    private AdvertService advertService;
 
     public void init() throws ServletException
     {
         this.userService = UserService.getInstance();
+        this.advertService = AdvertService.getInstance();
 
     }
 
@@ -26,21 +28,13 @@ public class Profil extends HttpServlet
     {
         User user = userService.getUserInSession();
 
-        /* TODO : Nico */
-        String json = new Gson().toJson(user);
+        request.setAttribute("user", user);
+        int nbAdverts = 0;
+        if(this.advertService.getAllAdverts() != null){
+            nbAdverts = this.advertService.getAllAdverts().size();
+        }
+        request.setAttribute("nbAdverts", nbAdverts);
 
-        response.getWriter().write(json);
-
-        //request.setAttribute("user", user);
-
-        //this.getServletContext().getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
-    }
-
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        Integer idCurrentUser = Integer.parseInt(request.getParameter("id"));
-        User user = this.userService.getUserById(idCurrentUser);
-        request.setAttribute("User", user);
-        return;
+        this.getServletContext().getRequestDispatcher("/WEB-INF/views/profil/profil.jsp").forward(request, response);
     }
 }

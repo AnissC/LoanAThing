@@ -1,0 +1,38 @@
+.profil{
+    background-color: rgba(255,255,255,0.1);
+    border: 1px solid #ffffff;
+    padding: 20px;
+}
+
+.profil .btn span{
+    font-weight: 500;
+}
+
+.profil p{
+    font-weight: 700;
+}
+
+.profil p span{
+    color: #ffffff;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    font-variant: small-caps;
+}
+
+.modal .button > span{
+    color: white;
+    font-weight: 500;
+}
+
+.icon{
+    font-size: 100%;
+}
+
+.modal-title{
+     color: white;
+    font-weight: 300;
+}
+
+.modal-header, .modal-footer{
+    background-color: #34495e;
+}
