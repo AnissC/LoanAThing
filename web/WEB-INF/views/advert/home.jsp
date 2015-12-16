@@ -106,21 +106,21 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="categoryId" class="col-sm-2 control-label">Catégorie</label>
+                                        <label class="col-sm-2 control-label">Catégorie</label>
                                         <div class="col-sm-10">
-                                            <select name="categoryId" id="categoryId" class="form-control">
+                                            <select name="categoryId" class="form-control">
                                                 <c:forEach var="category"  items="${requestScope['categories']}" >
                                                     <option class="control-label" value="<c:url value="${category.id}"/>"><c:url value="${category.name}"/></option>
                                                 </c:forEach>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <!--<div class="form-group">
                                         <label for="file" class="col-sm-2 control-label">Image</label>
                                         <div class="col-sm-10">
                                             <input type="file" class="form-control" id="file" name="file">
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -136,6 +136,7 @@
         <script src="../../../inc/slideOnSideBar/js/sidebarEffects.js"></script>
         <script src="../../../inc/js/transformicon.js"></script>
         <script src="../../../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
+        <script src="../../../inc/js/konami.js"></script>
 
         <script>
             transformicons.add('.tcon', {

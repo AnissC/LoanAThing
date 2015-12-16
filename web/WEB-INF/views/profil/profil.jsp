@@ -46,14 +46,20 @@
                                                         <img src="../../../inc/images/girafe.png" alt="" class="img-responsive">
                                                     </div>
                                                     <div class="col-xs-9">
-                                                        <p><span>Prenom : </span><c:out value="${user.firstname}" /><p>
-                                                        <p><span>Nom : </span><c:out value="${user.lastname}" /><p>
-                                                        <p><span>Nom d'utilisateur : </span><c:out value="${user.nickname}" /><p>
-                                                        <p><span>Adresse email : </span><c:out value="${user.email}" /><p>
-                                                        <p><span>Adresse : </span><c:out value="${user.address}" /><p>
-                                                        <p><span>Ville : </span><c:out value="${user.city}" /><p>
-                                                        <p><span>Code postal: </span><c:out value="${user.zipCode}" /><p>
-                                                        <p><span>Date de naissance : </span><c:out value="${user.birthday}" /><p>
+                                                        <div class="row">
+                                                            <div class="col-xs-6">
+                                                                <p><span>Prenom : </span><c:out value="${user.firstname}" /><p>
+                                                                <p><span>Nom : </span><c:out value="${user.lastname}" /><p>
+                                                                <p><span>Nom d'utilisateur : </span><c:out value="${user.nickname}" /><p>
+                                                                <p><span>Adresse email : </span><c:out value="${user.email}" /><p>
+                                                            </div>
+                                                            <div class="col-xs-6">
+                                                                <p><span>Adresse : </span><c:out value="${user.address}" /><p>
+                                                                <p><span>Ville : </span><c:out value="${user.city}" /><p>
+                                                                <p><span>Code postal: </span><c:out value="${user.zipCode}" /><p>
+                                                                <p><span>Date de naissance : </span><c:out value="${user.birthday}" /><p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -172,6 +178,9 @@
             $(function() {
                 $('.annonce-content').matchHeight();
             });
+            $("img").click(function(){
+                $("img").addClass("reda-pattern")
+            })
         </script>
     </jsp:attribute>
 </lat:baseLayout>

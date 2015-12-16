@@ -62,6 +62,7 @@ public class AdvertService
         String description = getFieldValue(request, "description");
         String dateStart = getFieldValue(request, "dateStart");
         String dateEnd = getFieldValue(request, "dateEnd");
+        System.out.println(request.getParameterValues("categoryId"));
         Integer categoryId = Integer.parseInt(getFieldValue(request, "categoryId"));
         Integer userId = user.getId();
 
