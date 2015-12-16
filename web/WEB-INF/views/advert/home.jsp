@@ -60,10 +60,12 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <button type="submit" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
-                                                                <span>Details</span>
-                                                                <i class="fa fa-search button__icon"></i>
-                                                            </button>
+                                                            <a href="<c:url value="/advert/view"><c:param name="id" value="${advert.id}" /></c:url>">
+                                                                <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
+                                                                    <span>Details</span>
+                                                                    <i class="fa fa-search button__icon"></i>
+                                                                </button>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -139,12 +141,10 @@
                                         <div class="col-xs-6">
                                             <button type="submit" class="pull-right btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
                                                 <span>Valider </span>
-                                                <i class="fa fa-undo button__icon"></i>
+                                                <i class="fa fa-check button__icon"></i>
                                             </button>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </form>
                         </div>

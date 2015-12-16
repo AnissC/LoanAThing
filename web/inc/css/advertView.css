@@ -1,0 +1,37 @@
+.annonce{
+    margin-top: 20px;
+    background-color: rgba(255,255,255,0.2);
+    border: 1px solid #fff;
+}
+
+h2{
+    margin-top: 75px;
+}
+
+.annonce h2{
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.annonce img{
+    margin-top: 20px;
+    padding-left: 20px;
+}
+
+.annonce h4 span{
+    margin-right: 20px;
+}
+
+.annonce .btn{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.annonce h2 span{
+    font-variant: small-caps;
+    font-size: 50%;
+    color: rgba(255,255,255,0.4);
+
+}
