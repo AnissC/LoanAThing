@@ -14,6 +14,8 @@
         <link href="../../../inc/css/transformicons.css" rel="stylesheet">
         <link href="../../../inc/css/annonce.css" rel="stylesheet">
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
+        <link href="../../../inc/css/modal.css" rel="stylesheet">
+
       </jsp:attribute>
       <jsp:attribute name="content">
         <div id="st-container" class="st-container">
@@ -35,13 +37,17 @@
 
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-xs-12">
+                                        <div class="col-xs-6 col-xs-offset-3">
                                             <h1 class="text-center">Nouvelles Offres</h1>
                                         </div>
+                                        <div class="col-xs-3">
+                                            <button data-toggle="modal" data-target="#addAdvert" type="submit" class="pull-right btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
+                                                <span>Ajouter une annonce</span>
+                                                <i class="fa fa-plus button__icon"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <button type="button" class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#addAdvert">
-                                        <i class="fa fa-plus"></i> Ajouter annonce
-                                    </button>
+
                                     <div class="row">
                                         <c:forEach items="${adverts}" var="advert">
                                             <div class="col-xs-3">
@@ -123,8 +129,22 @@
                                     </div>-->
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-success">Envoyer</button>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <button data-dismiss="modal" type="button" class=" btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
+                                                <span>Cancel </span>
+                                                <i class="fa fa-undo button__icon"></i>
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <button type="submit" class="pull-right btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
+                                                <span>Valider </span>
+                                                <i class="fa fa-undo button__icon"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+
                                 </div>
                             </form>
                         </div>

@@ -1,0 +1,30 @@
+.modal .modal-header h4{
+    color: white;
+}
+
+.modal .button--naira--success > span{
+    background-color: #5cb85c;
+}
+
+.modal .button--naira--danger > span{
+    background-color: #c9302c;
+}
+
+.modal .button--naira--custom > span{
+    background-color: rgba(92, 127, 184, 0.9);
+}
+
+.modal .button--border-thin.button--naira--danger:hover,
+.modal .button--border-thin.button--naira--success:hover,
+.modal .button--border-thin.button--naira--custom:hover
+{
+    border: none;
+}
+
+.modal .button--round-s{
+    border-radius: 0;
+}
+
+.modal-header{
+    background-color: #34495e;
+}
