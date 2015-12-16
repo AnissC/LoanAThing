@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Toutes les offres de prêt</title>
+    <title>Contact</title>
     <link href="../inc/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../inc/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
@@ -15,26 +15,21 @@
     <link href="../inc/css/multi-level-menu/demo.css" rel="stylesheet">
     <link href="../inc/css/multi-level-menu/organicfoodicons.css" rel="stylesheet">
     <link href="../inc/css/transformicons.css" rel="stylesheet">
-    <link href="../inc/css/annonce.css" rel="stylesheet">
     <link href="../inc/css/buttonStyle.css" rel="stylesheet">
+    <link href="../inc/css/inbox.css" rel="stylesheet">
 </head>
 <body>
-
-
-
 <div id="st-container" class="st-container">
-
-            <nav class="st-menu st-effect-4" id="menu-4">
-                <a href="/home"><h2 class="icon icon-lab"><img src="../inc/images/LatLogoWhite.png" alt="" class="img-responsive center-block"></h2></a>
-                <ul>
-                    <li><a class="icon" href="/home"><i class="fa fa-shopping-basket"></i> Offres <span class="badge pull-right">${nbAdverts}</span></a></li>
-                    <!--<li><a class="icon" href="/home"><i class="fa fa-comment-o"></i> Demandes<span class="badge pull-right">??</span></a></li>-->
-                    <li><a class="icon" href="/user"><i class="fa fa-user"></i> Profil</a></li>
-                    <li><a class="icon" href="/contact"><i class="fa fa-question-circle"></i> Contact</a></li>
-                    <li><a class="icon" href="/logout"><i class="fa fa-power-off"></i> Deconnexion</a></li>
-                </ul>
-            </nav>
-
+    <nav class="st-menu st-effect-4" id="menu-4">
+        <a href="/home"><h2 class="icon icon-lab"><img src="../inc/images/LatLogoWhite.png" alt="" class="img-responsive center-block"></h2></a>
+        <ul>
+            <li><a class="icon" href="/home"><i class="fa fa-shopping-basket"></i> Offres <span class="badge pull-right">${nbAdverts}</span></a></li>
+            <!--<li><a class="icon" href="/home"><i class="fa fa-comment-o"></i> Demandes<span class="badge pull-right">??</span></a></li>-->
+            <li><a class="icon active" href="/user"><i class="fa fa-user"></i> Profil</a></li>
+            <li><a class="icon" href="/home"><i class="fa fa-question-circle"></i> Contact</a></li>
+            <li><a class="icon" href="/logout"><i class="fa fa-power-off"></i> Deconnexion</a></li>
+        </ul>
+    </nav>
     <!-- content push wrapper -->
     <div class="st-pusher">
         <div class="st-content"><!-- this is the wrapper for the content -->
@@ -51,30 +46,38 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <h1 class="text-center">Nouvelles Offres</h1>
+                                    <h1 class="text-center">Contacter un administrateur</h1>
                                 </div>
                             </div>
                             <div class="row">
-                                <c:forEach items="${adverts}" var="advert">
-                                <div class="col-xs-3">
-                                    <div class="advert text-center">
-                                        <img src="../inc/images/girafe.png" alt="" class="img-responsive">
-                                        <div class="annonce-content" style="margin-bottom: 20px">
-                                            <h2 class=""><c:out value="${advert.title}" /></h2>
-                                            <p><c:out value="${advert.description}" /></p>
-                                            <p><c:out value="${advert.dateStart}" /> <i class="fa fa-arrow-right"></i> <c:out value="${advert.dateEnd}" /></p>
+                                <div class="col-xs-6 col-xs-offset-3">
+                                    <div class="inbox">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <input type="text" placeholder="Objet du message" class="form-control">
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <button type="submit" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
-                                                    <span>Details</span>
-                                                    <i class="fa fa-search button__icon"></i>
+                                                <textarea class="form-control" name="inbox-content" id="inbox-content" placeholder="Veuillez saisir votre message" cols="30" rows="10"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <button type="button" class=" btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
+                                                    <span>Annuler</span>
+                                                    <i class="fa fa-trash-o button__icon"></i>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <button type="submit" class="pull-right btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
+                                                    <span>Valider</span>
+                                                    <i class="fa fa-check button__icon"></i>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -84,20 +87,18 @@
     </div><!-- /st-pusher -->
 </div><!-- /st-container -->
 <!-- /view -->
-
-
 <script src="../inc/js/jquery-1.11.3.min.js"></script>
 <script src="../inc/slideOnSideBar/js/classie.js"></script>
 <script src="../inc/slideOnSideBar/js/sidebarEffects.js"></script>
 <script src="../inc/js/transformicon.js"></script>
 <script src="../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
-<script src="../inc/js/konami.js"></script>
+<script src="../inc/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 
 <script>
     transformicons.add('.tcon', {
-    transform: "mouseover",
-    revert: "mouseout"
-});
+        transform: "mouseover",
+        revert: "mouseout"
+    });
     $(function() {
         $('.annonce-content').matchHeight();
     });
