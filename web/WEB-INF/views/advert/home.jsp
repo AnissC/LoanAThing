@@ -85,7 +85,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title" id="myModalLabel">Publier une offre de prêt :</h4>
                             </div>
-                            <form method="post" class="form-horizontal" action="<c:url value="/advert/add" />" enctype="multipart/form-data">
+                            <form method="post" class="form-horizontal" action="<c:url value="/advert/add" />">
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label for="title" class="col-sm-2 control-label">Titre</label>
@@ -121,12 +121,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <!--<div class="form-group">
-                                        <label for="file" class="col-sm-2 control-label">Image</label>
-                                        <div class="col-sm-10">
-                                            <input type="file" class="form-control" id="file" name="file">
-                                        </div>
-                                    </div>-->
                                 </div>
                                 <div class="modal-footer">
                                     <div class="row">
@@ -143,8 +137,6 @@
                                             </button>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </form>
                         </div>
