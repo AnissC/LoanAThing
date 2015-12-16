@@ -28,7 +28,7 @@
                             <div id="st-trigger-effects" class="column">
                                 <!-- <button class="sideBarButton" data-effect="st-effect-4"> <i class="fa fa-bars"></i></button>-->
 
-                                <button type="button" class="tcon tcon-menu--arrow tcon-menu--arrowleft" aria-label="toggle menu"  data-effect="st-effect-4">
+                                <button type="button" class="tcon tcon-menu--arrow tcon-menu--arrowleft" aria-label="toggle menu" data-effect="st-effect-4">
                                     <span class="tcon-menu__lines" aria-hidden="true"></span>
                                     <span class="tcon-visuallyhidden">toggle menu</span>
                                 </button>
@@ -39,11 +39,14 @@
                                             <h1 class="text-center">Nouvelles Offres</h1>
                                         </div>
                                     </div>
+                                    <button type="button" class="btn btn-default btn-lg pull-right" data-toggle="modal" data-target="#addAdvert">
+                                        <i class="fa fa-plus"></i> Ajouter annonce
+                                    </button>
                                     <div class="row">
                                         <c:forEach items="${adverts}" var="advert">
                                             <div class="col-xs-3">
                                                 <div class="advert text-center">
-                                                    <img src="../inc/images/girafe.png" alt="" class="img-responsive">
+                                                    <img src="../../../inc/images/girafe.png" alt="" class="img-responsive">
                                                     <div class="annonce-content" style="margin-bottom: 20px">
                                                         <h2 class=""><c:out value="${advert.title}" /></h2>
                                                         <p><c:out value="${advert.description}" /></p>
@@ -68,6 +71,65 @@
                 </div><!-- /st-content -->
             </div><!-- /st-pusher -->
         </div><!-- /st-container -->
+          <!-- Modal -->
+                <div class="modal fade" id="addAdvert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Publier une offre de prêt :</h4>
+                            </div>
+                            <form method="post" class="form-horizontal" action="<c:url value="/advert/add" />" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="title" class="col-sm-2 control-label">Titre</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="title" id="title" value="${advert.title}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description" class="col-sm-2 control-label">Description</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="description" id="description" value="${advert.description}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dateStart" class="col-sm-2 control-label">Date de début</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control" name="dateStart" id="dateStart" value="${advert.dateStart}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dateEnd" class="col-sm-2 control-label">Date de fin</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control" name="dateEnd" id="dateEnd" value="${advert.dateEnd}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="categoryId" class="col-sm-2 control-label">Catégorie</label>
+                                        <div class="col-sm-10">
+                                            <select name="categoryId" id="categoryId" class="form-control">
+                                                <c:forEach var="category"  items="${requestScope['categories']}" >
+                                                    <option class="control-label" value="<c:url value="${category.id}"/>"><c:url value="${category.name}"/></option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="file" class="col-sm-2 control-label">Image</label>
+                                        <div class="col-sm-10">
+                                            <input type="file" class="form-control" id="file" name="file">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success">Envoyer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
     </jsp:attribute>
     <jsp:attribute name="js">
         <script src="../../../inc/slideOnSideBar/js/classie.js"></script>

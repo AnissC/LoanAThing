@@ -43,7 +43,7 @@
                                             <div class="profil">
                                                 <div class="row">
                                                     <div class="col-xs-3">
-                                                        <img src="../inc/images/girafe.png" alt="" class="img-responsive">
+                                                        <img src="../../../inc/images/girafe.png" alt="" class="img-responsive">
                                                     </div>
                                                     <div class="col-xs-9">
                                                         <p><span>Prenom : </span><c:out value="${user.firstname}" /><p>
