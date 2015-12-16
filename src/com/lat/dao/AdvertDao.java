@@ -15,7 +15,8 @@ import java.util.List;
 public class AdvertDao
 {
     private DAOFactory daoFactory;
-    private static final String SQL_SELECT_WHITH_ID = "SELECT * FROM advert WHERE id = ?";
+    private static final String SQL_SELECT_WITH_ID = "SELECT * FROM advert WHERE id = ?";
+    private static final String SQL_SELECT_ALL_BY_USER_ID = "SELECT * FROM advert WHERE user_id = ?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM advert ORDER BY id";
     private static final String SQL_INSERT = "INSERT INTO advert (title, description, date_start, date_end, category_id, user_id, is_publish, is_suspend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM advert WHERE id = ?";
@@ -75,7 +76,7 @@ public class AdvertDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd(), advert.getCategoryId(), advert.getUserId(), advert.getPublish(), advert.getSuspend());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd(), advert.getCategory().getId(), advert.getUser().getId(), advert.getPublish(), advert.getSuspend());
 
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
@@ -120,6 +121,29 @@ public class AdvertDao
         return adverts;
     }
 
+    public List<Advert> findAllByUserId(Integer userId) throws DAOException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Advert> adverts = new ArrayList<Advert>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_ALL_BY_USER_ID, false, userId);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                adverts.add(map(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return adverts;
+    }
+
     public Advert findOneById(Integer id) throws DAOException
     {
         Connection connexion = null;
@@ -130,7 +154,7 @@ public class AdvertDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_WHITH_ID, false, id);
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_WITH_ID, false, id);
             resultSet = preparedStatement.executeQuery();
             /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
             if (resultSet.next()) {
@@ -149,9 +173,11 @@ public class AdvertDao
     {
     }
 
-    private static Advert map(ResultSet resultSet) throws SQLException
+    private Advert map(ResultSet resultSet) throws SQLException
     {
         Advert advert = new Advert();
+        UserDao userDao = this.daoFactory.getUserDao();
+        CategoryDao categoryDao = this.daoFactory.getCategoryDao();
 
         advert.setId(resultSet.getInt("id"));
         advert.setTitle(resultSet.getString("title"));
@@ -160,8 +186,8 @@ public class AdvertDao
         advert.setDateStart(resultSet.getString("date_start"));
         advert.setDateEnd(resultSet.getString("date_end"));
         advert.setShortDescription(resultSet.getString("short_description"));
-        advert.setUserId(resultSet.getInt("user_id"));
-        advert.setCategoryId(resultSet.getInt("category_id"));
+        advert.setUser(userDao.findOneById(resultSet.getInt("user_id")));
+        advert.setCategory(categoryDao.findOneById(resultSet.getInt("category_id")));
         advert.setPublish(resultSet.getBoolean("is_publish"));
         advert.setSuspend(resultSet.getBoolean("is_suspend"));
 

@@ -8,8 +8,8 @@ public class Advert {
     private String dateStart;
     private String dateEnd;
     private String shortDescription;
-    private Integer userId;
-    private Integer categoryId;
+    private User user;
+    private Category category;
     private Boolean isPublish;
     private Boolean isSuspend;
 
@@ -69,20 +69,20 @@ public class Advert {
         this.shortDescription = shortDescription;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Boolean getPublish() {

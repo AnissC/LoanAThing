@@ -1,6 +1,8 @@
 package com.lat.forms;
 
+import com.lat.beans.Advert;
 import com.lat.beans.Apply;
+import com.lat.beans.User;
 import com.lat.dao.ApplyDao;
 import com.lat.dao.DAOException;
 
@@ -75,14 +77,20 @@ public final class ApplyForm
             e.printStackTrace();
         }
 
+        Advert advert = new Advert();
+        advert.setId(advertId);
+
+        User user = new User();
+        user.setId(userId);
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.FRANCE);
         LocalDate dateStartFormatted = LocalDate.parse(dateStart, formatter);
         LocalDate dateEndFormatted = LocalDate.parse(dateEnd, formatter);
 
         apply.setDateStart(dateStartFormatted.toString());
         apply.setDateEnd(dateEndFormatted.toString());
-        apply.setUserId(userId);
-        apply.setAdvertId(advertId);
+        apply.setUser(user);
+        apply.setAdvert(advert);
     }
 
     private void setError(String field, String message)

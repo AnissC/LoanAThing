@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/advert/add")
-public class AddAdvert extends HttpServlet
+@WebServlet("/profil/requests")
+public class Requests extends HttpServlet
 {
     private AdvertService advertService;
 
@@ -21,16 +21,13 @@ public class AddAdvert extends HttpServlet
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("categories", this.advertService.getCategories());
+        request.setAttribute("pendingRequests", this.advertService.getPendingRequests(request));
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/views/advert/add-advert.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/views/profil/requests.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("form", this.advertService.getAdvertForm());
-        request.setAttribute("advert", this.advertService.processAdvert(request));
-
-        this.getServletContext().getRequestDispatcher("/WEB-INF/views/advert/add-advert.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/views/profil/requests.jsp").forward(request, response);
     }
 }

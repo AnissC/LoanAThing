@@ -6,22 +6,22 @@
 <head>
     <meta charset="utf-8" />
     <title>Contact</title>
-    <link href="../inc/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../inc/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../../inc/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../inc/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
-    <link href="../inc/css/style.css" rel='stylesheet' type='text/css'>
-    <link href="../inc/slideOnSideBar/css/component.css" rel='stylesheet' type='text/css'>
-    <link href="../inc/css/multi-level-menu/component.css" rel="stylesheet">
-    <link href="../inc/css/multi-level-menu/demo.css" rel="stylesheet">
-    <link href="../inc/css/multi-level-menu/organicfoodicons.css" rel="stylesheet">
-    <link href="../inc/css/transformicons.css" rel="stylesheet">
-    <link href="../inc/css/buttonStyle.css" rel="stylesheet">
-    <link href="../inc/css/inbox.css" rel="stylesheet">
+    <link href="../../../inc/css/style.css" rel='stylesheet' type='text/css'>
+    <link href="../../../inc/slideOnSideBar/css/component.css" rel='stylesheet' type='text/css'>
+    <link href="../../../inc/css/multi-level-menu/component.css" rel="stylesheet">
+    <link href="../../../inc/css/multi-level-menu/demo.css" rel="stylesheet">
+    <link href="../../../inc/css/multi-level-menu/organicfoodicons.css" rel="stylesheet">
+    <link href="../../../inc/css/transformicons.css" rel="stylesheet">
+    <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
+    <link href="../../../inc/css/inbox.css" rel="stylesheet">
 </head>
 <body>
 <div id="st-container" class="st-container">
     <nav class="st-menu st-effect-4" id="menu-4">
-        <a href="/home"><h2 class="icon icon-lab"><img src="../inc/images/LatLogoWhite.png" alt="" class="img-responsive center-block"></h2></a>
+        <a href="/home"><h2 class="icon icon-lab"><img src="../../../inc/images/LatLogoWhite.png" alt="" class="img-responsive center-block"></h2></a>
         <ul>
             <li><a class="icon" href="/home"><i class="fa fa-shopping-basket"></i> Offres <span class="badge pull-right">${nbAdverts}</span></a></li>
             <!--<li><a class="icon" href="/home"><i class="fa fa-comment-o"></i> Demandes<span class="badge pull-right">??</span></a></li>-->
@@ -87,12 +87,12 @@
     </div><!-- /st-pusher -->
 </div><!-- /st-container -->
 <!-- /view -->
-<script src="../inc/js/jquery-1.11.3.min.js"></script>
-<script src="../inc/slideOnSideBar/js/classie.js"></script>
-<script src="../inc/slideOnSideBar/js/sidebarEffects.js"></script>
-<script src="../inc/js/transformicon.js"></script>
-<script src="../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
-<script src="../inc/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+<script src="../../../inc/js/jquery-1.11.3.min.js"></script>
+<script src="../../../inc/slideOnSideBar/js/classie.js"></script>
+<script src="../../../inc/slideOnSideBar/js/sidebarEffects.js"></script>
+<script src="../../../inc/js/transformicon.js"></script>
+<script src="../../../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
+<script src="../../../inc/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 
 <script>
     transformicons.add('.tcon', {

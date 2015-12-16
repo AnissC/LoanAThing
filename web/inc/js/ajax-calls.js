@@ -8,11 +8,18 @@ $(document).ready(function () {
             },
         });
     })
+    $("#user").click(function () {
+        $.ajax({
+            method: "GET",
+            url: "/profil",
+            success: function () {
+                location.reload();
+            },
+        });
+    })
 })
 
-
 function loadUserProfil($content, idUser){
-
     $.get("/profil", function(responseJson) {
         user = JSON.parse(responseJson);
         $content.append("<h1 class='text-center'>Profil</h1>");

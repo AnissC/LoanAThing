@@ -5,8 +5,8 @@ public class Apply {
     private String dateStart;
     private String dateEnd;
     private Boolean accepted;
-    private Integer userId;
-    private Integer advertId;
+    private User user;
+    private Advert advert;
 
     public Integer getId() {
         return id;
@@ -40,19 +40,19 @@ public class Apply {
         this.accepted = accepted;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Integer getAdvertId() {
-        return advertId;
+    public Advert getAdvert() {
+        return advert;
     }
 
-    public void setAdvertId(Integer advertId) {
-        this.advertId = advertId;
+    public void setAdvert(Advert advert) {
+        this.advert = advert;
     }
 }

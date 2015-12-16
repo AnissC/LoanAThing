@@ -28,14 +28,16 @@ public class Home extends HttpServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         int nbAdverts = 0;
+
         if(this.advertService.getAllAdverts() != null){
             nbAdverts = this.advertService.getAllAdverts().size();
         }
+
         request.setAttribute("nbAdverts", nbAdverts);
         request.setAttribute("adverts", this.advertService.getAllAdverts());
-        request.setAttribute("categories", this.categoryService.getAllCategory());
+        request.setAttribute("categories", this.advertService.getCategories());
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/views/advert/home.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

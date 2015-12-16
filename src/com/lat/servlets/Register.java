@@ -22,7 +22,7 @@ public class Register extends HttpServlet
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+        this.getServletContext().getRequestDispatcher("/WEB-INF/views/connect/register.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
