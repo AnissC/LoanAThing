@@ -13,6 +13,7 @@
         <link href="../../../inc/css/transformicons.css" rel="stylesheet">
         <link href="../../../inc/css/userProfil.css" rel="stylesheet">
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
+        <link href="../../../inc/css/modal.css" rel="stylesheet">
     </jsp:attribute>
     <jsp:attribute name="content">
         <div id="st-container" class="st-container">
