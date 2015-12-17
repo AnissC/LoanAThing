@@ -8,24 +8,52 @@
         <link href="../../../inc/css/style.css" rel='stylesheet' type='text/css'>
         <link href="../../../inc/css/indexStyle.css" rel="stylesheet">
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
+        <link href="../../../inc/css/advertView.css" rel="stylesheet">
     </jsp:attribute>
     <jsp:attribute name="content">
         <div class="container">
-            <div class="row" style="background-color: #ffffff">
-                <h1><c:out value="${advert.title}"/></h1>
-                <h1><c:out value="${advert.user.lastname}"/></h1>
-                <h1><c:out value="${advert.id}"/></h1>
-                <p><c:out value="${advert.description}"/></p>
-                <p><c:out value="${advert.dateStart}"/></p>
-                <p><c:out value="${advert.dateEnd}"/></p>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="text-center">Details de l'annonce</h2>
+                </div>
+                <div class="col-xs-12">
+                    <div class="annonce">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <img src="../../../inc/images/girafe.png" alt="" class="img-responsive">
+                            </div>
+                            <div class="col-xs-8">
+                                <h2><c:out value="${advert.title}"/> <span><c:out value="${advert.category.name}"/></span></h2>
+                                <p>Proposé par : <c:out value="${advert.user.lastname}"/> <c:out value="${advert.user.firstname}"/></p>
+                                <p><c:out value="${advert.description}"/></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h3 class="text-center">Date de disponibilite</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4 class="text-center"><span><i class="fa fa-calendar-o"></i></span> <span><c:out value="${advert.dateStart}"/></span> <span><i class="fa fa-arrow-right"></i></span> <span><i class="fa fa-calendar-o"></i></span> <span><c:out value="${advert.dateEnd}"/></span></h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <c:if test="${advert.id != sessionScope.userSession.id}">
+                                    <!-- Button trigger modal -->
+                                    <button data-toggle="modal" data-target="#loan" type="button" class="center-block btn btn-block button button--naira button--round-s button--border-thin button--naira--success pull-right">
+                                        <span>Emprunter</span>
+                                        <i class="fa fa-check button__icon"></i>
+                                    </button>
+                                </c:if>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <c:if test="${advert.id != sessionScope.userSession.id}">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loan">
-                    Emprunter
-                </button>
-            </c:if>
+
 
             <!-- Modal -->
             <div class="modal fade" id="loan" tabindex="-1" role="dialog" aria-labelledby="loan">
