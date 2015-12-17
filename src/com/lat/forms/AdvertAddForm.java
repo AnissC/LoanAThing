@@ -61,6 +61,30 @@ public final class AdvertAddForm
         return advert;
     }
 
+    public Advert updateAdvert(Advert advert, String title, String description, String dateStart, String dateEnd, Integer categoryId, Boolean isPublish, Boolean isSuspend)
+    {
+        try {
+            checkUpdatedValues(advert, title, description, dateStart, dateEnd, categoryId, isPublish, isSuspend);
+
+            if (errors.isEmpty()) {
+                advertDao.update(advert);
+
+                if (advert.getId() == null) {
+                    setError("advertFail", "Tous les champs doivent être remplis");
+                }
+            } else {
+                setError("advertFail", "Échec lors de la modification de l'offre de prêt.");
+            }
+        } catch (DAOException e) {
+            results = "Échec lors de la modification de l'offre de prêt : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return advert;
+    }
+
     private void checkValues(String title, String description, String dateStart, Integer categoryId) throws Exception
     {
         if (title == null || description == null || dateStart == null || categoryId == null) {
@@ -98,6 +122,43 @@ public final class AdvertAddForm
             advert.setDateEnd(endDate.toString());
         } else {
             advert.setDateEnd(null);
+        }
+    }
+
+    private void checkUpdatedValues(Advert advert, String title, String description, String dateStart, String dateEnd, Integer categoryId, Boolean isPublish, Boolean isSuspend) throws Exception
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.FRANCE);
+
+        if (title != null) {
+            advert.setTitle(title);
+        }
+
+        if (description != null) {
+            advert.setDescription(description);
+        }
+
+        if (dateStart != null) {
+            LocalDate startDate = LocalDate.parse(dateStart, formatter);
+            advert.setDateStart(startDate.toString());
+        }
+
+        if (dateEnd != null) {
+            LocalDate endDate = LocalDate.parse(dateEnd, formatter);
+            advert.setDateEnd(endDate.toString());
+        }
+
+        if (categoryId != null) {
+            Category category = new Category();
+            category.setId(categoryId);
+            advert.setCategory(category);
+        }
+
+        if (isPublish != null) {
+            advert.setPublish(isPublish);
+        }
+
+        if (isSuspend != null) {
+            advert.setSuspend(isSuspend);
         }
     }
 

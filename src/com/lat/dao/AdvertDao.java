@@ -19,6 +19,7 @@ public class AdvertDao
     private static final String SQL_SELECT_ALL_BY_USER_ID = "SELECT * FROM advert WHERE user_id = ?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM advert ORDER BY id";
     private static final String SQL_INSERT = "INSERT INTO advert (title, description, date_start, date_end, category_id, user_id, is_publish, is_suspend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE advert SET title = ?, description = ?, date_start = ?, date_end = ?, category_id = ?, is_publish = ?, is_suspend = ? WHERE advert_id = ?";
     private static final String SQL_DELETE = "DELETE FROM advert WHERE id = ?";
     private static final String SQL_COUNT_ADVERT = "SELECT COUNT(*) FROM advert";
     private static final String SQL_COUNT_ADVERT_BY_CATEGORY = "SELECT COUNT(*) FROM advert A, category C WHERE A.category_id = ? OR (? = C.parent_category AND A.category_id = C.id)";
@@ -98,6 +99,29 @@ public class AdvertDao
         }
     }
 
+    public Advert update(Advert advert) throws DAOException
+    {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_UPDATE, false, advert.getTitle(), advert.getDescription(), advert.getDateStart(), advert.getDateEnd(), advert.getCategory().getId(), advert.getPublish(), advert.getSuspend(), advert.getId());
+
+            int statut = preparedStatement.executeUpdate();
+            if (statut == 0) {
+                throw new DAOException("Échec de la modification d'une offre de prêt, aucune ligne ajoutée dans la table.");
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connexion);
+        }
+
+        return advert;
+    }
+
     public List<Advert> find() throws DAOException
     {
         Connection connection = null;
@@ -152,11 +176,9 @@ public class AdvertDao
         Advert advert = null;
 
         try {
-            /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
             preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_WITH_ID, false, id);
             resultSet = preparedStatement.executeQuery();
-            /* Parcours de la ligne de données de l'éventuel ResulSet retourné */
             if (resultSet.next()) {
                 advert = map(resultSet);
             }
