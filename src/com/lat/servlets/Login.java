@@ -27,7 +27,7 @@ public class Login extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("form", this.userService.getLoginForm());
+        request.setAttribute("form", this.userService.getUserForm());
         request.setAttribute("user", this.userService.connectUser(request));
 
         response.sendRedirect("/home");

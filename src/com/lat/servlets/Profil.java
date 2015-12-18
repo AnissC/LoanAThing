@@ -37,4 +37,11 @@ public class Profil extends HttpServlet
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/views/profil/profil.jsp").forward(request, response);
     }
+
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        this.userService.updateUser(request);
+
+        response.sendRedirect("/profil");
+    }
 }

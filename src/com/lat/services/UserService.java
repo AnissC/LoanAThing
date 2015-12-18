@@ -4,8 +4,7 @@ import com.lat.beans.User;
 import com.lat.dao.DAOFactory;
 import com.lat.dao.GroupDAO;
 import com.lat.dao.UserDao;
-import com.lat.forms.LoginForm;
-import com.lat.forms.RegisterForm;
+import com.lat.forms.UserForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,15 +15,13 @@ public class UserService
     private HttpSession session;
     private UserDao userDao;
     private GroupDAO groupDAO;
-    private RegisterForm registerForm;
-    private LoginForm loginForm;
+    private UserForm userForm;
 
     private UserService()
     {
         this.userDao = DAOFactory.getInstance().getUserDao();
         this.groupDAO = DAOFactory.getInstance().getGroupDAO();
-        this.registerForm = new RegisterForm(this.userDao);
-        this.loginForm = new LoginForm(this.userDao);
+        this.userForm = new UserForm(this.userDao);
     }
 
     public static UserService getInstance()
@@ -41,14 +38,14 @@ public class UserService
         return ((User) this.session.getAttribute("userSession"));
     }
 
-    public RegisterForm getRegisterForm()
+    public void setUserInSession(User user)
     {
-        return this.registerForm;
+        this.session.setAttribute("userSession", user);
     }
 
-    public LoginForm getLoginForm()
+    public UserForm getUserForm()
     {
-        return this.loginForm;
+        return this.userForm;
     }
 
     public User processUser(HttpServletRequest request)
@@ -58,7 +55,26 @@ public class UserService
         String valid = getFieldValue(request, "valid");
         String lastname = getFieldValue(request, "lastname");
 
-        return this.registerForm.processUser(email, password, valid, lastname);
+        return this.userForm.processUser(email, password, valid, lastname);
+    }
+
+    public void updateUser(HttpServletRequest request)
+    {
+        Integer id = Integer.parseInt(getFieldValue(request, "id"));
+        User user = this.userDao.findOneById(id);
+
+        String lastname = getFieldValue(request, "lastname");
+        String firstname = getFieldValue(request, "firstname");
+        String nickname = getFieldValue(request, "nickname");
+        String email = getFieldValue(request, "email");
+        String address = getFieldValue(request, "address");
+        String city = getFieldValue(request, "city");
+        Integer zipcode = Integer.parseInt(getFieldValue(request, "zipcode"));
+        String birthday = getFieldValue(request, "birthday");
+
+        this.userForm.updateUser(user, lastname, firstname, nickname, email, address, city, zipcode, birthday);
+
+        setUserInSession(this.userDao.findOneById(id));
     }
 
     public User connectUser(HttpServletRequest request)
@@ -67,15 +83,15 @@ public class UserService
         String email = getFieldValue(request, "email");
         String password = getFieldValue(request, "password");
 
-        User user = this.loginForm.connectUser(email, password);
+        User user = this.userForm.connectUser(email, password);
 
-        if (this.loginForm.getErrors().isEmpty()) {
+        if (this.userForm.getErrors().isEmpty()) {
             session.setAttribute("userSession", user);
         } else {
             session.setAttribute("userSession", null);
         }
 
-        this.loginForm.resetError();
+        this.userForm.resetError();
 
         return user;
     }

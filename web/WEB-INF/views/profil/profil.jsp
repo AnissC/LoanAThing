@@ -110,58 +110,61 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">Modification du profil</h4>
                     </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <input type="text" class="form-control" placeholder="Prenom" value="<c:out value="${user.firstname}"/>"/>
+                    <form method="post" class="form-horizontal" action="<c:url value="/profil" />">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <input type="text" class="form-control" placeholder="Prénom" name="firstname" value="<c:out value="${user.firstname}"/>"/>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input type="text" class="form-control" placeholder="Nom" name="lastname" value="<c:out value="${user.lastname}"/>"/>
+                                </div>
                             </div>
-                            <div class="col-xs-6">
-                                <input type="text" class="form-control" placeholder="Nom" value="<c:out value="${user.lastname}"/>"/>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="nickname" value="<c:out value="${user.nickname}"/>"/>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input type="text" class="form-control" placeholder="Email" name="email" value="<c:out value="${user.email}"/>"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <input type="date" class="form-control" placeholder="Date de naissance" name="birthday" value="<c:out value="${user.birthday}"/>"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <input type="text" class="form-control" placeholder="Adresse" name="address" value="<c:out value="${user.address}"/>"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <input type="text" class="form-control" placeholder="Ville" name="city" value="<c:out value="${user.city}"/>"/>
+                                </div>
+                                <div class="col-xs-6">
+                                    <input type="text" class="form-control" placeholder="Code Postal" name="zipcode" value="<c:out value="${user.zipCode}"/>"/>
+                                </div>
+                            </div>
+                            <input type="hidden" name="id" value="${user.id}">
+                        </div>
+                        <div class="modal-footer">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button data-dismiss="modal" type="button" class="pull-right btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
+                                        <span>Annuler</span>
+                                        <i class="fa fa-trash-o button__icon"></i>
+                                    </button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button type="submit" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
+                                        <span>Valider</span>
+                                        <i class="fa fa-check button__icon"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <input type="text" class="form-control" placeholder="Nom d'utilisateur" value="<c:out value="${user.nickname}"/>"/>
-                            </div>
-                            <div class="col-xs-6">
-                                <input type="text" class="form-control" placeholder="Email" value="<c:out value="${user.email}"/>"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <input type="text" class="form-control" placeholder="Date de naissance" value="<c:out value="${user.birthday}"/>"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <input type="text" class="form-control" placeholder="Adresse" value="<c:out value="${user.address}"/>"/>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <input type="text" class="form-control" placeholder="Ville" value="<c:out value="${user.city}"/>"/>
-                            </div>
-                            <div class="col-xs-6">
-                                <input type="text" class="form-control" placeholder="Code Postal" value="<c:out value="${user.zipCode}"/>"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <button data-dismiss="modal" type="button" class="pull-right btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
-                                    <span>Annuler</span>
-                                    <i class="fa fa-trash-o button__icon"></i>
-                                </button>
-                            </div>
-                            <div class="col-xs-6">
-                                <button type="submit" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
-                                    <span>Valider</span>
-                                    <i class="fa fa-check button__icon"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
