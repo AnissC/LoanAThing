@@ -69,6 +69,22 @@ public class AdvertService
         return this.advertAddForm.processAdvert(title, description, dateStart, dateEnd, categoryId, userId);
     }
 
+    public void updateAdvert(HttpServletRequest request)
+    {
+        Integer id = Integer.parseInt(getFieldValue(request, "id"));
+        Advert advert = this.advertDao.findOneById(id);
+
+        String title = getFieldValue(request, "title");
+        String description = getFieldValue(request, "description");
+        String dateStart = getFieldValue(request, "dateStart");
+        String dateEnd = getFieldValue(request, "dateEnd");
+        Integer categoryId = Integer.parseInt(getFieldValue(request, "categoryId"));
+        Boolean isPublish = Boolean.parseBoolean(getFieldValue(request, "isPublish"));
+        Boolean isSuspend = Boolean.parseBoolean(getFieldValue(request, "isSuspend"));
+
+        this.advertAddForm.updateAdvert(advert, title, description, dateStart, dateEnd, categoryId, isPublish, isSuspend);
+    }
+
     public Apply processApply(HttpServletRequest request) {
         this.session = request.getSession();
         User user = ((User) session.getAttribute("userSession"));

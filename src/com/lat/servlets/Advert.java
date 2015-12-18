@@ -22,15 +22,15 @@ public class Advert extends HttpServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         request.setAttribute("advert", this.advertService.getAdvert(request));
+        request.setAttribute("categories", this.advertService.getCategories());
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/views/advert/advert.jsp").forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("form", this.advertService.getAdvertForm());
-        this.advertService.processApply(request);
+        this.advertService.updateAdvert(request);
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/views/advert/advert.jsp").forward(request, response);
+        response.sendRedirect("/advert/view?id=" + request.getParameter("id"));
     }
 }
