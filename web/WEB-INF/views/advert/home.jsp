@@ -37,18 +37,22 @@
 
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-xs-6 col-xs-offset-3">
-                                            <h1 class="text-center">Nouvelles Offres</h1>
-                                        </div>
                                         <div class="col-xs-3">
-                                            <button data-toggle="modal" data-target="#addAdvert" type="submit" class="pull-right btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
+                                            <button id="btn-add-advert" data-toggle="modal" data-target="#addAdvert" type="submit" class=" btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
                                                 <span>Ajouter une annonce</span>
                                                 <i class="fa fa-plus button__icon"></i>
                                             </button>
                                         </div>
+                                        <div class="col-xs-6">
+                                            <h1 class="text-center">Nouvelles Offres</h1>
+                                        </div>
+                                        <div class="col-xs-3 search-field">
+                                            <input type="text" class="search" class="pull-right">
+                                            <h2><i class="fa fa-search pull-right"></i></h2>
+                                        </div>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row" id="annonces">
                                         <c:forEach items="${adverts}" var="advert">
                                             <div class="col-xs-3">
                                                 <div class="advert text-center">
@@ -160,6 +164,55 @@
             $(function() {
                 $('.annonce-content').matchHeight();
             });
+
+            $('.fa-search').click(function(){
+
+                if ($(this).parent().siblings('input').width() == 180){
+                    $(this).parent().siblings('input').width("0px");
+                    $(this).parent().siblings('input').css("border-color", "transparent");
+                    $(this).css("opacity", "0.5");
+                }
+                else{
+                    $(this).parent().siblings('input').width("180px");
+                    $(this).parent().siblings('input').focus();
+                    $(this).parent().siblings('input').css("border-color", "#ffffff");
+                    $(this).css("opacity", "1");
+                }
+            });
+
+            $('.search-field input').blur(function(){
+                if($(this).val() == ""){
+                    $(this).width("0px");
+                    $(this).css("border-color", "transparent");
+                    $(this).siblings().children("i").css("opacity", "1");
+                }
+            })
+
+            $('.search-field input').keyup(function(){
+                var name = $(this).val();
+                $.ajax({
+                    type:"GET",
+                    url: "/search",
+                    dataType: "text",
+                    data: {name:name},
+                    success: function(jsonResponse){
+                        var adverts = JSON.parse(jsonResponse);
+                        $("#annonces").children().remove();
+                        $.each(adverts, function(){
+                            $("#annonces").append('<div class="col-xs-3"><div class="advert text-center"><img src="../../../inc/images/girafe.png" alt="" class="img-responsive"><div class="annonce-content" style="margin-bottom: 20px">' +
+                            '<h2>'+ this.title +'</h2>' +
+                            '<p>' + this.description + '</p>' +
+                            '<p>'+ this.dateStart +' <i class="fa fa-arrow-right"></i> ' + this.dateEnd + '</p>'+
+                            '</div><div class="row"><div class="col-xs-12">'+
+                            '<a href="/advert/view'+ this.id + '>' +
+                            '<button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom"> <span>Details</span><i class="fa fa-search button__icon"></i></button></a></div></div></div></div>'
+                            );
+                        })
+                        $('.annonce-content').matchHeight();
+                    }
+                })
+            })
+
         </script>
     </jsp:attribute>
 </lat:baseLayout>
