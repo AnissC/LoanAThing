@@ -9,6 +9,7 @@ import com.lat.forms.LoanForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdvertService
@@ -143,5 +144,10 @@ public class AdvertService
         } else {
             return value.trim();
         }
+    }
+
+    public List<Advert> getAdvertsWithName(String name)
+    {
+        return advertDao.findAllByName("%" + name + "%");
     }
 }

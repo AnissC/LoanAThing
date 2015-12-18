@@ -17,6 +17,7 @@ public class AdvertDao
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_WITH_ID = "SELECT * FROM advert WHERE id = ?";
     private static final String SQL_SELECT_ALL_BY_USER_ID = "SELECT * FROM advert WHERE user_id = ?";
+    private static final String SQL_SELECT_ALL_BY_NAME = "SELECT * FROM advert WHERE title LIKE ?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM advert ORDER BY id";
     private static final String SQL_INSERT = "INSERT INTO advert (title, description, date_start, date_end, category_id, user_id, is_publish, is_suspend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM advert WHERE id = ?";
@@ -193,4 +194,28 @@ public class AdvertDao
 
         return advert;
     }
+
+    public List<Advert> findAllByName(String name) throws DAOException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Advert> adverts = new ArrayList<Advert>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_ALL_BY_NAME, false, name);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                adverts.add(map(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return adverts;
+    }
+
 }
