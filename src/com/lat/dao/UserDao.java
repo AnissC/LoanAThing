@@ -15,6 +15,7 @@ public class UserDao
     private static final String SQL_SELECT_WITH_EMAIL = "SELECT * FROM user WHERE email = ?";
     private static final String SQL_SELECT_WITH_EMAIL_AND_PASSWORD = "SELECT * FROM user WHERE email = ? AND password = ?";
     private static final String SQL_SELECT_WITH_ID = "SELECT * FROM user WHERE id = ?";
+    private static final String SQL_UPDATE = "UPDATE user SET lastname = ?, firstname = ?, nickname = ?, email = ?, address = ?, city = ?, zipcode = ?, birthday = ? WHERE id = ?";
     private static final String SQL_INSERT = "INSERT INTO user (email, password, lastname) VALUES (?, ?, ?)";
 
     UserDao(DAOFactory daoFactory)
@@ -49,6 +50,27 @@ public class UserDao
             throw new DAOException(e);
         } finally {
             silentClosures(valeursAutoGenerees, preparedStatement, connexion);
+        }
+    }
+
+    public void update(User user) throws DAOException
+    {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_UPDATE, false, user.getLastname(), user.getFirstname(), user.getNickname(), user.getEmail(), user.getAddress(), user.getCity(), user.getZipCode(), user.getBirthday(), user.getId());
+
+            int statut = preparedStatement.executeUpdate();
+            if (statut == 0) {
+                throw new DAOException("Échec de la création de l'utilisateur en base, aucune ligne modifiée dans la table.");
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connexion);
         }
     }
 

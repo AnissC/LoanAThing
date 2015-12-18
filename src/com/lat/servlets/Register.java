@@ -27,7 +27,7 @@ public class Register extends HttpServlet
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        request.setAttribute("form", this.userService.getRegisterForm());
+        request.setAttribute("form", this.userService.getUserForm());
         request.setAttribute("user", this.userService.processUser(request));
 
         /* TODO : Find a better way to redirect the user */
