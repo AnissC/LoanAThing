@@ -1,6 +1,8 @@
 package com.lat.servlets;
 
+import com.lat.beans.User;
 import com.lat.services.AdvertService;
+import com.lat.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,10 +15,13 @@ import java.io.IOException;
 public class Home extends HttpServlet
 {
     private AdvertService advertService;
+    private UserService userService;
 
     public void init() throws ServletException
     {
         this.advertService = AdvertService.getInstance();
+        this.userService = UserService.getInstance();
+
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -27,6 +32,9 @@ public class Home extends HttpServlet
             nbAdverts = this.advertService.getAllAdverts().size();
         }
 
+        User user = userService.getUserInSession();
+
+        request.setAttribute("user", user);
         request.setAttribute("nbAdverts", nbAdverts);
         request.setAttribute("adverts", this.advertService.getAllAdverts());
         request.setAttribute("categories", this.advertService.getCategories());

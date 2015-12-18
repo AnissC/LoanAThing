@@ -3,6 +3,8 @@ package com.lat.beans;
 public class Group {
     private Integer id;
     private String name;
+    public static final String ADMIN = "ADMIN";
+    public static final String USER = "USER";
 
     public Integer getId() {
         return id;

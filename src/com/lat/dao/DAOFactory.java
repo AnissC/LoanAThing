@@ -85,4 +85,6 @@ public class DAOFactory
     public ApplyDao getApplyDao() { return new ApplyDao(this);}
 
     public LoanDao getLoanDao() { return new LoanDao(this);}
+
+    public GroupDAO getGroupDAO() { return new GroupDAO(this);}
 }
