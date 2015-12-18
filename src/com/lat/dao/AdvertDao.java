@@ -19,7 +19,7 @@ public class AdvertDao
     private static final String SQL_SELECT_ALL_BY_USER_ID = "SELECT * FROM advert WHERE user_id = ?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM advert ORDER BY id";
     private static final String SQL_INSERT = "INSERT INTO advert (title, description, date_start, date_end, category_id, user_id, is_publish, is_suspend) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE advert SET title = ?, description = ?, date_start = ?, date_end = ?, category_id = ?, is_publish = ?, is_suspend = ? WHERE advert_id = ?";
+    private static final String SQL_UPDATE = "UPDATE advert SET title = ?, description = ?, date_start = ?, date_end = ?, category_id = ?, is_publish = ?, is_suspend = ? WHERE id = ?";
     private static final String SQL_DELETE = "DELETE FROM advert WHERE id = ?";
     private static final String SQL_COUNT_ADVERT = "SELECT COUNT(*) FROM advert";
     private static final String SQL_COUNT_ADVERT_BY_CATEGORY = "SELECT COUNT(*) FROM advert A, category C WHERE A.category_id = ? OR (? = C.parent_category AND A.category_id = C.id)";
@@ -99,7 +99,7 @@ public class AdvertDao
         }
     }
 
-    public Advert update(Advert advert) throws DAOException
+    public void update(Advert advert) throws DAOException
     {
         Connection connexion = null;
         PreparedStatement preparedStatement = null;
@@ -118,8 +118,6 @@ public class AdvertDao
         } finally {
             silentClosures(resultSet, preparedStatement, connexion);
         }
-
-        return advert;
     }
 
     public List<Advert> find() throws DAOException

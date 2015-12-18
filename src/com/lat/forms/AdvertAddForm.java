@@ -61,7 +61,7 @@ public final class AdvertAddForm
         return advert;
     }
 
-    public Advert updateAdvert(Advert advert, String title, String description, String dateStart, String dateEnd, Integer categoryId, Boolean isPublish, Boolean isSuspend)
+    public void updateAdvert(Advert advert, String title, String description, String dateStart, String dateEnd, Integer categoryId, Boolean isPublish, Boolean isSuspend)
     {
         try {
             checkUpdatedValues(advert, title, description, dateStart, dateEnd, categoryId, isPublish, isSuspend);
@@ -81,8 +81,6 @@ public final class AdvertAddForm
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return advert;
     }
 
     private void checkValues(String title, String description, String dateStart, Integer categoryId) throws Exception
