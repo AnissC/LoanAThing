@@ -1,5 +1,6 @@
 package com.lat.dao;
 
+import com.lat.beans.Group;
 import com.lat.beans.User;
 import static com.lat.dao.DAOUtilities.*;
 import java.sql.Connection;
@@ -126,16 +127,16 @@ public class UserDao
         return user;
     }
 
-    private static User map(ResultSet resultSet) throws SQLException
+    private User map(ResultSet resultSet) throws SQLException
     {
         User user = new User();
+        GroupDAO groupDAO = this.daoFactory.getGroupDAO();
 
         user.setId(resultSet.getInt("id"));
         user.setLastname(resultSet.getString("lastname"));
         user.setFirstname(resultSet.getString("firstname"));
         user.setNickname(resultSet.getString("nickname"));
         user.setEmail(resultSet.getString("email"));
-        user.setGroupId(resultSet.getInt("group_id"));
         user.setAddress(resultSet.getString("address"));
         user.setCity(resultSet.getString("city"));
         user.setZipCode(resultSet.getInt("zipcode"));
@@ -145,6 +146,7 @@ public class UserDao
         user.setSchoolDomain(resultSet.getString("school_domain"));
         user.setEducationFormation(resultSet.getString("education_formation"));
         user.setImage(resultSet.getString("image"));
+        user.setGroup(groupDAO.findOneById(resultSet.getInt("group_id")));
 
         return user;
     }

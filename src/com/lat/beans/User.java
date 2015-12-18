@@ -18,7 +18,7 @@ public class User {
     private String educationFormation;
     private String image;
     private ArrayList<User> friends;
-    private Integer groupId;
+    private Group group;
 
     public Integer getId() {
         return id;
@@ -140,11 +140,11 @@ public class User {
         this.friends = friends;
     }
 
-    public Integer getGroupId() {
-        return groupId;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGroupId(Integer groupId) {
-        this.groupId = groupId;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

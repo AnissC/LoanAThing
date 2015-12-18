@@ -2,6 +2,7 @@ package com.lat.services;
 
 import com.lat.beans.User;
 import com.lat.dao.DAOFactory;
+import com.lat.dao.GroupDAO;
 import com.lat.dao.UserDao;
 import com.lat.forms.LoginForm;
 import com.lat.forms.RegisterForm;
@@ -14,12 +15,14 @@ public class UserService
     private static UserService USER_SERVICE = null;
     private HttpSession session;
     private UserDao userDao;
+    private GroupDAO groupDAO;
     private RegisterForm registerForm;
     private LoginForm loginForm;
 
     private UserService()
     {
         this.userDao = DAOFactory.getInstance().getUserDao();
+        this.groupDAO = DAOFactory.getInstance().getGroupDAO();
         this.registerForm = new RegisterForm(this.userDao);
         this.loginForm = new LoginForm(this.userDao);
     }
