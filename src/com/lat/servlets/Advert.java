@@ -14,19 +14,16 @@ import java.io.IOException;
 public class Advert extends HttpServlet
 {
     private AdvertService advertService;
-    private UserService userService;
 
     public void init() throws ServletException
     {
         this.advertService = AdvertService.getInstance();
-        this.userService = UserService.getInstance();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         request.setAttribute("advert", this.advertService.getAdvert(request));
         request.setAttribute("categories", this.advertService.getCategories());
-        request.setAttribute("user", this.userService.getUserInSession());
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/views/advert/advert.jsp").forward(request, response);
     }

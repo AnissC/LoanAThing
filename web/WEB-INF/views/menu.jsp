@@ -5,7 +5,7 @@
         <li><a class="icon" href="/profil"><i class="fa fa-user"></i> Profil</a></li>
         <li><a class="icon" href="/contact"><i class="fa fa-question-circle"></i> Contact</a></li>
         <li><a class="icon" href="/logout"><i class="fa fa-power-off"></i> Deconnexion</a></li>
-        <c:if test="${user.group.name == 'ADMIN' }">
+        <c:if test="${sessionScope.userSession.group.name == 'ADMIN' }">
             <li><a class="icon" href="/backoffice"><i class="fa fa-rocket"></i> Back Office</a></li>
         </c:if>
     </ul>
