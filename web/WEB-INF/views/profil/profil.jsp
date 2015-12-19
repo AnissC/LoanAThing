@@ -151,13 +151,13 @@
                         <div class="modal-footer">
                             <div class="row">
                                 <div class="col-xs-6">
-                                    <button data-dismiss="modal" type="button" class="pull-right btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
+                                    <button data-dismiss="modal" type="button" class="button--nico--danger button--nico">
                                         <span>Annuler</span>
                                         <i class="fa fa-trash-o button__icon"></i>
                                     </button>
                                 </div>
                                 <div class="col-xs-6">
-                                    <button type="submit" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
+                                    <button type="submit" class="button--nico button--nico--success">
                                         <span>Valider</span>
                                         <i class="fa fa-check button__icon"></i>
                                     </button>
