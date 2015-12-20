@@ -47,7 +47,7 @@
                                             <h1 class="text-center">Nouvelles Offres</h1>
                                         </div>
                                         <div class="col-xs-3 search-field">
-                                            <input type="text" class="search" class="pull-right">
+                                            <input type="text" class="search" class="pull-right" placeholder="Recherche">
                                             <h2><i class="fa fa-search pull-right"></i></h2>
                                         </div>
                                     </div>
@@ -204,7 +204,7 @@
                             '<p>' + this.description + '</p>' +
                             '<p>'+ this.dateStart +' <i class="fa fa-arrow-right"></i> ' + this.dateEnd + '</p>'+
                             '</div><div class="row"><div class="col-xs-12">'+
-                            '<a href="/advert/view'+ this.id + '>' +
+                            '<a href="/advert/view?id='+ this.id + '">' +
                             '<button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom"> <span>Details</span><i class="fa fa-search button__icon"></i></button></a></div></div></div></div>'
                             );
                         })
