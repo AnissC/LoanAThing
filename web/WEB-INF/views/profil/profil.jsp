@@ -78,10 +78,10 @@
                                                         </button>
                                                     </div>
                                                     <div class="col-xs-3">
-                                                        <button type="submit" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
+                                                        <a href="<c:url value="/profil/requests" />" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
                                                             <span>Gérer les Demandes</span>
                                                             <i class="fa fa-comment-o button__icon"></i>
-                                                        </button>
+                                                        </a>
                                                     </div>
                                                     <div class="col-xs-3">
                                                         <button type="submit" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">

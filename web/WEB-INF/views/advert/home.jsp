@@ -216,7 +216,5 @@
 
 
         </script>
-
-
     </jsp:attribute>
 </lat:baseLayout>

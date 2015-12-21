@@ -19,7 +19,7 @@ public class ApplyDao
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as nbApplies FROM apply";
     private static final String SQL_SELECT_PENDING_REQUESTS = "SELECT * FROM apply WHERE user_id = ?";
-    private static final String SQL_SELECT_INBOX_REQUESTS = "SELECT * FROM apply WHERE user_id = ?";
+    private static final String SQL_SELECT_INBOX_REQUESTS = "SELECT * FROM apply WHERE advert_id = ?";
     private static final String SQL_INSERT = "INSERT INTO apply (date_start, date_end, accepted, user_id, advert_id) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM apply WHERE id = ?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM apply ORDER BY id";
@@ -48,7 +48,7 @@ public class ApplyDao
         return resultSet;
     }
 
-    public List<Apply> findPendingRequests(User user) throws DAOException
+    public List<Apply> findPendingRequests(Integer advertId) throws DAOException
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -57,7 +57,7 @@ public class ApplyDao
 
         try {
             connection = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_PENDING_REQUESTS, false, user.getId());
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_PENDING_REQUESTS, false, advertId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 applyRequests.add(map(resultSet));
