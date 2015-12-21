@@ -19,18 +19,11 @@ public class AddAdvert extends HttpServlet
         this.advertService = AdvertService.getInstance();
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {
-        request.setAttribute("categories", this.advertService.getCategories());
-
-        this.getServletContext().getRequestDispatcher("/WEB-INF/views/advert/add-advert.jsp").forward(request, response);
-    }
-
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         request.setAttribute("form", this.advertService.getAdvertForm());
         request.setAttribute("advert", this.advertService.processAdvert(request));
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/views/advert/add-advert.jsp").forward(request, response);
+        response.sendRedirect("/home");
     }
 }
