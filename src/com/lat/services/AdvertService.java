@@ -136,12 +136,18 @@ public class AdvertService
         return this.loanDao.findOneById(id);
     }
 
-    public List<Apply> getPendingRequests(HttpServletRequest request)
+    public List<List<Apply>> getPendingRequests(HttpServletRequest request)
     {
         this.session = request.getSession();
         User user = ((User) session.getAttribute("userSession"));
+        List<Advert> adverts = this.advertDao.findAllByUserId(user.getId());
 
-        return this.applyDao.findPendingRequests(user);
+        List<List<Apply>> applies = new ArrayList<List<Apply>>();
+        for (Advert advert : adverts) {
+            applies.add(this.applyDao.findPendingRequests(advert.getId()));
+        }
+
+        return applies;
     }
 
     public List<Apply> getInboxRequests(HttpServletRequest request)

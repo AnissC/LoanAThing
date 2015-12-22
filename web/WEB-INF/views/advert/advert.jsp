@@ -99,7 +99,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title" id="myModalLabel">Faire une demande d'emprunt pour : <c:out value="${advert.title}"/></h4>
                             </div>
-                            <form class="form-horizontal" method="post" action="advert">
+                            <form class="form-horizontal" method="post" action="<c:url value="/advert/apply" />">
                                 <h4 class="text-center">Veuillez sélectionner les dates souhaitées pour l'emprunt.</h4>
                                 <div class="modal-body">
                                     <div class="form-group">
