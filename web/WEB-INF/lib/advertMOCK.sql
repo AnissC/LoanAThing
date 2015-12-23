@@ -89,32 +89,6 @@ INSERT INTO `advert` (
   `is_suspend`,
   `is_publish`
 ) VALUES (
-  9,
-  'BB-8',
-  'Un petit robot rond telecommandé qui parcourera votre salon de son allure non chalante pour ravir petits et grands',
-  NULL,
-  'bb8.png',
-  now(),
-  '2016-01-03',
-  '2',
-  '1',
-  0,
-  1
-);
-
-INSERT INTO `advert` (
-  `id`,
-  `title`,
-  `description`,
-  `short_description`,
-  `image`,
-  `date_start`,
-  `date_end`,
-  `user_id`,
-  `category_id`,
-  `is_suspend`,
-  `is_publish`
-) VALUES (
   4,
   'Moniteur',
   'Un écran 22.5 pouces pour les informaticiens en cruel manque d ecran, car on a jamais trop d ecrans !',

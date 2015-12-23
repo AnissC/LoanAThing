@@ -54,12 +54,18 @@
                                         <c:forEach items="${adverts}" var="advert">
                                             <div class="col-xs-3">
                                                 <div class="advert text-center">
-                                                    <img src="../../../inc/images/girafe.png" alt="" class="img-responsive">
-                                                    <div class="annonce-content" style="margin-bottom: 20px">
-                                                        <h2 class=""><c:out value="${advert.title}" /></h2>
-                                                        <p><c:out value="${advert.description}" /></p>
-                                                        <p><c:out value="${advert.dateStart}" /> <i class="fa fa-arrow-right"></i> <c:out value="${advert.dateEnd}" /></p>
+                                                    <div class="annonce-image">
+                                                        <img src="../../../inc/images/advert/<c:out value="${advert.image}"/>" alt="" class="img-responsive center-block">
                                                     </div>
+                                                    <div class="annonce-title" style="margin-bottom: 20px">
+                                                        <h2 class=""><c:out value="${advert.title}" /></h2>
+                                                    </div>
+                                                    <div class="annonce-description">
+                                                        <p><c:out value="${advert.description}" /></p>
+                                                    </div>
+
+                                                    <p><c:out value="${advert.dateStart}" /> <i class="fa fa-arrow-right"></i> <c:out value="${advert.dateEnd}" /></p>
+
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <a href="<c:url value="/advert/view"><c:param name="id" value="${advert.id}" /></c:url>">
@@ -160,7 +166,9 @@
                 revert: "mouseout"
             });
             $(function() {
-                $('.annonce-content').matchHeight();
+                $('.annonce-title').matchHeight();
+                $('.annonce-description').matchHeight();
+                $('.annonce-image').matchHeight();
             });
 
             $('.fa-search').click(function(){
@@ -197,22 +205,36 @@
                         var adverts = JSON.parse(jsonResponse);
                         $("#annonces").children().remove();
                         $.each(adverts, function(){
-                            $("#annonces").append('<div class="col-xs-3"><div class="advert text-center"><img src="../../../inc/images/girafe.png" alt="" class="img-responsive"><div class="annonce-content" style="margin-bottom: 20px">' +
-                            '<h2>'+ this.title +'</h2>' +
-                            '<p>' + this.description + '</p>' +
-                            '<p>'+ this.dateStart +' <i class="fa fa-arrow-right"></i> ' + this.dateEnd + '</p>'+
-                            '</div><div class="row"><div class="col-xs-12">'+
-                            '<a href="/advert/view?id='+ this.id + '">' +
-                            '<button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom"> <span>Details</span><i class="fa fa-search button__icon"></i></button></a></div></div></div></div>'
+                            $("#annonces").append('<div class="col-xs-3">' +
+                                '<div class="advert text-center">' +
+                                    '<div class="annonce-image">' +
+                                        '<img src="../../../inc/images/advert/'+ this.image +'" alt="" class="img-responsive center-block">' +
+                                    '</div>' +
+                                    '<div class="annonce-title" style="margin-bottom: 20px">' +
+                                        '<h2>'+ this.title +'</h2>' +
+                                    '</div>' +
+                                    '<div class="annonce-description" style="margin-bottom: 20px">' +
+                                        '<p>' + this.description + '</p>' +
+                                    '</div>' +
+                                    '<p>'+ this.dateStart +' <i class="fa fa-arrow-right"></i> ' + this.dateEnd + '</p>'+
+
+                                    '<div class="row">' +
+                                        '<div class="col-xs-12">'+
+                                            '<a href="/advert/view?id='+ this.id + '">' +
+                                                '<button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom"><span>Details</span><i class="fa fa-search button__icon"></i></button>' +
+                                            '</a>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>'
                             );
                         })
-                        $('.annonce-content').matchHeight();
+                        $('.annonce-image').matchHeight();
+                        $('.annonce-title').matchHeight();
+                        $('.annonce-description').matchHeight();
                     }
                 })
             })
-
-
-
         </script>
     </jsp:attribute>
 </lat:baseLayout>

@@ -36,6 +36,7 @@ a, p, h1, h2, h3, h4, h5{
     background: url(../images/bg4.jpg) no-repeat center fixed;
     -webkit-background-size: cover; /* pour anciens Chrome et Safari */
     background-size: cover; /* version standardisée */
+    min-height: 100vh;
 }
 
 .btn:focus{
@@ -66,6 +67,7 @@ a, p, h1, h2, h3, h4, h5{
     transition-timing-function: ease;
     width: 0px;
     padding-left: 10px;
+    color: #ffffff;
 }
 
 .search:focus{
