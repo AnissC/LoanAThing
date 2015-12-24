@@ -84,3 +84,7 @@ a, p, h1, h2, h3, h4, h5{
     opacity: .5;
     transition: opacity .5s;
 }
+
+#btn-delete{
+    margin-top: 10px;
+}

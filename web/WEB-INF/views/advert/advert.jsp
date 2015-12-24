@@ -42,7 +42,7 @@
                                             <div class="annonce">
                                                 <div class="row">
                                                     <div class="col-xs-4">
-                                                        <img src="../../../inc/images/girafe.png" alt="" class="img-responsive">
+                                                        <img src="../../../inc/images/advert/<c:out value="${advert.image}"/> " alt="" class="img-responsive">
                                                     </div>
                                                     <div class="col-xs-8">
                                                         <h2><c:out value="${advert.title}"/> <span><c:out value="${advert.category.name}"/></span></h2>
@@ -57,7 +57,13 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <h4 class="text-center"><span><i class="fa fa-calendar-o"></i></span> <span><c:out value="${advert.dateStart}"/></span> <span><i class="fa fa-arrow-right"></i></span> <span><i class="fa fa-calendar-o"></i></span> <span><c:out value="${advert.dateEnd}"/></span></h4>
+                                                        <h4 class="text-center">
+                                                            <span><i class="fa fa-calendar-o"></i></span>
+                                                            <span><c:out value="${advert.dateStart}"/></span>
+                                                            <span><i class="fa fa-arrow-right"></i></span>
+                                                            <span><i class="fa fa-calendar-o"></i></span>
+                                                            <span><c:out value="${advert.dateEnd}"/></span>
+                                                        </h4>
                                                     </div>
                                                 </div>
                                                 <div class="row">

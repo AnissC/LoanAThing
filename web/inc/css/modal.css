@@ -73,3 +73,7 @@
     color: #ffffff;
     transition: all 0.3s;
 }
+
+.modal .modal-body p{
+    color: #333;
+}

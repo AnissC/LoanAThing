@@ -84,7 +84,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="col-xs-3">
-                                                        <button type="submit" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
+                                                        <button data-toggle="modal" data-target="#modal-delete" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
                                                             <span>Supprimer le compte</span>
                                                             <i class="fa fa-trash-o button__icon"></i>
                                                         </button>
@@ -168,6 +168,37 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i> Suppression du profil</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-center">Etes-vous sur de vouloir supprimer votre profil ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button data-dismiss="modal" type="button" class="button--nico--danger button--nico">
+                                    <span>Annuler</span>
+                                    <i class="fa fa-trash-o button__icon"></i>
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                <div id="delete-profil" class="button--nico button--nico--success">
+                                    <span>Valider</span>
+                                    <i class="fa fa-check button__icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </jsp:attribute>
     <jsp:attribute name="js">
         <script src="../../../inc/slideOnSideBar/js/classie.js"></script>
@@ -184,7 +215,7 @@
             });
             $("img").click(function(){
                 $("img").addClass("reda-pattern")
-            })
+            });
         </script>
     </jsp:attribute>
 </lat:baseLayout>
