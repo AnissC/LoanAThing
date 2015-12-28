@@ -61,7 +61,7 @@ a, p, h1, h2, h3, h4, h5{
     transition: all 0.5s;
     -webkit-transition-timing-function:ease;
     transition-timing-function: ease;
-    width: 0px;
+    width: 0;
     padding-left: 10px;
     color: #ffffff;
 }
