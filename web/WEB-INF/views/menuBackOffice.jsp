@@ -5,6 +5,7 @@
         <li><a class="icon" href="/backoffice/report/users"><i class="fa fa-user"></i> Utilisateurs signalés</a></li>
         <li><a class="icon" href="/backoffice/report/adverts"><i class="fa fa-exclamation-triangle"></i> Annonces signalées</a></li>
         <li><a class="icon" href="/backoffice/stats"><i class="fa fa-bar-chart"></i> Statistiques</a></li>
+        <li><a class="icon" href="/home"><i class="fa fa-rocket"></i> Front Office</a></li>
         <li><a class="icon" href="/logout"><i class="fa fa-power-off"></i> Deconnexion</a></li>
     </ul>
 </nav>
