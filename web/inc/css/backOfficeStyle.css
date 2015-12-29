@@ -32,11 +32,8 @@ a, p, h1, h2, h3, h4, h5{
     font-weight: 500;
 }
 
-.main.clearfix{
-    background: url(../images/bg4.jpg) no-repeat center fixed;
-    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
-    background-size: cover; /* version standardisée */
-    min-height: 100vh;
+.st-content{
+   background-color: rgb(32, 40, 56);
 }
 
 .btn:focus{
@@ -64,7 +61,7 @@ a, p, h1, h2, h3, h4, h5{
     transition: all 0.5s;
     -webkit-transition-timing-function:ease;
     transition-timing-function: ease;
-    width: 0px;
+    width: 0;
     padding-left: 10px;
     color: #ffffff;
 }
@@ -88,3 +85,26 @@ a, p, h1, h2, h3, h4, h5{
     margin-top: 10px;
 }
 
+.btn-bo{
+    background-color: transparent;
+    border-top:1px solid transparent;
+    border-bottom: 1px solid transparent;
+    color: #ffffff;
+    opacity: 0.5;
+    padding: 10px;
+    margin-top: 150px;
+    letter-spacing: 0.1em;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.btn-bo:hover{
+    border-top:1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    transition: all 0.5s;
+    opacity: 1;
+}
+
+.btn-bo h1 i{
+    font-size: 40px;
+}
