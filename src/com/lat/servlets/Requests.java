@@ -24,7 +24,6 @@ public class Requests extends HttpServlet
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        List<List<Apply>> requests = this.advertService.getPendingRequests(request) ;
         request.setAttribute("pendingRequests", this.advertService.getPendingRequests(request));
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/views/profil/requests.jsp").forward(request, response);

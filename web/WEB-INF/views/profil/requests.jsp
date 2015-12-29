@@ -11,6 +11,7 @@
         <link href="../../../inc/css/annonce.css" rel="stylesheet">
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
         <link href="../../../inc/css/modal.css" rel="stylesheet">
+        <link href="../../../inc/css/pendingRequestStyle.css" rel="stylesheet">
     </jsp:attribute>
     <jsp:attribute name="content">
         <div id="st-container" class="st-container">
@@ -32,17 +33,33 @@
 
                                 <div class="container">
                                     <div class="row">
+                                        <div class="col-xs-12">
+                                            <h1 class="text-center">Demandes en attente</h1>
+                                        </div>
                                         <c:forEach var="pendingRequest"  items="${requestScope['pendingRequests']}" >
-                                            <c:forEach var="apply"  items="${pendingRequest}" >
-                                                <h1><c:out value="${apply.dateStart}"/></h1>
-                                                <h1><c:out value="${apply.dateEnd}"/></h1>
-                                                <h1><c:out value="${apply.user.lastname}"/></h1>
-                                                <h1><c:out value="${apply.advert.title}"/></h1>
-                                                <h1><c:out value="${apply.advert.user.lastname}"/></h1>
-                                                <p><c:out value="${apply.advert.description}"/></p>
-                                                <p><c:out value="${apply.advert.dateStart}"/></p>
-                                                <p><c:out value="${apply.advert.dateEnd}"/></p>
-                                            </c:forEach>
+                                            <div class="col-xs-6 col-xs-offset-3">
+                                                <div class="request-table">
+                                                    <h4 class="text-center"><c:out value="${pendingRequest[0].advert.title}"/></h4></td>
+                                                    <table class="table">
+                                                        <tr>
+                                                            <td><p>Utilisateur</p></td>
+                                                            <td><p>Date de début</p></td>
+                                                            <td><p>Date de fin</p></td>
+                                                            <td><p class="text-center">Accepter</p></td>
+                                                            <td><p class="text-center">Refuser</p></td>
+                                                        </tr>
+                                                        <c:forEach var="apply"  items="${pendingRequest}" >
+                                                        <tr>
+                                                            <td><p><c:out value="${apply.user.lastname}"/></p></td>
+                                                            <td><p><c:out value="${apply.dateStart}"/></p></td>
+                                                            <td><p><c:out value="${apply.dateEnd}"/></p></td>
+                                                            <td><div class="btn btn-block btn-success"><i class="fa fa-check"></i></div></td>
+                                                            <td><div class="btn btn-block btn-danger"><i class="fa fa-ban"></i></div></td>
+                                                        </tr>
+                                                        </c:forEach>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </c:forEach>
                                     </div>
                                 </div>

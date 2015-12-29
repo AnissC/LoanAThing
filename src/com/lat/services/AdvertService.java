@@ -143,8 +143,12 @@ public class AdvertService
         List<Advert> adverts = this.advertDao.findAllByUserId(user.getId());
 
         List<List<Apply>> applies = new ArrayList<List<Apply>>();
+
         for (Advert advert : adverts) {
-            applies.add(this.applyDao.findPendingRequests(advert.getId()));
+            List<Apply> advertApplies = this.applyDao.findPendingRequests(advert.getId());
+            if (!advertApplies.isEmpty()) {
+                applies.add(advertApplies);
+            }
         }
 
         return applies;
