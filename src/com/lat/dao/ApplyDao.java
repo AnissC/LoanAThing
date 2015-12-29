@@ -57,7 +57,7 @@ public class ApplyDao
 
         try {
             connection = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_PENDING_REQUESTS, false, advertId);
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_INBOX_REQUESTS, false, advertId);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 applyRequests.add(map(resultSet));
