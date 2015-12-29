@@ -12,6 +12,6 @@ public class BoAdvertReport extends HttpServlet
 {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/views/backoffice/advertReport.jsp").forward(request, response);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/views/backoffice/advertReport.jsp").forward(request, response);
     }
 }
