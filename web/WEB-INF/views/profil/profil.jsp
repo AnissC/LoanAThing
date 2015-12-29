@@ -188,10 +188,10 @@
                                 </button>
                             </div>
                             <div class="col-xs-6">
-                                <div id="delete-profil" class="button--nico button--nico--success">
+                                <button id="delete-profil" class="button--nico button--nico--success">
                                     <span>Valider</span>
                                     <i class="fa fa-check button__icon"></i>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
