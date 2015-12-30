@@ -116,7 +116,7 @@
             });
 
             $('#modal-delete').on('hidden.bs.modal', function () {
-                $('.id-to-delete').removeClass('id-to-delete')
+                $('.id-to-delete').removeClass('id-to-delete');
             });
 
             $('#delete-profil').click(function(){
@@ -127,10 +127,15 @@
                     dataType: "text",
                     data: {id:id},
                     success: function(){
-                        alert('ok');
+                        if($('.id-to-delete').parent().siblings().size() == 1){
+                            $('.id-to-delete').parent().after("<tr><td colspan='5'><p class='text-center'>Aucune demande disponible pour cette offre</p></td></tr>");
+                        }
+                        $('.id-to-delete').parent().remove();
+                        $("#modal-delete").modal('hide');
                     }
                 })
             });
+
         </script>
     </jsp:attribute>
 </lat:baseLayout>
