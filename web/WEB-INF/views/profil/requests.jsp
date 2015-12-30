@@ -1,5 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="lat" %>
 
 <lat:baseLayout>
@@ -34,7 +35,14 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <h1 class="text-center">Demandes en attente</h1>
+                                            <c:choose>
+                                                <c:when test="${fn:length(requestScope['pendingRequests']) gt 0}">
+                                                    <h1 class="text-center">Demandes en attente</h1>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h1 class="text-center">Aucune demande en attente</h1>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                         <c:forEach var="pendingRequest"  items="${requestScope['pendingRequests']}" >
                                             <div class="col-xs-6 col-xs-offset-3">
@@ -135,7 +143,6 @@
                     }
                 })
             });
-
         </script>
     </jsp:attribute>
 </lat:baseLayout>
