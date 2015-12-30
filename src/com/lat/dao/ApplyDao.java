@@ -17,6 +17,7 @@ import static com.lat.dao.DAOUtilities.silentClosures;
 public class ApplyDao
 {
     private DAOFactory daoFactory;
+    private static final String SQL_SELECT_WITH_ID = "SELECT * FROM apply WHERE id = ?";
     private static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as nbApplies FROM apply";
     private static final String SQL_SELECT_PENDING_REQUESTS = "SELECT * FROM apply WHERE user_id = ?";
     private static final String SQL_SELECT_INBOX_REQUESTS = "SELECT * FROM apply WHERE advert_id = ?";
@@ -102,8 +103,8 @@ public class ApplyDao
 
         try {
             connection = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connection, SQL_DELETE, false);
-            resultSet = preparedStatement.executeQuery();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_DELETE, false, apply.getId());
+            preparedStatement.executeUpdate();
         } catch ( SQLException e ) {
             throw new DAOException( e );
         } finally {
@@ -177,6 +178,29 @@ public class ApplyDao
             throw new DAOException(e);
         } finally {
             silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return apply;
+    }
+
+    public Apply findOneById(long id) throws DAOException
+    {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Apply apply = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_SELECT_WITH_ID, false, id);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                apply = map(resultSet);
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connexion);
         }
 
         return apply;

@@ -42,6 +42,7 @@
                                                     <h4 class="text-center"><c:out value="${pendingRequest[0].advert.title}"/></h4></td>
                                                     <table class="table">
                                                         <tr>
+                                                            <td class="hidden">id</td>
                                                             <td><p>Utilisateur</p></td>
                                                             <td><p>Date de début</p></td>
                                                             <td><p>Date de fin</p></td>
@@ -50,11 +51,12 @@
                                                         </tr>
                                                         <c:forEach var="apply"  items="${pendingRequest}" >
                                                         <tr>
+                                                            <td class="hidden id"><c:out value="${apply.id}"/></td>
                                                             <td><p><c:out value="${apply.user.lastname}"/></p></td>
                                                             <td><p><c:out value="${apply.dateStart}"/></p></td>
                                                             <td><p><c:out value="${apply.dateEnd}"/></p></td>
                                                             <td><div class="btn btn-block btn-success"><i class="fa fa-check"></i></div></td>
-                                                            <td><div class="btn btn-block btn-danger"><i class="fa fa-ban"></i></div></td>
+                                                            <td><div data-toggle="modal" data-target="#modal-delete" class="btn btn-block btn-danger delete"><i class="fa fa-ban"></i></div></td>
                                                         </tr>
                                                         </c:forEach>
                                                     </table>
@@ -69,6 +71,37 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"><i class="fa fa-exclamation-circle"></i> Suppression du profil</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-center">Etes-vous sur de vouloir supprimer cette demande ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button data-dismiss="modal" type="button" class="button--nico--danger button--nico">
+                                    <span>Annuler</span>
+                                    <i class="fa fa-trash-o button__icon"></i>
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button id="delete-profil" class="button--nico button--nico--success">
+                                    <span>Valider</span>
+                                    <i class="fa fa-check button__icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </jsp:attribute>
     <jsp:attribute name="js">
         <script src="../../../inc/slideOnSideBar/js/classie.js"></script>
@@ -76,5 +109,28 @@
         <script src="../../../inc/js/transformicon.js"></script>
         <script src="../../../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
         <script src="../../../inc/js/konami.js"></script>
+
+        <script>
+            $('.delete').click(function(){
+                $(this).parent().siblings('.id').addClass('id-to-delete');
+            });
+
+            $('#modal-delete').on('hidden.bs.modal', function () {
+                $('.id-to-delete').removeClass('id-to-delete')
+            });
+
+            $('#delete-profil').click(function(){
+                var id = $('.id-to-delete').text();
+                $.ajax({
+                    type:"GET",
+                    url: "/request/delete",
+                    dataType: "text",
+                    data: {id:id},
+                    success: function(){
+                        alert('ok');
+                    }
+                })
+            });
+        </script>
     </jsp:attribute>
 </lat:baseLayout>
