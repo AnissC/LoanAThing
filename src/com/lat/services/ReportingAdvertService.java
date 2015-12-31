@@ -5,8 +5,8 @@ import com.lat.beans.ReportingAdvert;
 import com.lat.dao.*;
 import java.util.List;
 
-public class ReportingAdvertService {
-
+public class ReportingAdvertService
+{
     private static ReportingAdvertService REPORTING_ADVERT_SERVICE = null;
     private ReportingAdvertDao reportingAdvertDao;
 

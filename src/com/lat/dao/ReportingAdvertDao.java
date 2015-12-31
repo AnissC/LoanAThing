@@ -13,7 +13,8 @@ import java.util.List;
 import static com.lat.dao.DAOUtilities.initialisationRequetePreparee;
 import static com.lat.dao.DAOUtilities.silentClosures;
 
-public class ReportingAdvertDao {
+public class ReportingAdvertDao
+{
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_ALL = "SELECT * FROM reporting_advert ORDER BY id";
     private static final String SQL_SELECT_ALL_BY_ADVERT_ID = "SELECT * from reporting_advert WHERE advert_id = ?";
