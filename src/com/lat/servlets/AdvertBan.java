@@ -1,6 +1,5 @@
 package com.lat.servlets;
 
-import com.lat.beans.*;
 import com.lat.services.AdvertService;
 import com.lat.services.ReportingAdvertService;
 
@@ -11,15 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/backoffice/report/advert/ignore")
-public class ReportIgnore extends HttpServlet
-{
-    private ReportingAdvertService reportingAdvertService;
+@WebServlet("/backoffice/report/advert/ban")
+public class AdvertBan extends HttpServlet {
     private AdvertService advertService;
 
     public void init() throws ServletException
     {
-        reportingAdvertService = ReportingAdvertService.getInstance();
         advertService = AdvertService.getInstance();
     }
 
@@ -29,7 +25,7 @@ public class ReportIgnore extends HttpServlet
 
         if (advert != null)
         {
-            reportingAdvertService.ignore(advert);
+            advertService.ban(advert);
         }
 
         response.sendRedirect("/backoffice/report/adverts");

@@ -51,32 +51,36 @@
 
                                     <div class="row" id="annonces">
                                         <c:forEach items="${adverts}" var="advert">
-                                            <div class="col-xs-3">
-                                                <div class="advert text-center">
-                                                    <div class="annonce-image">
-                                                        <img src="../../../inc/images/advert/<c:out value="${advert.image}"/>" alt="" class="img-responsive center-block">
-                                                    </div>
-                                                    <div class="annonce-title" style="margin-bottom: 20px">
-                                                        <h2 class=""><c:out value="${advert.title}" /></h2>
-                                                    </div>
-                                                    <div class="annonce-description">
-                                                        <p><c:out value="${advert.description}" /></p>
-                                                    </div>
+                                            <c:choose>
+                                                <c:when test="${not advert.suspend}">
+                                                    <div class="col-xs-3">
+                                                        <div class="advert text-center">
+                                                            <div class="annonce-image">
+                                                                <img src="../../../inc/images/advert/<c:out value="${advert.image}"/>" alt="" class="img-responsive center-block">
+                                                            </div>
+                                                            <div class="annonce-title" style="margin-bottom: 20px">
+                                                                <h2 class=""><c:out value="${advert.title}" /></h2>
+                                                            </div>
+                                                            <div class="annonce-description">
+                                                                <p><c:out value="${advert.description}" /></p>
+                                                            </div>
 
-                                                    <p><c:out value="${advert.dateStart}" /> <i class="fa fa-arrow-right"></i> <c:out value="${advert.dateEnd}" /></p>
+                                                            <p><c:out value="${advert.dateStart}" /> <i class="fa fa-arrow-right"></i> <c:out value="${advert.dateEnd}" /></p>
 
-                                                    <div class="row">
-                                                        <div class="col-xs-12">
-                                                            <a href="<c:url value="/advert/view"><c:param name="id" value="${advert.id}" /></c:url>">
-                                                                <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
-                                                                    <span>Details</span>
-                                                                    <i class="fa fa-search button__icon"></i>
-                                                                </button>
-                                                            </a>
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    <a href="<c:url value="/advert/view"><c:param name="id" value="${advert.id}" /></c:url>">
+                                                                        <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
+                                                                            <span>Details</span>
+                                                                            <i class="fa fa-search button__icon"></i>
+                                                                        </button>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                </c:when>
+                                            </c:choose>
                                         </c:forEach>
                                     </div>
                                 </div>
