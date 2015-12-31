@@ -9,9 +9,9 @@
         <link href="../../../inc/slideOnSideBar/css/component.css" rel='stylesheet' type='text/css'>
         <link href="../../../inc/css/backOfficeStyle.css" rel='stylesheet' type='text/css'>
         <link href="../../../inc/css/transformicons.css" rel="stylesheet">
-        <link href="../../../inc/css/annonce.css" rel="stylesheet">
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
         <link href="../../../inc/css/modal.css" rel="stylesheet">
+        <link href="../../../inc/css/annonce.css" rel="stylesheet" type="text/css">
 
       </jsp:attribute>
       <jsp:attribute name="content">
@@ -38,35 +38,44 @@
                                             <h1 class="text-center">Annonces Signalées</h1>
                                         </div>
                                     </div>
-                                </div>
-                                <c:forEach var="reportedAdvert"  items="${reportedAdverts}" >
-                                    <div class="col-xs-3">
-                                        <div class="advert text-center">
-                                            <div class="annonce-image">
-                                                <img src="../../../inc/images/advert/<c:out value="${reportedAdvert.image}"/>" alt="" class="img-responsive center-block">
-                                            </div>
-                                            <div class="annonce-title" style="margin-bottom: 20px">
-                                                <h2 class=""><c:out value="${reportedAdvert.title}" /></h2>
-                                            </div>
-                                            <div class="annonce-description">
-                                                <p><c:out value="${reportedAdvert.description}" /></p>
-                                            </div>
+                                    <div class="row">
+                                        <c:forEach var="reportedAdvert"  items="${reportedAdverts}" >
+                                            <div class="col-xs-3">
+                                                <div class="advert text-center advert-reported">
+                                                    <div class="annonce-image">
+                                                        <img src="../../../inc/images/advert/<c:out value="${reportedAdvert.image}"/>" alt="" class="img-responsive center-block">
+                                                    </div>
+                                                    <div class="annonce-title">
+                                                        <h2 class=""><c:out value="${reportedAdvert.title}" /></h2>
+                                                    </div>
 
-                                            <p><c:out value="${reportedAdvert.dateStart}" /> <i class="fa fa-arrow-right"></i> <c:out value="${reportedAdvert.dateEnd}" /></p>
-
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <a href="<c:url value="/advert/view"><c:param name="id" value="${reportedAdvert.id}" /></c:url>">
-                                                        <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
-                                                            <span>Details</span>
-                                                            <i class="fa fa-search button__icon"></i>
-                                                        </button>
-                                                    </a>
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <a href="<c:url value="/advert/view"><c:param name="id" value="${reportedAdvert.id}" /></c:url>">
+                                                                <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
+                                                                    <span>Details</span>
+                                                                    <i class="fa fa-search button__icon"></i>
+                                                                </button>
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-xs-12">
+                                                            <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
+                                                                <span>Ignorer</span>
+                                                                <i class="fa fa-eye-slash button__icon"></i>
+                                                            </button>
+                                                        </div>
+                                                        <div class="col-xs-12">
+                                                            <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
+                                                                <span>Bannir</span>
+                                                                <i class="fa fa-ban button__icon"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </c:forEach>
                                     </div>
-                                </c:forEach>
+                                </div>
                             </div>
                         </div><!-- /main -->
                     </div><!-- /st-content-inner -->
@@ -81,8 +90,12 @@
         <script src="../../../inc/js/transformicon.js"></script>
         <script src="../../../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
         <script src="../../../inc/js/konami.js"></script>
-
         <script>
+            $(function() {
+                $('.annonce-title').matchHeight();
+                $('.annonce-description').matchHeight();
+                $('.annonce-image').matchHeight();
+            });
             transformicons.add('.tcon', {
                 transform: "mouseover",
                 revert: "mouseout"

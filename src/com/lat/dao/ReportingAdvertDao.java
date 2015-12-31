@@ -1,7 +1,5 @@
 package com.lat.dao;
 
-import com.lat.beans.Advert;
-import com.lat.beans.Reporting;
 import com.lat.beans.ReportingAdvert;
 
 import java.sql.Connection;
@@ -17,6 +15,7 @@ import static com.lat.dao.DAOUtilities.silentClosures;
 public class ReportingAdvertDao {
     private DAOFactory daoFactory;
     private static final String SQL_SELECT_ALL = "SELECT * FROM reporting_advert ORDER BY id";
+    private static final String SQL_INSERT = "INSERT INTO reporting_advert (advert_id) VALUES (?)";
 
     ReportingAdvertDao(DAOFactory daoFactory)
     {
@@ -55,5 +54,36 @@ public class ReportingAdvertDao {
         reportingAdvert.setAdvert(advertDao.findOneById(resultSet.getInt("advert_id")));
 
         return reportingAdvert;
+    }
+
+    public void create(ReportingAdvert reportingAdvert) throws DAOException
+    {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet valeursAutoGenerees = null;
+
+        try {
+            /* Récupération d'une connexion depuis la Factory */
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, reportingAdvert.getAdvert().getId());
+
+            int statut = preparedStatement.executeUpdate();
+            /* Analyse du statut retourné par la requête d'insertion */
+            if (statut == 0) {
+                throw new DAOException("Échec de la création du signalement de l'offre, aucune ligne ajoutée dans la table.");
+            }
+            /* Récupération de l'id auto-généré par la requête d'insertion */
+            valeursAutoGenerees = preparedStatement.getGeneratedKeys();
+            if (valeursAutoGenerees.next()) {
+                /* Puis initialisation de la propriété id du bean reportingAdvert avec sa valeur */
+                reportingAdvert.setId(valeursAutoGenerees.getInt(1));
+            } else {
+                throw new DAOException("Échec de la création du signalement de l'offre, aucun ID auto-généré retourné.");
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(valeursAutoGenerees, preparedStatement, connexion);
+        }
     }
 }

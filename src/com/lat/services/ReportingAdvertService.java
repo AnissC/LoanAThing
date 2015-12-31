@@ -3,11 +3,6 @@ package com.lat.services;
 import com.lat.beans.Advert;
 import com.lat.beans.ReportingAdvert;
 import com.lat.dao.*;
-import com.lat.forms.AdvertAddForm;
-import com.lat.forms.ApplyForm;
-import com.lat.forms.LoanForm;
-
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class ReportingAdvertService {
@@ -32,6 +27,12 @@ public class ReportingAdvertService {
     public List<ReportingAdvert> getAllReportingAdverts()
     {
         return this.reportingAdvertDao.find();
+    }
+
+    public void reportAdvert(Advert advert){
+        ReportingAdvert reportingAdvert = new ReportingAdvert();
+        reportingAdvert.setAdvert(advert);
+        this.reportingAdvertDao.create(reportingAdvert);
     }
 
 }

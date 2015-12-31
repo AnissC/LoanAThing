@@ -75,6 +75,12 @@
                                                                     <span>Emprunter</span>
                                                                     <i class="fa fa-check button__icon"></i>
                                                                 </button>
+                                                                <a href="<c:url value="/advert/report"><c:param name="id" value="${advert.id}"/></c:url>">
+                                                                    <button type="button" class="center-block btn btn-block button button--naira button--round-s button--border-thin button--naira--danger pull-right">
+                                                                        <span>Signaler</span>
+                                                                        <i class="fa fa-exclamation-triangle button__icon"></i>
+                                                                    </button>
+                                                                </a>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <button data-toggle="modal" data-target="#update" type="button" class="center-block btn btn-block button button--naira button--round-s button--border-thin button--naira--success pull-right">

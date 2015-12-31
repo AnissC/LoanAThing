@@ -40,3 +40,11 @@
 #annonces{
     margin-bottom: 40px;
 }
+
+.advert.advert-reported button{
+    margin-top: 15px;
+}
+
+.advert.advert-reported .annonce-title {
+    margin-bottom: 0;
+}
