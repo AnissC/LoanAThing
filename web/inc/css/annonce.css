@@ -48,3 +48,11 @@
 .advert.advert-reported .annonce-title {
     margin-bottom: 0;
 }
+
+.advert.advert-suspended button{
+    margin-top: 15px;
+}
+
+.advert.advert-suspended .annonce-title {
+    margin-bottom: 0;
+}

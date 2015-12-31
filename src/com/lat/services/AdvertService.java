@@ -174,4 +174,8 @@ public class AdvertService
     }
 
     public void ban(Advert advert) { advertDao.suspend(advert); }
+
+    public void unban(Advert advert) { advertDao.unSuspend(advert); }
+
+    public List<Advert> getAllSuspendedAdverts(){ return advertDao.findAllSuspended(); }
 }

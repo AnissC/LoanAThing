@@ -35,23 +35,23 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <h1 class="text-center">Annonces Signalées</h1>
+                                            <h1 class="text-center">Annonces Suspendues</h1>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <c:forEach var="reportedAdvert"  items="${reportedAdverts}">
+                                        <c:forEach var="suspendedAdvert"  items="${suspendedAdverts}" >
                                             <div class="col-xs-3">
-                                                <div class="advert text-center advert-reported">
+                                                <div class="advert text-center advert-suspended">
                                                     <div class="annonce-image">
-                                                        <img src="../../../inc/images/advert/<c:out value="${reportedAdvert.image}"/>" alt="" class="img-responsive center-block">
+                                                        <img src="../../../inc/images/advert/<c:out value="${suspendedAdvert.image}"/>" alt="" class="img-responsive center-block">
                                                     </div>
                                                     <div class="annonce-title">
-                                                        <h2 class=""><c:out value="${reportedAdvert.title}" /></h2>
+                                                        <h2 class=""><c:out value="${suspendedAdvert.title}" /></h2>
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <a href="<c:url value="/advert/view"><c:param name="id" value="${reportedAdvert.id}" /></c:url>">
+                                                            <a href="<c:url value="/advert/view"><c:param name="id" value="${suspendedAdvert.id}" /></c:url>">
                                                                 <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
                                                                     <span>Details</span>
                                                                     <i class="fa fa-search button__icon"></i>
@@ -59,18 +59,10 @@
                                                             </a>
                                                         </div>
                                                         <div class="col-xs-12">
-                                                            <a href="<c:url value="/backoffice/report/advert/ignore"><c:param name="id" value="${reportedAdvert.id}" /></c:url>">
+                                                            <a href="<c:url value="/backoffice/report/advert/unban"><c:param name="id" value="${suspendedAdvert.id}" /></c:url>">
                                                                 <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
-                                                                    <span>Ignorer</span>
-                                                                    <i class="fa fa-eye-slash button__icon"></i>
-                                                                </button>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-xs-12">
-                                                            <a href="<c:url value="/backoffice/report/advert/ban"><c:param name="id" value="${reportedAdvert.id}" /></c:url>">
-                                                                <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
-                                                                    <span>Bannir</span>
-                                                                    <i class="fa fa-ban button__icon"></i>
+                                                                    <span>Retablir</span>
+                                                                    <i class="fa fa-eye button__icon"></i>
                                                                 </button>
                                                             </a>
                                                         </div>
@@ -107,3 +99,4 @@
         </script>
     </jsp:attribute>
 </lat:baseLayout>
+
