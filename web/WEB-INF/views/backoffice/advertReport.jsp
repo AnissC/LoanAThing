@@ -39,6 +39,34 @@
                                         </div>
                                     </div>
                                 </div>
+                                <c:forEach var="reportedAdvert"  items="${reportedAdverts}" >
+                                    <div class="col-xs-3">
+                                        <div class="advert text-center">
+                                            <div class="annonce-image">
+                                                <img src="../../../inc/images/advert/<c:out value="${reportedAdvert.image}"/>" alt="" class="img-responsive center-block">
+                                            </div>
+                                            <div class="annonce-title" style="margin-bottom: 20px">
+                                                <h2 class=""><c:out value="${reportedAdvert.title}" /></h2>
+                                            </div>
+                                            <div class="annonce-description">
+                                                <p><c:out value="${reportedAdvert.description}" /></p>
+                                            </div>
+
+                                            <p><c:out value="${reportedAdvert.dateStart}" /> <i class="fa fa-arrow-right"></i> <c:out value="${reportedAdvert.dateEnd}" /></p>
+
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <a href="<c:url value="/advert/view"><c:param name="id" value="${reportedAdvert.id}" /></c:url>">
+                                                        <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
+                                                            <span>Details</span>
+                                                            <i class="fa fa-search button__icon"></i>
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div><!-- /main -->
                     </div><!-- /st-content-inner -->
