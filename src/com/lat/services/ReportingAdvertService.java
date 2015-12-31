@@ -35,4 +35,11 @@ public class ReportingAdvertService {
         this.reportingAdvertDao.create(reportingAdvert);
     }
 
+    public void ignore(Advert advert){
+        List<ReportingAdvert> reportingAdverts = reportingAdvertDao.findAllByIdAdvert(advert.getId());
+
+        for (ReportingAdvert reportingAdvert : reportingAdverts){
+            reportingAdvertDao.delete(reportingAdvert);
+        }
+    }
 }

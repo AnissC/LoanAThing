@@ -59,10 +59,12 @@
                                                             </a>
                                                         </div>
                                                         <div class="col-xs-12">
-                                                            <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
-                                                                <span>Ignorer</span>
-                                                                <i class="fa fa-eye-slash button__icon"></i>
-                                                            </button>
+                                                            <a href="<c:url value="/backoffice/report/advert/ignore"><c:param name="id" value="${reportedAdvert.id}" /></c:url>">
+                                                                <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
+                                                                    <span>Ignorer</span>
+                                                                    <i class="fa fa-eye-slash button__icon"></i>
+                                                                </button>
+                                                            </a>
                                                         </div>
                                                         <div class="col-xs-12">
                                                             <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
