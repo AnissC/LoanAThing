@@ -24,9 +24,9 @@ public class AdvertDao
     private static final String SQL_DELETE = "DELETE FROM advert WHERE id = ?";
     private static final String SQL_COUNT_ADVERT = "SELECT COUNT(*) FROM advert";
     private static final String SQL_COUNT_ADVERT_BY_CATEGORY = "SELECT COUNT(*) FROM advert A, category C WHERE A.category_id = ? OR (? = C.parent_category AND A.category_id = C.id)";
-    private static final String SQL_SUSPEND_ADVERT = "UPDATE advert SET is_suspend = 1 WHERE id = ?";
-    private static final String SQL_UNSUSPEND_ADVERT = "UPDATE advert SET is_suspend = 0 WHERE id = ?";
-    private static final String SQL_SELECT_ALL_SUSPENDED = "SELECT * FROM advert WHERE is_suspend = 1";
+    private static final String SQL_SUSPEND_ADVERT = "UPDATE advert SET is_suspend = TRUE WHERE id = ?";
+    private static final String SQL_UNSUSPEND_ADVERT = "UPDATE advert SET is_suspend = FALSE WHERE id = ?";
+    private static final String SQL_SELECT_ALL_SUSPENDED = "SELECT * FROM advert WHERE is_suspend = TRUE";
 
     AdvertDao(DAOFactory daoFactory)
     {
@@ -282,7 +282,7 @@ public class AdvertDao
         }
     }
 
-    public void unSuspend(Advert advert) throws DAOException
+    public void reauthorize(Advert advert) throws DAOException
     {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

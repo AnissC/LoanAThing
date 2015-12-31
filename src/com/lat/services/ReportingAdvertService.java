@@ -17,7 +17,8 @@ public class ReportingAdvertService {
 
     public static ReportingAdvertService getInstance()
     {
-        if (REPORTING_ADVERT_SERVICE == null) {
+        if (REPORTING_ADVERT_SERVICE == null)
+        {
             REPORTING_ADVERT_SERVICE = new ReportingAdvertService();
         }
 
@@ -29,16 +30,19 @@ public class ReportingAdvertService {
         return this.reportingAdvertDao.find();
     }
 
-    public void reportAdvert(Advert advert){
+    public void reportAdvert(Advert advert)
+    {
         ReportingAdvert reportingAdvert = new ReportingAdvert();
         reportingAdvert.setAdvert(advert);
         this.reportingAdvertDao.create(reportingAdvert);
     }
 
-    public void ignore(Advert advert){
+    public void ignore(Advert advert)
+    {
         List<ReportingAdvert> reportingAdverts = reportingAdvertDao.findAllByIdAdvert(advert.getId());
 
-        for (ReportingAdvert reportingAdvert : reportingAdverts){
+        for (ReportingAdvert reportingAdvert : reportingAdverts)
+        {
             reportingAdvertDao.delete(reportingAdvert);
         }
     }

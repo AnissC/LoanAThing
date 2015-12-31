@@ -20,7 +20,6 @@ public class ReportingAdvertDao {
     private static final String SQL_INSERT = "INSERT INTO reporting_advert (advert_id) VALUES (?)";
     private static final String SQL_DELETE = "DELETE FROM reporting_advert WHERE id = ?";
 
-
     ReportingAdvertDao(DAOFactory daoFactory)
     {
         this.daoFactory = daoFactory;
