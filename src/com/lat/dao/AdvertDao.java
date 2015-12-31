@@ -24,6 +24,9 @@ public class AdvertDao
     private static final String SQL_DELETE = "DELETE FROM advert WHERE id = ?";
     private static final String SQL_COUNT_ADVERT = "SELECT COUNT(*) FROM advert";
     private static final String SQL_COUNT_ADVERT_BY_CATEGORY = "SELECT COUNT(*) FROM advert A, category C WHERE A.category_id = ? OR (? = C.parent_category AND A.category_id = C.id)";
+    private static final String SQL_SUSPEND_ADVERT = "UPDATE advert SET is_suspend = TRUE WHERE id = ?";
+    private static final String SQL_UNSUSPEND_ADVERT = "UPDATE advert SET is_suspend = FALSE WHERE id = ?";
+    private static final String SQL_SELECT_ALL_SUSPENDED = "SELECT * FROM advert WHERE is_suspend = TRUE";
 
     AdvertDao(DAOFactory daoFactory)
     {
@@ -167,6 +170,29 @@ public class AdvertDao
         return adverts;
     }
 
+    public List<Advert> findAllSuspended() throws DAOException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Advert> adverts = new ArrayList<Advert>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_ALL_SUSPENDED, false);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                adverts.add(map(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return adverts;
+    }
+
     public Advert findOneById(Integer id) throws DAOException
     {
         Connection connexion = null;
@@ -238,4 +264,39 @@ public class AdvertDao
         return adverts;
     }
 
+    public void suspend(Advert advert) throws DAOException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Advert> adverts = new ArrayList<Advert>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SUSPEND_ADVERT, false, advert.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+    }
+
+    public void reauthorize(Advert advert) throws DAOException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Advert> adverts = new ArrayList<Advert>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_UNSUSPEND_ADVERT, false, advert.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+    }
 }

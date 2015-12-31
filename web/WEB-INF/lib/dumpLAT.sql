@@ -187,7 +187,6 @@ ALTER TABLE `opinion`
 ADD CONSTRAINT `opinion_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `reporting_advert`
-ADD CONSTRAINT `reporting_advert_ibfk_1` FOREIGN KEY (`id`) REFERENCES `reporting` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `reporting_advert_ibfk_2` FOREIGN KEY (`advert_id`) REFERENCES `advert` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `reporting_user`

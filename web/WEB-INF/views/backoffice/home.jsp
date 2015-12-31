@@ -75,6 +75,25 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-xs-4">
+                                            <div class="row">
+                                                <div class="col-xs-8 col-xs-offset-2">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="row">
+                                                <div class="col-xs-8 col-xs-offset-2">
+                                                    <a href="/backoffice/suspended/adverts">
+                                                        <div class="btn-bo">
+                                                            <h1 class="text-center"><i class="fa fa-ban"></i></h1>
+                                                            <p class="text-center">Annonces suspendues</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

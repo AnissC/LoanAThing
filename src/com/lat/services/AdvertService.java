@@ -172,4 +172,10 @@ public class AdvertService
     {
         return advertDao.findAllByName("%" + name + "%");
     }
+
+    public void ban(Advert advert) { advertDao.suspend(advert); }
+
+    public void reauthorize(Advert advert) { advertDao.reauthorize(advert); }
+
+    public List<Advert> getAllSuspendedAdverts(){ return advertDao.findAllSuspended(); }
 }
