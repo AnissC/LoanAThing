@@ -1,6 +1,5 @@
 package com.lat.servlets;
 
-import com.lat.beans.ReportingAdvert;
 import com.lat.services.AdvertService;
 import com.lat.services.ReportingAdvertService;
 
@@ -10,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import com.lat.beans.Advert;
 
 @WebServlet("/backoffice/report/advert/ban")
-public class AdvertBan extends HttpServlet {
+public class AdvertBan extends HttpServlet
+{
     private AdvertService advertService;
     private ReportingAdvertService reportingAdvertService;
 
@@ -24,7 +25,7 @@ public class AdvertBan extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        com.lat.beans.Advert advert = advertService.getAdvert(request);
+        Advert advert = advertService.getAdvert(request);
 
         if (advert != null)
         {

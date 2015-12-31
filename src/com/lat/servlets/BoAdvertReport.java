@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import com.lat.beans.Advert;
 
 @WebServlet("/backoffice/report/adverts")
 public class BoAdvertReport extends HttpServlet
@@ -25,7 +26,7 @@ public class BoAdvertReport extends HttpServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         List<ReportingAdvert> reportingAdverts = reportingAdvertService.getAllReportingAdverts();
-        ArrayList<com.lat.beans.Advert> adverts = new ArrayList<>();
+        ArrayList<Advert> adverts = new ArrayList<>();
 
         if (reportingAdverts != null)
         {

@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import com.lat.beans.Advert;
 
 @WebServlet("/backoffice/report/advert/unban")
-public class AdvertUnban extends HttpServlet {
+public class AdvertUnban extends HttpServlet
+{
     private AdvertService advertService;
 
     public void init() throws ServletException
@@ -20,11 +22,11 @@ public class AdvertUnban extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        com.lat.beans.Advert advert = advertService.getAdvert(request);
+        Advert advert = advertService.getAdvert(request);
 
         if (advert != null)
         {
-            advertService.unban(advert);
+            advertService.reauthorize(advert);
         }
 
         response.sendRedirect("/backoffice/suspended/adverts");
