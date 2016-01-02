@@ -23,6 +23,7 @@ public class LoanDao
     private static final String SQL_INSERT = "INSERT INTO loan (code, state_code, return_code, state_return_code, apply_id) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM loan WHERE id = ?";
     private static final String SQL_SELECT_WITH_APPLY_ID = "SELECT * FROM loan WHERE apply_id = ?";
+    private static final String SQL_UPDATE = "UPDATE loan SET code = ?, state_code = ?, return_code = ?, state_return_code = ?, apply_id = ? WHERE id = ?";
 
     LoanDao(DAOFactory daoFactory)
     {
@@ -146,5 +147,26 @@ public class LoanDao
         }
 
         return loan;
+    }
+
+    public void update(Loan loan) throws DAOException
+    {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_UPDATE, false, loan.getCode(), loan.getStateCode(), loan.getReturnCode(), loan.getStateReturnCode(), loan.getApply().getId(), loan.getId());
+
+            int statut = preparedStatement.executeUpdate();
+            if (statut == 0) {
+                throw new DAOException("Échec de la modification d'une offre de prêt, aucune ligne ajoutée dans la table.");
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connexion);
+        }
     }
 }

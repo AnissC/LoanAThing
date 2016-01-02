@@ -73,4 +73,26 @@ public class LoanService
 
         return loans;
     }
+
+    public void submitCode(Integer loanId, String code)
+    {
+        Loan loan = loanDao.findOneById(loanId);
+
+        if (loan != null && code.equals(loan.getCode()))
+        {
+            loan.setStateCode(true);
+            loanDao.update(loan);
+        }
+    }
+
+    public void submitReturnCode(Integer loanId, String code)
+    {
+        Loan loan = loanDao.findOneById(loanId);
+
+        if (loan != null && code.equals(loan.getReturnCode()))
+        {
+            loan.setStateReturnCode(true);
+            loanDao.update(loan);
+        }
+    }
 }
