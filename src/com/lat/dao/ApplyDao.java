@@ -20,12 +20,13 @@ public class ApplyDao
     private static final String SQL_SELECT_WITH_ID = "SELECT * FROM apply WHERE id = ?";
     private static final String SQL_SELECT_COUNT = "SELECT COUNT(*) as nbApplies FROM apply";
     private static final String SQL_SELECT_PENDING_REQUESTS = "SELECT * FROM apply WHERE user_id = ?";
-    private static final String SQL_SELECT_INBOX_REQUESTS = "SELECT * FROM apply WHERE advert_id = ?";
+    private static final String SQL_SELECT_INBOX_REQUESTS = "SELECT * FROM apply WHERE advert_id = ? AND accepted = false";
     private static final String SQL_INSERT = "INSERT INTO apply (date_start, date_end, accepted, user_id, advert_id) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM apply WHERE id = ?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM apply ORDER BY id";
     private static final String SQL_SELECT_ALL_BY_USER_ID = "SELECT * FROM apply WHERE user_id = ?";
     private static final String SQL_SELECT_ALL_BY_ADVERT_ID = "SELECT * FROM apply WHERE advert_id = ?";
+    private static final String SQL_UPDATE = "UPDATE apply SET date_start = ?, date_end = ?, accepted = ?, user_id = ?, advert_id = ? WHERE id = ?";
 
     ApplyDao(DAOFactory daoFactory)
     {
@@ -252,5 +253,26 @@ public class ApplyDao
         }
 
         return applies;
+    }
+
+    public void update(Apply apply) throws DAOException
+    {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_UPDATE, false, apply.getDateStart(), apply.getDateEnd(), apply.getAccepted(), apply.getUser().getId(), apply.getAdvert().getId(), apply.getId());
+
+            int statut = preparedStatement.executeUpdate();
+            if (statut == 0) {
+                throw new DAOException("Échec de la modification d'une offre de prêt, aucune ligne ajoutée dans la table.");
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connexion);
+        }
     }
 }

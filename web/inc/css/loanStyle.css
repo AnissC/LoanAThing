@@ -1,0 +1,19 @@
+.code{
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    letter-spacing: 0.2em;
+}
+
+.code p{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.code-description {
+    margin-top: 10px;
+    opacity: 0.6;
+}
+
+h1{
+    margin-bottom: 20px;
+}

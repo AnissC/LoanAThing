@@ -12,7 +12,7 @@
         <link href="../../../inc/css/annonce.css" rel="stylesheet">
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
         <link href="../../../inc/css/modal.css" rel="stylesheet">
-        <link href="../../../inc/css/pendingRequestStyle.css" rel="stylesheet">
+        <link href="../../../inc/css/loanStyle.css" rel="stylesheet">
     </jsp:attribute>
     <jsp:attribute name="content">
 
@@ -78,12 +78,18 @@
 
                                                             <div class="row">
                                                                 <div class="col-xs-12">
-                                                                    <a href="<c:url value="/advert/view"><c:param name="id" value="${loan.id}" /></c:url>">
-                                                                        <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
-                                                                            <span>VOODOO</span>
-                                                                            <i class="fa fa-search button__icon"></i>
-                                                                        </button>
-                                                                    </a>
+                                                                    <div class="contact text-center">
+                                                                        <p>Vous pouvez dès à présent prendre contact avec <c:out value="${loan.apply.advert.user.firstname}"/> afin de convenir d'une date de rendez-vous.</p>
+                                                                        <p><i class="fa fa-envelope-o"></i> Email : <c:out value="${loan.apply.advert.user.email}"/></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <div class="code text-center">
+                                                                        <p><c:out value="${loan.code}"/></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <p class="code-description">Vous devrez fournir le code ci dessus à <c:out value="${loan.apply.advert.user.firstname}"/> en échange de l'objet emprunté afin de démarrer la procédure de prêt.</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -138,6 +144,13 @@
         <script src="../../../inc/js/konami.js"></script>
 
         <script>
+
+            $(function() {
+                $('.annonce-title').matchHeight();
+                $('.annonce-image').matchHeight();
+            });
+
+
             $('.delete').click(function(){
                 $(this).parent().siblings('.id').addClass('id-to-delete');
             });

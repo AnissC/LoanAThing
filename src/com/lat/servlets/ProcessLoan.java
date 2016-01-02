@@ -27,7 +27,6 @@ public class ProcessLoan extends HttpServlet
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        long id = Long.valueOf(request.getParameter("applyId"));
         advertService.processLoan(request);
         response.sendRedirect("/profil/loans");
     }

@@ -48,7 +48,10 @@ public class LoanService
 
         for (Apply apply : applies)
         {
-            loans.add(loanDao.findOneByApplyId(apply));
+            if (loanDao.findOneByApplyId(apply).getId() != null)
+            {
+                loans.add(loanDao.findOneByApplyId(apply));
+            }
         }
 
         return loans;
@@ -62,7 +65,10 @@ public class LoanService
 
         for (Apply apply : applies)
         {
-            loans.add(loanDao.findOneByApplyId(apply));
+            if (loanDao.findOneByApplyId(apply).getId() != null)
+            {
+                loans.add(loanDao.findOneByApplyId(apply));
+            }
         }
 
         return loans;

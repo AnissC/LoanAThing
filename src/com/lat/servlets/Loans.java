@@ -30,10 +30,8 @@ public class Loans extends HttpServlet
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         User user = userService.getUserInSession();
-        List<Loan> loansAsked = loanService.getAllLoansAskedByUser(user);
-        List<Loan> loansOffered = loanService.getAllLoansOfferedByUser(user);
-        request.setAttribute("loansAsked", loansAsked);
-        request.setAttribute("loansOffered", loansOffered);
+        request.setAttribute("loansAsked", loanService.getAllLoansAskedByUser(user));
+        request.setAttribute("loansOffered", loanService.getAllLoansOfferedByUser(user));
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/views/profil/loans.jsp").forward(request, response);
     }
