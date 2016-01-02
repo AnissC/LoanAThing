@@ -12,7 +12,7 @@
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
         <link href="../../../inc/css/modal.css" rel="stylesheet">
         <link href="../../../inc/css/loanStyle.css" rel="stylesheet">
-                <link href="../../../inc/css/inputfield.css" rel="stylesheet">
+        <link href="../../../inc/css/inputfield.css" rel="stylesheet">
     </jsp:attribute>
     <jsp:attribute name="content">
 
@@ -56,7 +56,14 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-xs-12">
-                                                                            <p>Vous pouvez dès à présent prendre contact avec <c:out value="${loan.apply.user.firstname}"/> afin de convenir d'une date de rendez-vous.</p>
+                                                                            <c:choose>
+                                                                                <c:when test="${!loan.stateReturnCode}">
+                                                                                    <p>Vous pouvez dès à présent prendre contact avec <c:out value="${loan.apply.user.firstname}"/> afin de convenir d'une date de rendez-vous.</p>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                    <p>Le pret avec <c:out value="${loan.apply.user.firstname}"/> est terminé</p>
+                                                                                </c:otherwise>
+                                                                            </c:choose>
                                                                         </div>
                                                                         <div class="col-xs-12">
                                                                             <p><i class="fa fa-envelope-o"></i> Email : <c:out value="${loan.apply.user.email}"/></p>
@@ -205,7 +212,14 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-xs-12">
-                                                                            <p>Vous pouvez dès à présent prendre contact avec <c:out value="${loan.apply.advert.user.firstname}"/> afin de convenir d'une date de rendez-vous.</p>
+                                                                            <c:choose>
+                                                                                <c:when test="${!loan.stateReturnCode}">
+                                                                                    <p>Vous pouvez dès à présent prendre contact avec <c:out value="${loan.apply.advert.user.firstname}"/> afin de convenir d'une date de rendez-vous.</p>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                    <p>Le pret avec <c:out value="${loan.apply.advert.user.firstname}"/> est terminé</p>
+                                                                                </c:otherwise>
+                                                                            </c:choose>
                                                                         </div>
                                                                         <div class="col-xs-12">
                                                                             <p><i class="fa fa-envelope-o"></i> Email : <c:out value="${loan.apply.advert.user.email}"/></p>
