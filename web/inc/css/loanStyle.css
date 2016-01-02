@@ -1,0 +1,64 @@
+.code{
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+}
+
+.code-letter-spacing{
+    letter-spacing: 0.2em;
+}
+
+.code p{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.code-description {
+    margin-top: 10px;
+    opacity: 0.6;
+}
+
+h1{
+    margin-bottom: 20px;
+}
+
+.fake-to-blur img{
+    height: 20px;
+    width: 10px;
+}
+
+.code-description{
+    margin-top: 30px;
+}
+
+.loan{
+    background-color: rgba(255,255,255,0.1);
+    padding: 20px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s;
+    margin-top: 30px;
+}
+
+.loan:hover{
+    background-color: rgba(255,255,255,0.12);
+    transition: background-color 0.3s;
+}
+
+.code, .btn {
+    margin-top: 15px;
+}
+
+.loan-image img{
+    max-height: 250px;
+}
+
+.loan:last-child{
+    margin-bottom: 40px;
+}
+
+.border-separator{
+    border-bottom: 1px solid white;
+    height: 30px;
+    width: 100%;
+}

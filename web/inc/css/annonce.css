@@ -8,7 +8,7 @@
 }
 
 .advert:hover{
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255,255,255,0.12);
     transition: background-color 0.3s;
 }
 
@@ -18,10 +18,6 @@
 
 .advert:first-child{
     margin-top: 50px;
-}
-
-.advert h2{
-
 }
 
 .annonce-image img{

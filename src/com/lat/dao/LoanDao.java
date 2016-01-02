@@ -1,6 +1,9 @@
 package com.lat.dao;
 
+import com.lat.beans.Advert;
+import com.lat.beans.Apply;
 import com.lat.beans.Loan;
+import com.lat.beans.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +22,8 @@ public class LoanDao
     private static final String SQL_SELECT_ALL = "SELECT * FROM loan ORDER BY id";
     private static final String SQL_INSERT = "INSERT INTO loan (code, state_code, return_code, state_return_code, apply_id) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM loan WHERE id = ?";
+    private static final String SQL_SELECT_WITH_APPLY_ID = "SELECT * FROM loan WHERE apply_id = ?";
+    private static final String SQL_UPDATE = "UPDATE loan SET code = ?, state_code = ?, return_code = ?, state_return_code = ?, apply_id = ? WHERE id = ?";
 
     LoanDao(DAOFactory daoFactory)
     {
@@ -34,7 +39,7 @@ public class LoanDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, loan.getCode(), loan.getStateCode(), loan.getReturnCode(), loan.getStateReturnCode(), loan.getApplyId());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, loan.getCode(), loan.getStateCode(), loan.getReturnCode(), loan.getStateReturnCode(), loan.getApply().getId());
 
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
@@ -106,17 +111,62 @@ public class LoanDao
     {
     }
 
-    private static Loan map(ResultSet resultSet) throws SQLException
+    private Loan map(ResultSet resultSet) throws SQLException
     {
         Loan loan = new Loan();
+        ApplyDao applyDao = this.daoFactory.getApplyDao();
 
         loan.setId(resultSet.getInt("id"));
         loan.setCode(resultSet.getString("code"));
         loan.setStateCode(resultSet.getBoolean("state_code"));
         loan.setReturnCode(resultSet.getString("return_code"));
         loan.setStateReturnCode(resultSet.getBoolean("state_return_code"));
-        loan.setApplyId(resultSet.getInt("apply_id"));
+        loan.setApply(applyDao.findOneById(resultSet.getInt("apply_id")));
 
         return loan;
+    }
+
+    public Loan findOneByApplyId(Apply apply)
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        Loan loan = new Loan();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_WITH_APPLY_ID, false, apply.getId());
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                loan = map(resultSet);
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return loan;
+    }
+
+    public void update(Loan loan) throws DAOException
+    {
+        Connection connexion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connexion = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_UPDATE, false, loan.getCode(), loan.getStateCode(), loan.getReturnCode(), loan.getStateReturnCode(), loan.getApply().getId(), loan.getId());
+
+            int statut = preparedStatement.executeUpdate();
+            if (statut == 0) {
+                throw new DAOException("Échec de la modification d'une offre de prêt, aucune ligne ajoutée dans la table.");
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connexion);
+        }
     }
 }

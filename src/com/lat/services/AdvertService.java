@@ -32,7 +32,7 @@ public class AdvertService
         this.applyDao = DAOFactory.getInstance().getApplyDao();
         this.applyForm = new ApplyForm(this.applyDao);
         this.loanDao = DAOFactory.getInstance().getLoanDao();
-        this.loanForm = new LoanForm(this.loanDao);
+        this.loanForm = new LoanForm(this.loanDao, this.applyDao);
     }
 
     public static AdvertService getInstance()
@@ -124,7 +124,7 @@ public class AdvertService
 
     public Loan processLoan(HttpServletRequest request)
     {
-        Integer applyId = Integer.parseInt(getFieldValue(request, "applyId"));
+        Integer applyId = Integer.valueOf(request.getParameter("applyId"));
 
         return this.loanForm.processLoan(applyId);
     }
@@ -143,8 +143,12 @@ public class AdvertService
         List<Advert> adverts = this.advertDao.findAllByUserId(user.getId());
 
         List<List<Apply>> applies = new ArrayList<List<Apply>>();
+
         for (Advert advert : adverts) {
-            applies.add(this.applyDao.findPendingRequests(advert.getId()));
+            List<Apply> advertApplies = this.applyDao.findPendingRequests(advert.getId());
+            if (!advertApplies.isEmpty()) {
+                applies.add(advertApplies);
+            }
         }
 
         return applies;

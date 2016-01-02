@@ -1,22 +1,29 @@
 package com.lat.forms;
 
+import com.lat.beans.Advert;
+import com.lat.beans.Apply;
 import com.lat.beans.Loan;
+import com.lat.dao.AdvertDao;
+import com.lat.dao.ApplyDao;
 import com.lat.dao.DAOException;
 import com.lat.dao.LoanDao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 public final class LoanForm
 {
     private LoanDao loanDao;
+    private ApplyDao applyDao;
     private String results;
     private Map<String, String> errors = new HashMap<String, String>();
 
-    public LoanForm(LoanDao loanDao)
+    public LoanForm(LoanDao loanDao, ApplyDao applyDao)
     {
         this.loanDao = loanDao;
+        this.applyDao = applyDao;
     }
 
     public String getResults()
@@ -40,7 +47,20 @@ public final class LoanForm
             loan.setStateReturnCode(false);
 
             if (errors.isEmpty()) {
+                Apply applyAccepted = applyDao.findOneById(applyId);
+                applyAccepted.setAccepted(true);
+                List<Apply > applies = applyDao.findAllByAdvertId(applyAccepted.getAdvert());
+                loan.setApply(applyAccepted);
+                applyDao.update(applyAccepted);
                 loanDao.create(loan);
+
+                for (Apply apply : applies)
+                {
+                    if(apply.getId() != applyAccepted.getId())
+                    {
+                        applyDao.delete(apply);
+                    }
+                }
 
                 if (loan.getId() == null) {
                     setError("loanFail", "Erreur de génération des codes");
@@ -78,8 +98,8 @@ public final class LoanForm
 
     private void generateCodes(Loan loan)
     {
-        loan.setCode(UUID.randomUUID().toString());
-        loan.setReturnCode(UUID.randomUUID().toString());
+        loan.setCode(UUID.randomUUID().toString().substring(0, 8));
+        loan.setReturnCode(UUID.randomUUID().toString().substring(0,8));
     }
 
     private void setError(String field, String message)

@@ -6,7 +6,7 @@ public class Loan {
     private Boolean stateCode;
     private String returnCode;
     private Boolean stateReturnCode;
-    private Integer applyId;
+    private Apply apply;
 
     public Integer getId() {
         return id;
@@ -48,11 +48,7 @@ public class Loan {
         this.stateReturnCode = stateReturnCode;
     }
 
-    public Integer getApplyId() {
-        return applyId;
-    }
+    public Apply getApply() { return apply; }
 
-    public void setApplyId(Integer applyId) {
-        this.applyId = applyId;
-    }
+    public void setApply(Apply apply) { this.apply = apply; }
 }
