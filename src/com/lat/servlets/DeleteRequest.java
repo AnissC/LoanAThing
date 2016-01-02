@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/request/delete")
-public class DeleteRequest extends HttpServlet{
-
+public class DeleteRequest extends HttpServlet
+{
     private ApplyService applyService;
 
     public void init() throws ServletException
@@ -24,7 +24,8 @@ public class DeleteRequest extends HttpServlet{
     {
         Apply apply = applyService.getApplyById(Long.valueOf(request.getParameter("id")));
 
-        if (apply != null){
+        if (apply != null)
+        {
             applyService.delete(apply);
         }
     }

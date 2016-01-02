@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/loan/submit/return-code")
-public class LoanSubmitReturnCode extends HttpServlet{
-
+public class LoanSubmitReturnCode extends HttpServlet
+{
     private LoanService loanService;
 
     public void init() throws ServletException
@@ -22,7 +22,8 @@ public class LoanSubmitReturnCode extends HttpServlet{
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         String code = request.getParameter("code");
-        loanService.submitReturnCode(Integer.valueOf(request.getParameter("loanId")), code);
-        response.sendRedirect("/profils/loans");
+        Integer loanId = Integer.valueOf(request.getParameter("loanId"));
+        loanService.submitReturnCode(loanId, code);
+        response.sendRedirect("/profil/loans");
     }
 }
