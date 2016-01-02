@@ -9,10 +9,10 @@
         <link href="../../../inc/css/style.css" rel='stylesheet' type='text/css'>
         <link href="../../../inc/slideOnSideBar/css/component.css" rel='stylesheet' type='text/css'>
         <link href="../../../inc/css/transformicons.css" rel="stylesheet">
-        <link href="../../../inc/css/annonce.css" rel="stylesheet">
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
         <link href="../../../inc/css/modal.css" rel="stylesheet">
         <link href="../../../inc/css/loanStyle.css" rel="stylesheet">
+                <link href="../../../inc/css/inputfield.css" rel="stylesheet">
     </jsp:attribute>
     <jsp:attribute name="content">
 
@@ -40,22 +40,86 @@
                                                     <h1 class="text-center">Vos Prets</h1>
                                                 </div>
                                                 <c:forEach var="loan"  items="${loansOffered}" >
-                                                    <div class="col-xs-3">
-                                                        <div class="advert text-center">
-                                                            <div class="annonce-image">
-                                                                <img src="../../../inc/images/advert/<c:out value="${loan.apply.advert.image}"/>" alt="" class="img-responsive center-block">
-                                                            </div>
-                                                            <div class="annonce-title" style="margin-bottom: 20px">
-                                                                <h2 class=""><c:out value="${loan.apply.advert.title}" /></h2>
-                                                            </div>
+                                                    <div class="col-xs-12">
+                                                        <div class="loan">
                                                             <div class="row">
+                                                                <div class="col-xs-3">
+                                                                    <div class="loan-image">
+                                                                        <img src="../../../inc/images/advert/<c:out value="${loan.apply.advert.image}"/>" alt="" class="img-responsive ">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-9">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-12">
+                                                                            <div class="annonce-title" style="margin-bottom: 20px">
+                                                                                <h2 class=""><c:out value="${loan.apply.advert.title}" /></h2>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xs-12">
+                                                                            <p>Vous pouvez dès à présent prendre contact avec <c:out value="${loan.apply.user.firstname}"/> afin de convenir d'une date de rendez-vous.</p>
+                                                                        </div>
+                                                                        <div class="col-xs-12">
+                                                                            <p><i class="fa fa-envelope-o"></i> Email : <c:out value="${loan.apply.user.email}"/></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="col-xs-12">
-                                                                    <a href="<c:url value="/advert/view"><c:param name="id" value="${loan.id}" /></c:url>">
-                                                                        <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
-                                                                            <span>VOODOO</span>
-                                                                            <i class="fa fa-search button__icon"></i>
-                                                                        </button>
-                                                                    </a>
+                                                                    <div class="row">
+                                                                        <div class="col-xs-6 col-xs-offset-3">
+                                                                            <div class="border-separator"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-12">
+                                                                             <p class="code-description text-center">Lors du rendez vous assurez vous que <c:out value="${loan.apply.user.firstname}"/> vous fournisse le code d'emprunt. Vous pourrez ensuite entrer le code dans le champs ci-dessous afin de valider le debut du pret.</p>
+                                                                        </div>
+                                                                        <div class="col-xs-4">
+                                                                            <div class="row">
+                                                                                <div class="col-xs-8 col-xs-offset-2">
+                                                                                    <div class="code text-center">
+                                                                                        <p>
+                                                                                            <span><c:out value="${fn:substring(loan.code, 0, 1)}"/></span>
+                                                                                            <span class="fake-to-blur"><img src="../../../inc/images/blurredfont.png" alt=""></span>
+                                                                                            <span><c:out value="${fn:substring(loan.code, 2, 3)}"/></span>
+                                                                                            <span class="fake-to-blur"><img src="../../../inc/images/blurredfont.png" alt=""></span>
+                                                                                            <span class="fake-to-blur"><img src="../../../inc/images/blurredfont.png" alt=""></span>
+                                                                                            <span class="fake-to-blur"><img src="../../../inc/images/blurredfont.png" alt=""></span>
+                                                                                            <span><c:out value="${fn:substring(loan.code, 6, 7)}"/></span>
+                                                                                            <span class="fake-to-blur"><img src="../../../inc/images/blurredfont.png" alt=""></span>
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xs-4">
+                                                                            <div class="row">
+                                                                                <div class="col-xs-8 col-xs-offset-2 input--shoko">
+                                                                                    <input class="input__field input__field--shoko" type="text" id="code" name="code"
+                                                                                           size="20" maxlength="8"/>
+                                                                                    <label class="input__label input__label--shoko" for="code">
+                                                                                        <span class="input__label-content input__label-content--shoko">Code</span>
+                                                                                    </label>
+                                                                                    <svg class="graphic graphic--shoko" width="300%" height="100%" viewBox="0 0 1200 60"
+                                                                                         preserveAspectRatio="none">
+                                                                                        <path d="M0,56.5c0,0,298.666,0,399.333,0C448.336,56.5,513.994,46,597,46c77.327,0,135,10.5,200.999,10.5c95.996,0,402.001,0,402.001,0"/>
+                                                                                        <path d="M0,2.5c0,0,298.666,0,399.333,0C448.336,2.5,513.994,13,597,13c77.327,0,135-10.5,200.999-10.5c95.996,0,402.001,0,402.001,0"/>
+                                                                                    </svg>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xs-4">
+                                                                            <div class="row">
+                                                                                <div class="col-xs-8 col-xs-offset-2">
+                                                                                    <button type="submit" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
+                                                                                        <span>Soumettre</span>
+                                                                                        <i class="fa fa-check button__icon"></i>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -84,7 +148,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xs-12">
-                                                                    <div class="code text-center">
+                                                                    <div class="code code-letter-spacing text-center">
                                                                         <p><c:out value="${loan.code}"/></p>
                                                                     </div>
                                                                 </div>

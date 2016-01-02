@@ -32,11 +32,15 @@ a, p, h1, h2, h3, h4, h5{
     font-weight: 500;
 }
 
-.main.clearfix{
+/*.main.clearfix{
     background: url(../images/bg4.jpg) no-repeat center fixed;
-    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
-    background-size: cover; /* version standardisée */
+    -webkit-background-size: cover;
+    background-size: cover;
     min-height: 100vh;
+}*/
+
+.st-content{
+    background-color: rgb(32, 40, 56);
 }
 
 .btn:focus{
@@ -49,7 +53,6 @@ a, p, h1, h2, h3, h4, h5{
 
 .btn span{
     color: white;
-    font-weight: 500;
 }
 
 

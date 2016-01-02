@@ -39,7 +39,7 @@
                                         <div class="col-xs-12 input--shoko">
                                             <input class="input__field input__field--shoko" type="password" id="password"
                                                    name="password" value="" size="20" maxlength="20"/>
-                                            <label class="input__label input__label--shoko" for="email">
+                                            <label class="input__label input__label--shoko" for="password">
                                                 <span class="input__label-content input__label-content--shoko">Mot de passe</span>
                                             </label>
                                             <svg class="graphic graphic--shoko" width="300%" height="100%" viewBox="0 0 1200 60"
