@@ -1,6 +1,7 @@
 package com.lat.forms;
 
 import com.lat.beans.Loan;
+import com.lat.dao.ApplyDao;
 import com.lat.dao.DAOException;
 import com.lat.dao.LoanDao;
 
@@ -11,12 +12,14 @@ import java.util.UUID;
 public final class LoanForm
 {
     private LoanDao loanDao;
+    private ApplyDao applyDao;
     private String results;
     private Map<String, String> errors = new HashMap<String, String>();
 
-    public LoanForm(LoanDao loanDao)
+    public LoanForm(LoanDao loanDao, ApplyDao applyDao)
     {
         this.loanDao = loanDao;
+        this.applyDao = applyDao;
     }
 
     public String getResults()
@@ -40,8 +43,8 @@ public final class LoanForm
             loan.setStateReturnCode(false);
 
             if (errors.isEmpty()) {
+                loan.setApply(applyDao.findOneById(applyId));
                 loanDao.create(loan);
-
                 if (loan.getId() == null) {
                     setError("loanFail", "Erreur de génération des codes");
                 }

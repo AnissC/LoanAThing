@@ -24,6 +24,8 @@ public class ApplyDao
     private static final String SQL_INSERT = "INSERT INTO apply (date_start, date_end, accepted, user_id, advert_id) VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_DELETE = "DELETE FROM apply WHERE id = ?";
     private static final String SQL_SELECT_ALL = "SELECT * FROM apply ORDER BY id";
+    private static final String SQL_SELECT_ALL_BY_USER_ID = "SELECT * FROM apply WHERE user_id = ?";
+    private static final String SQL_SELECT_ALL_BY_ADVERT_ID = "SELECT * FROM apply WHERE advert_id = ?";
 
     ApplyDao(DAOFactory daoFactory)
     {
@@ -204,5 +206,51 @@ public class ApplyDao
         }
 
         return apply;
+    }
+
+    public List<Apply> findAllByUserId(User user) throws DAOException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Apply> applies = new ArrayList<>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_ALL_BY_USER_ID, false, user.getId());
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                applies.add(map(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return applies;
+    }
+
+    public List<Apply> findAllByAdvertId(Advert advert)
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Apply> applies = new ArrayList<>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_ALL_BY_ADVERT_ID, false, advert.getId());
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                applies.add(map(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return applies;
     }
 }

@@ -32,7 +32,7 @@ public class AdvertService
         this.applyDao = DAOFactory.getInstance().getApplyDao();
         this.applyForm = new ApplyForm(this.applyDao);
         this.loanDao = DAOFactory.getInstance().getLoanDao();
-        this.loanForm = new LoanForm(this.loanDao);
+        this.loanForm = new LoanForm(this.loanDao, this.applyDao);
     }
 
     public static AdvertService getInstance()
@@ -124,7 +124,7 @@ public class AdvertService
 
     public Loan processLoan(HttpServletRequest request)
     {
-        Integer applyId = Integer.parseInt(getFieldValue(request, "applyId"));
+        Integer applyId = Integer.valueOf(request.getParameter("applyId"));
 
         return this.loanForm.processLoan(applyId);
     }
