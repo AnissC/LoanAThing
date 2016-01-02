@@ -12,6 +12,7 @@
         <link href="../../../inc/css/annonce.css" rel="stylesheet">
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
         <link href="../../../inc/css/modal.css" rel="stylesheet">
+        <link href="../../../inc/css/statsStyle.css" rel="stylesheet">
 
       </jsp:attribute>
       <jsp:attribute name="content">
@@ -36,6 +37,46 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <h1 class="text-center">Statistiques</h1>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="stat">
+                                                <p class="text-center">Nombre de pret</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="stat">
+                                                <p class="text-center">Pourcentage d'utilisateur ayant déja emprunté</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="stat">
+                                                <p class="text-center">Nombre d'annnonce actullement en ligne</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="stat">
+                                                <p class="text-center">Nombre de pret en fonction du temps</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="stat">
+                                                <p class="text-center">Nombre d'avis utilisateur</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="stat">
+                                                <p class="text-center">Nombre de pret en cours</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="stat">
+                                                <p class="text-center">Fréquence moyenne d'emprunt</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="stat">
+                                                <p class="text-center">Pourcentage d'offre par catégorie</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
