@@ -40,7 +40,7 @@
                                         </div>
                                         <div class="col-xs-3">
                                             <div class="stat">
-                                                <p class="text-center stat-number">10</p>
+                                                <p id="nbLoan" class="text-center stat-number">10</p>
                                                 <p class="text-center stat-description">Pret au total</p>
                                             </div>
                                         </div>
@@ -52,7 +52,7 @@
                                         </div>
                                         <div class="col-xs-3">
                                             <div class="stat">
-                                                <p class="text-center stat-number">8</p>
+                                                <p id="nbAdvert" class="text-center stat-number">8</p>
                                                 <p class="text-center stat-description">Annnonces en ligne</p>
                                             </div>
                                         </div>
@@ -64,7 +64,7 @@
                                         </div>
                                         <div class="col-xs-3">
                                             <div class="stat">
-                                                <p class="text-center stat-number">15</p>
+                                                <p id="nbReview" class="text-center stat-number">15</p>
                                                 <p class="text-center stat-description">Avis utilisateur</p>
                                             </div>
                                         </div>
@@ -77,7 +77,7 @@
                                         </div>
                                         <div class="col-xs-3">
                                             <div class="stat">
-                                                <p class="text-center stat-number">3</p>
+                                                <p id="currentLoan" class="text-center stat-number">3</p>
                                                 <p class="text-center stat-description">Prets en cours</p>
                                             </div>
                                         </div>
@@ -108,8 +108,8 @@
         <script src="../../../inc/slideOnSideBar/js/sidebarEffects.js"></script>
         <script src="../../../inc/js/transformicon.js"></script>
         <script src="../../../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
-        <script src="../../../inc/js/konami.js"></script>
         <script src="../../../inc/js/Chart.min.js"></script>
+        <script src="../../../inc/js/konamiStats.js"></script>
 
         <script>
             transformicons.add('.tcon', {
@@ -142,7 +142,7 @@
 
             var loanNumberCanvas = document.getElementById("loanNumberLineChart").getContext("2d");
             var loanNumberData = {
-                labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"],
+                labels: ["Jan", "Fév", "Mars", "Avr", "Mai", "Juin", "Juil", "Aout", "Sept", "Oct", "Nov", "Dec" ],
                 datasets: [
                     {
                         label: "Nombre de prêts",
@@ -152,7 +152,7 @@
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: [65, 59, 80, 81, 56, 55, 40]
+                        data: [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4]
                     }
                 ]
             };
@@ -171,12 +171,11 @@
                         strokeColor: "rgba(220,220,220,0.8)",
                         highlightFill: "rgba(220,220,220,0.75)",
                         highlightStroke: "rgba(220,220,220,1)",
-                        data: [90, 30, 53, 81, 56, 20, 70]
+                        data: [2, 1, 1, 1, 1, 1, 1]
                     }
                 ]
             };
             var advertByCategoryChart = new Chart(advertByCategoryCanvas).Bar(advertByCategoryData);
-
 
             $(function(){
                 $('.stat').matchHeight();
