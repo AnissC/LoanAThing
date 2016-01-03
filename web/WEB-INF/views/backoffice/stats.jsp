@@ -41,7 +41,7 @@
                                         <div class="col-xs-3">
                                             <div class="stat">
                                                 <p id="nbLoan" class="text-center stat-number">10</p>
-                                                <p class="text-center stat-description">Pret au total</p>
+                                                <p class="text-center stat-description">Prets au total</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
@@ -89,8 +89,43 @@
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="stat last-stat">
-                                                <canvas class="center-block" id="advertByCategory" width="500" height="200"></canvas>
-                                                <p class="legend text-center">Nombres d'annonce par catégories</p>
+                                                <canvas class="center-block" id="nbAdvertMonth" width="500" height="200"></canvas>
+                                                <p class="legend text-center">Nombres d'annonce posté par mois</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="stat">
+                                                <p id="nbUserBan" class="text-center stat-number">0</p>
+                                                <p class="text-center">Utilisateur banni</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="stat last-stat">
+                                                <div class="row">
+                                                    <div class="col-xs-7">
+                                                        <canvas class="pull-right" id="nbAdvertByCategory" width="200" height="200"></canvas>
+                                                    </div>
+                                                    <div class="col-xs-5">
+                                                        <div id="legend">
+                                                            <p><i class="fa fa-square" style="color: #F7464A"></i> Informatique</p>
+                                                            <p><i class="fa fa-square" style="color: #46BFBD"></i> Maison</p>
+                                                            <p><i class="fa fa-square" style="color: #FDB45C"></i> Sport</p>
+                                                            <p><i class="fa fa-square" style="color: #9A12B3"></i> Bricolage</p>
+                                                            <p><i class="fa fa-square" style="color: #2ECC71"></i> Chaussures</p>
+                                                            <p><i class="fa fa-square" style="color: #6BB9F0"></i> Livres</p>
+                                                            <p><i class="fa fa-square" style="color: #F9690E"></i> Vetements</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p class="legend text-center">Nombres d'annonces par categorie</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="stat">
+                                                <p id="nbAdvertSuspended" class="text-center stat-number">1</p>
+                                                <p class="text-center">Annonce suspendue</p>
                                             </div>
                                         </div>
                                     </div>
@@ -152,7 +187,7 @@
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4]
+                        data: [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
                     }
                 ]
             };
@@ -161,9 +196,9 @@
                 scaleLineColor: "rgba(255,255,255,.05)",
             });
 
-            var advertByCategoryCanvas = document.getElementById("advertByCategory").getContext("2d");
-            var advertByCategoryData = {
-                labels: ["Info", "Maison", "Sport", "Bricolage", "Chaussures", "Livres", "Vétements"],
+            var nbAdvertMonthCanvas = document.getElementById("nbAdvertMonth").getContext("2d");
+            var nbAdvertMonthData = {
+                labels: ["Jan", "Fév", "Mars", "Avr", "Mai", "Juin", "Juil", "Aout", "Sept", "Oct", "Nov", "Dec"],
                 datasets: [
                     {
                         label: "data",
@@ -171,11 +206,61 @@
                         strokeColor: "rgba(220,220,220,0.8)",
                         highlightFill: "rgba(220,220,220,0.75)",
                         highlightStroke: "rgba(220,220,220,1)",
-                        data: [2, 1, 1, 1, 1, 1, 1]
+                        data: [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5]
                     }
                 ]
             };
-            var advertByCategoryChart = new Chart(advertByCategoryCanvas).Bar(advertByCategoryData);
+            var nbAdvertMonthChart = new Chart(nbAdvertMonthCanvas).Bar(nbAdvertMonthData);
+
+
+            var nbAdvertByCategoryCanvas = document.getElementById("nbAdvertByCategory").getContext("2d");
+            var nbAdvertByCategoryData = [
+                    {
+                        value: 2,
+                        color:"#F7464A",
+                        highlight: "#FF5A5E",
+                        label: "Informatique"
+                    },
+                    {
+                        value: 1,
+                        color: "#46BFBD",
+                        highlight: "#5AD3D1",
+                        label: "Maison"
+                    },
+                    {
+                        value: 1,
+                        color: "#FDB45C",
+                        highlight: "#FFC870",
+                        label: "Sport"
+                    },
+                    {
+                        value: 1,
+                        color: "#9A12B3",
+                        highlight: "#8E44AD",
+                        label: "Bricolage"
+                    },
+                    {
+                        value: 1,
+                        color: "#2ECC71",
+                        highlight: "#66CC99",
+                        label: "Chaussures"
+                    },
+                    {
+                        value: 1,
+                        color: "#6BB9F0",
+                        highlight: "#89C4F4",
+                        label: "Livres"
+                    },
+                    {
+                        value: 1,
+                        color: "#F9690E",
+                        highlight: "#E67E22",
+                        label: "Vétements"
+                    }
+                ];
+            var nbAdvertByCategoryChart = new Chart(nbAdvertByCategoryCanvas).Pie(nbAdvertByCategoryData, {
+                segmentStrokeColor : "rgb(32, 40, 56)",
+            });
 
             $(function(){
                 $('.stat').matchHeight();
