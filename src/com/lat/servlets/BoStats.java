@@ -21,6 +21,7 @@ public class BoStats extends HttpServlet
         loanService = LoanService.getInstance();
         advertService = AdvertService.getInstance();
     }
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         this.getServletContext().getRequestDispatcher("/WEB-INF/views/backoffice/stats.jsp").forward(request, response);
