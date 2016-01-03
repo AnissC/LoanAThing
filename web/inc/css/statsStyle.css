@@ -1,0 +1,43 @@
+.stat{
+    margin-top: 75px;
+}
+
+.stat h4{
+    border-top: 1px solid white;
+    padding-top: 10px;
+}
+
+.stat-number{
+    font-size: 100px;
+    margin-top: 30px;
+}
+
+h1{
+    margin-bottom: 50px;
+}
+
+.stat-description{
+    position: relative;
+    top: -20px;
+    font-size: 25px;
+}
+
+.stat p i.fa.fa-star, i.fa.fa-star-o, i.fa.fa-star-half-o {
+    font-size: 30px;
+    color: darkgoldenrod;
+    position: relative;
+    top: 100px;
+    margin-bottom: 40px;
+}
+
+.last-stat{
+    margin-bottom: 50px;
+}
+
+.legend{
+    margin-top: 10px;
+}
+
+#userWhoBorrowedChart-legend i{
+    color: #F7464A;
+}
