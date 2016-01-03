@@ -40,42 +40,57 @@
                                         </div>
                                         <div class="col-xs-3">
                                             <div class="stat">
-                                                <p class="text-center">Nombre de pret</p>
+                                                <p class="text-center stat-number">10</p>
+                                                <p class="text-center stat-description">Pret au total</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="stat">
-                                                <p class="text-center">Pourcentage d'utilisateur ayant déja emprunté</p>
+                                                <canvas class="center-block" id="userWhoBorrowedChart" width="500" height="200"></canvas>
+                                                <p class="text-center legend" id="userWhoBorrowedChart-legend"><i class="fa fa-square"></i> Utilisateurs ayant déjà emprunté</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-3">
                                             <div class="stat">
-                                                <p class="text-center">Nombre d'annnonce actullement en ligne</p>
+                                                <p class="text-center stat-number">8</p>
+                                                <p class="text-center stat-description">Annnonces en ligne</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
                                             <div class="stat">
-                                                <p class="text-center">Nombre de pret en fonction du temps</p>
+                                                <canvas class="center-block" id="loanNumberLineChart" width="500" height="200"></canvas>
+                                                <p class="legend text-center">Nombre de prêts par mois</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-3">
                                             <div class="stat">
-                                                <p class="text-center">Nombre d'avis utilisateur</p>
+                                                <p class="text-center stat-number">15</p>
+                                                <p class="text-center stat-description">Avis utilisateur</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-3">
                                             <div class="stat">
-                                                <p class="text-center">Nombre de pret en cours</p>
+                                                <p class="text-center">
+                                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i> <i class="fa fa-star-o"></i></p>
+                                                <p class="text-center stat-description">Note moyenne</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-3">
                                             <div class="stat">
-                                                <p class="text-center">Fréquence moyenne d'emprunt</p>
+                                                <p class="text-center stat-number">3</p>
+                                                <p class="text-center stat-description">Prets en cours</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <div class="stat">
+                                                <p class="text-center stat-number">0,2</p>
+                                                <p class="text-center">Pret par mois par utilisateur</p>
                                             </div>
                                         </div>
                                         <div class="col-xs-6">
-                                            <div class="stat">
-                                                <p class="text-center">Pourcentage d'offre par catégorie</p>
+                                            <div class="stat last-stat">
+                                                <canvas class="center-block" id="advertByCategory" width="500" height="200"></canvas>
+                                                <p class="legend text-center">Nombres d'annonce par catégories</p>
                                             </div>
                                         </div>
                                     </div>
@@ -94,11 +109,77 @@
         <script src="../../../inc/js/transformicon.js"></script>
         <script src="../../../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
         <script src="../../../inc/js/konami.js"></script>
+        <script src="../../../inc/js/Chart.min.js"></script>
 
         <script>
             transformicons.add('.tcon', {
                 transform: "mouseover",
                 revert: "mouseout"
+            });
+        </script>
+
+        <script>
+
+
+            var userWhoBorrowedCanvas = document.getElementById("userWhoBorrowedChart").getContext("2d");
+            var userWhoBorrowedData = [
+                {
+                    value: 40,
+                    color:"#F7464A",
+                    highlight: "#FF5A5E",
+                    label: "Utilisateur ayant déjà emprunté"
+                },
+                {
+                    value: 60,
+                    color: "#46BFBD",
+                    highlight: "#5AD3D1",
+                    label: "Utilisateur n'ayant jamais emprunté"
+                }
+            ]
+            var userWhoBorrowedChart = new Chart(userWhoBorrowedCanvas).Doughnut(userWhoBorrowedData, {
+                segmentStrokeColor : "transparent",
+            });
+
+            var loanNumberCanvas = document.getElementById("loanNumberLineChart").getContext("2d");
+            var loanNumberData = {
+                labels: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"],
+                datasets: [
+                    {
+                        label: "Nombre de prêts",
+                        fillColor: "rgba(220,220,220,0.2)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: [65, 59, 80, 81, 56, 55, 40]
+                    }
+                ]
+            };
+            var myLineChart = new Chart(loanNumberCanvas).Line(loanNumberData,{
+                scaleGridLineColor : "rgba(255,255,255,.05)",
+                scaleLineColor: "rgba(255,255,255,.05)",
+            });
+
+            var advertByCategoryCanvas = document.getElementById("advertByCategory").getContext("2d");
+            var advertByCategoryData = {
+                labels: ["Info", "Maison", "Sport", "Bricolage", "Chaussures", "Livres", "Vétements"],
+                datasets: [
+                    {
+                        label: "data",
+                        fillColor: "rgba(220,220,220,0.5)",
+                        strokeColor: "rgba(220,220,220,0.8)",
+                        highlightFill: "rgba(220,220,220,0.75)",
+                        highlightStroke: "rgba(220,220,220,1)",
+                        data: [90, 30, 53, 81, 56, 20, 70]
+                    }
+                ]
+            };
+            var advertByCategoryChart = new Chart(advertByCategoryCanvas).Bar(advertByCategoryData);
+
+
+            $(function(){
+                $('.stat').matchHeight();
             });
         </script>
     </jsp:attribute>
