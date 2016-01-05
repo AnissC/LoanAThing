@@ -32,7 +32,5 @@ public class AdvertBan extends HttpServlet
             advertService.ban(advert);
             reportingAdvertService.ignore(advert);
         }
-
-        response.sendRedirect("/backoffice/report/adverts");
     }
 }
