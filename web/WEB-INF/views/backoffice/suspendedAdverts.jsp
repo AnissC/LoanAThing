@@ -12,6 +12,8 @@
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
         <link href="../../../inc/css/modal.css" rel="stylesheet">
         <link href="../../../inc/css/annonce.css" rel="stylesheet" type="text/css">
+        <link href="../../../inc/toastr-master/build/toastr.css" rel="stylesheet" type="text/css">
+
 
       </jsp:attribute>
       <jsp:attribute name="content">
@@ -42,6 +44,7 @@
                                         <c:forEach var="suspendedAdvert"  items="${suspendedAdverts}" >
                                             <div class="col-xs-3">
                                                 <div class="advert text-center advert-suspended">
+                                                    <p class="hidden id"><c:out value="${suspendedAdvert.id}"/></p>
                                                     <div class="annonce-image">
                                                         <img src="../../../inc/images/advert/<c:out value="${suspendedAdvert.image}"/>" alt="" class="img-responsive center-block">
                                                     </div>
@@ -59,12 +62,10 @@
                                                             </a>
                                                         </div>
                                                         <div class="col-xs-12">
-                                                            <a href="<c:url value="/backoffice/report/advert/unban"><c:param name="id" value="${suspendedAdvert.id}" /></c:url>">
-                                                                <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
-                                                                    <span>Retablir</span>
-                                                                    <i class="fa fa-eye button__icon"></i>
-                                                                </button>
-                                                            </a>
+                                                            <button type="button" class="btn-reauthorize btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
+                                                                <span>Retablir</span>
+                                                                <i class="fa fa-eye button__icon"></i>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -86,6 +87,8 @@
         <script src="../../../inc/js/transformicon.js"></script>
         <script src="../../../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
         <script src="../../../inc/js/konami.js"></script>
+        <script src="../../../inc/toastr-master/build/toastr.min.js"></script>
+
         <script>
             $(function() {
                 $('.annonce-title').matchHeight();
@@ -96,6 +99,21 @@
                 transform: "mouseover",
                 revert: "mouseout"
             });
+
+            $(".btn-reauthorize").click(function(){
+                var id = $(this).parents('.advert').find(".id").text();
+                var $advert = $(this).parents('.advert').parent()
+                $.ajax({
+                    type: "GET",
+                    url: "/backoffice/report/advert/unban",
+                    dataType: "text",
+                    data: {id: id},
+                    success: function () {
+                        toastr.success('Annonce remise en ligne');
+                        $advert.remove();
+                    }
+                })
+            })
         </script>
     </jsp:attribute>
 </lat:baseLayout>

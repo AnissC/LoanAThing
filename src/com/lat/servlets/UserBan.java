@@ -35,7 +35,5 @@ public class UserBan extends HttpServlet
             userService.ban(user);
             reportingUserService.ignore(user);
         }
-
-        response.sendRedirect("/backoffice/report/adverts");
     }
 }

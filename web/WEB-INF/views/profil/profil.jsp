@@ -7,9 +7,6 @@
         <title>Mon compte</title>
         <link href="../../../inc/css/style.css" rel='stylesheet' type='text/css'>
         <link href="../../../inc/slideOnSideBar/css/component.css" rel='stylesheet' type='text/css'>
-        <link href="../../../inc/css/multi-level-menu/component.css" rel="stylesheet">
-        <link href="../../../inc/css/multi-level-menu/demo.css" rel="stylesheet">
-        <link href="../../../inc/css/multi-level-menu/organicfoodicons.css" rel="stylesheet">
         <link href="../../../inc/css/transformicons.css" rel="stylesheet">
         <link href="../../../inc/css/userProfil.css" rel="stylesheet">
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
@@ -44,7 +41,7 @@
                                             <div class="profil">
                                                 <div class="row">
                                                     <div class="col-xs-3">
-                                                        <img src="../../../inc/images/girafe.png" alt="" class="img-responsive">
+                                                        <img src="../../../inc/images/user/<c:out value="${user.image}"/>" alt="" class="img-responsive">
                                                     </div>
                                                     <div class="col-xs-9">
                                                         <div class="row">

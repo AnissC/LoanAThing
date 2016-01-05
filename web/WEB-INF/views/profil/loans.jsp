@@ -13,6 +13,7 @@
         <link href="../../../inc/css/modal.css" rel="stylesheet">
         <link href="../../../inc/css/loanStyle.css" rel="stylesheet">
         <link href="../../../inc/css/inputfield.css" rel="stylesheet">
+        <link href="../../../inc/toastr-master/build/toastr.css" rel="stylesheet" type="text/css">
     </jsp:attribute>
     <jsp:attribute name="content">
 
@@ -124,7 +125,8 @@
                                                                                     <div class="row">
                                                                                         <div class="col-xs-8 col-xs-offset-2">
                                                                                             <a href="<c:url value="/user/report"><c:param name="userId" value="${loan.apply.user.id}"/> </c:url>">
-                                                                                                <button class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
+                                                                                                <p class="hidden id"><c:out value="${loan.apply.user.id}"/></p>
+                                                                                                <button data-toggle="modal" data-target="#report" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger btn-report-modal">
                                                                                                     <span>Signaler</span>
                                                                                                     <i class="fa fa-exclamation-triangle button__icon"></i>
                                                                                                 </button>
@@ -319,12 +321,11 @@
                                                                                 <div class="col-xs-4">
                                                                                     <div class="row">
                                                                                         <div class="col-xs-8 col-xs-offset-2">
-                                                                                            <a href="<c:url value="/user/report"><c:param name="userId" value="${loan.apply.advert.user.id}"/></c:url>">
-                                                                                                <button class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
-                                                                                                    <span>Signaler</span>
-                                                                                                    <i class="fa fa-exclamation-triangle button__icon"></i>
-                                                                                                </button>
-                                                                                            </a>
+                                                                                            <p class="hidden id"><c:out value="${loan.apply.advert.user.id}"/></p>
+                                                                                            <button data-toggle="modal" data-target="#report" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger btn-report-modal">
+                                                                                                <span>Signaler</span>
+                                                                                                <i class="fa fa-exclamation-triangle button__icon"></i>
+                                                                                            </button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -360,6 +361,39 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="modal fade" id="report" tabindex="-1" role="dialog" aria-labelledby="report">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"> Etes vous sur de vouloir signaler cet Utilisateur ?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>En cas d'abus d'utilisation de la fonction signalement votre compte pourra être suspendu.</p>
+                        <p>Si vous avez un doute veuillez consulter la <a href="#" style="color: #0d3349">FAQ</a> pour savoir dans quels cas signaler une annonce.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button data-dismiss="modal" type="button" class="button--nico button--nico--danger">
+                                    <span>Cancel </span>
+                                    <i class="fa fa-undo button__icon"></i>
+                                </button>
+                            </div>
+                            <p class="hidden" id="id"></p>
+                            <div class="col-xs-6">
+                                <button id="btn-report" type="submit" class="button--nico--success button--nico">
+                                    <span>Signaler</span>
+                                    <i class="fa fa-exclamation-triangle button__icon"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </jsp:attribute>
     <jsp:attribute name="js">
         <script src="../../../inc/slideOnSideBar/js/classie.js"></script>
@@ -367,6 +401,7 @@
         <script src="../../../inc/js/transformicon.js"></script>
         <script src="../../../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
         <script src="../../../inc/js/konami.js"></script>
+        <script src="../../../inc/toastr-master/build/toastr.min.js"></script>
         <script>
             (function () {
                 // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
@@ -403,6 +438,25 @@
 
 
             })();
+
+            $('.btn-report-modal').click(function(){
+               $('#id').html($(this).siblings(".id").html());
+            });
+
+            $("#btn-report").click(function(){
+                var id = $("#id").text();
+                $.ajax({
+                    type: "GET",
+                    url: "/user/report",
+                    dataType: "text",
+                    data: {userId: id},
+                    success: function () {
+                        toastr.success('Utilisateur signalé');
+                        $('#report').modal('toggle');
+                    }
+                })
+            })
+
         </script>
     </jsp:attribute>
 </lat:baseLayout>

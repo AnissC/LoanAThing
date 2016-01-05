@@ -12,6 +12,8 @@
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
         <link href="../../../inc/css/modal.css" rel="stylesheet">
         <link href="../../../inc/css/annonce.css" rel="stylesheet" type="text/css">
+        <link href="../../../inc/toastr-master/build/toastr.css" rel="stylesheet" type="text/css">
+
 
       </jsp:attribute>
       <jsp:attribute name="content">
@@ -41,15 +43,16 @@
                                     <div class="row">
                                         <c:forEach var="reportedAdvert"  items="${reportedAdverts}">
                                             <div class="col-xs-3">
-                                                <div class="advert text-center advert-reported">
+                                                <div id="<c:out value="${reportedAdvert.id}"/>" class="advert text-center advert-reported">
+                                                    <div class="nbSignalement">1</div>
                                                     <div class="annonce-image">
                                                         <img src="../../../inc/images/advert/<c:out value="${reportedAdvert.image}"/>" alt="" class="img-responsive center-block">
                                                     </div>
                                                     <div class="annonce-title">
                                                         <h2 class=""><c:out value="${reportedAdvert.title}" /></h2>
                                                     </div>
-
                                                     <div class="row">
+                                                        <p class="hidden id"><c:out value="${reportedAdvert.id}"/></p>
                                                         <div class="col-xs-12">
                                                             <a href="<c:url value="/advert/view"><c:param name="id" value="${reportedAdvert.id}" /></c:url>">
                                                                 <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
@@ -59,20 +62,16 @@
                                                             </a>
                                                         </div>
                                                         <div class="col-xs-12">
-                                                            <a href="<c:url value="/backoffice/report/advert/ignore"><c:param name="id" value="${reportedAdvert.id}" /></c:url>">
-                                                                <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
-                                                                    <span>Ignorer</span>
-                                                                    <i class="fa fa-eye-slash button__icon"></i>
-                                                                </button>
-                                                            </a>
+                                                            <button type="button" class="btn-ignore btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
+                                                                <span>Ignorer</span>
+                                                                <i class="fa fa-eye-slash button__icon"></i>
+                                                            </button>
                                                         </div>
                                                         <div class="col-xs-12">
-                                                            <a href="<c:url value="/backoffice/report/advert/ban"><c:param name="id" value="${reportedAdvert.id}" /></c:url>">
-                                                                <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
-                                                                    <span>Bannir</span>
-                                                                    <i class="fa fa-ban button__icon"></i>
-                                                                </button>
-                                                            </a>
+                                                            <button type="button" class="btn-ban btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
+                                                                <span>Bannir</span>
+                                                                <i class="fa fa-ban button__icon"></i>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,6 +93,7 @@
         <script src="../../../inc/js/transformicon.js"></script>
         <script src="../../../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
         <script src="../../../inc/js/konami.js"></script>
+        <script src="../../../inc/toastr-master/build/toastr.min.js"></script>
         <script>
             $(function() {
                 $('.annonce-title').matchHeight();
@@ -104,6 +104,46 @@
                 transform: "mouseover",
                 revert: "mouseout"
             });
+
+            $(".btn-ignore").click(function(){
+                var id = $(this).parent().siblings(".id").text();
+                var $advert = $(this).parents('.advert').parent();
+                var url = "/backoffice/report/advert/ignore";
+                var toasterMessage = "Signalement ignoré";
+                ajaxToasterCall(url, id, $advert, toasterMessage);
+            });
+
+            $(".btn-ban").click(function(){
+                var id = $(this).parent().siblings(".id").text();
+                var $advert = $(this).parents('.advert').parent();
+                var url = "/backoffice/report/advert/ban";
+                var toasterMessage = "Annonce suspendue";
+                ajaxToasterCall(url, id, $advert, toasterMessage);
+            });
+
+            function ajaxToasterCall(url, id, $advert, toasterMessage){
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "text",
+                    data: {id: id},
+                    success: function () {
+                        toastr.success(toasterMessage);
+                        $advert.remove();
+                    }
+                })
+            };
+
+            $(".advert").each(function(){
+                var id = $(this).attr('id');
+                var $nbSignalement = $(this).find(".nbSignalement");
+                if($(this).parent().siblings().find('#' + id) != null){
+                    $(this).parent().siblings().find('#' + id).each(function(){
+                        $(this).parent().remove();
+                        $nbSignalement.html(parseInt($nbSignalement.html(), 10)+1);
+                    })
+                }
+            })
         </script>
     </jsp:attribute>
 </lat:baseLayout>

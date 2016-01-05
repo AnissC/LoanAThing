@@ -32,7 +32,5 @@ public class UserReportIgnore extends HttpServlet
         if (user != null) {
             reportingUserService.ignore(user);
         }
-
-        response.sendRedirect("/backoffice/report/users");
     }
 }
