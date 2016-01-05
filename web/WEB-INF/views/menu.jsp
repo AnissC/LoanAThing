@@ -1,7 +1,7 @@
 <nav class="st-menu st-effect-4" id="menu-4">
     <a href="/home"><h2 class="icon icon-lab"><img src="../../../inc/images/LatLogoWhite.png" alt="" class="img-responsive center-block"></h2></a>
     <ul>
-        <li><a class="" href="/home"><i class="fa fa-shopping-basket"></i> Offres <span class="badge pull-right">${nbAdverts}</span></a></li>
+        <li><a class="" href="/home"><i class="fa fa-shopping-basket"></i> Offres </a></li>
         <li><a class="" href="/profil/requests"><i class="fa fa-commenting-o"></i> Demandes <span class="badge pull-right">?</span></a></li>
         <li><a class="" href="/profil/loans"><i class="fa fa-random"></i> Emprunts en cours <span class="badge pull-right">?</span></a></li>
         <li><a class="" href="/profil"><i class="fa fa-user"></i> Profil</a></li>
