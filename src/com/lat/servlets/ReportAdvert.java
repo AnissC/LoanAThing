@@ -29,6 +29,5 @@ public class ReportAdvert extends HttpServlet
         if(advert != null){
             reportingAdvertService.reportAdvert(advert);
         }
-        response.sendRedirect("/home");
     }
 }
