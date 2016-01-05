@@ -112,7 +112,7 @@ INSERT INTO `advert` (
   'popcorn.png',
   now(),
   '2016-01-03',
-  '2',
+  '1',
   '2',
   0,
   1
@@ -136,7 +136,7 @@ INSERT INTO `advert` (
   'maillotfoot.png',
   now(),
   '2016-01-03',
-  '2',
+  '1',
   '3',
   0,
   1
@@ -160,7 +160,7 @@ INSERT INTO `advert` (
   'tournevis.png',
   now(),
   '2016-01-03',
-  '2',
+  '1',
   '4',
   0,
   1
@@ -184,7 +184,7 @@ INSERT INTO `advert` (
   'livrereseau.png',
   now(),
   '2016-01-03',
-  '2',
+  '1',
   '6',
   0,
   1

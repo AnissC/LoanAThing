@@ -73,9 +73,9 @@ CREATE TABLE `reporting_user` (
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `lastname` varchar(20) NOT NULL,
+  `lastname` varchar(20) DEFAULT NULL,
   `firstname` varchar(20) DEFAULT NULL,
-  `nickname` varchar(20) DEFAULT NULL,
+  `nickname` varchar(20) NOT NULL,
   `email` varchar(60) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `city` varchar(255) DEFAULT NULL,
@@ -85,6 +85,7 @@ CREATE TABLE `user` (
   `preferences` varchar(255) DEFAULT NULL,
   `school_domain` varchar(255) DEFAULT NULL,
   `education_formation` varchar(255) DEFAULT NULL,
+  `is_suspend` BOOLEAN DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `group_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -190,7 +191,6 @@ ALTER TABLE `reporting_advert`
 ADD CONSTRAINT `reporting_advert_ibfk_2` FOREIGN KEY (`advert_id`) REFERENCES `advert` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `reporting_user`
-ADD CONSTRAINT `reporting_user_ibfk_1` FOREIGN KEY (`id`) REFERENCES `reporting` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT `reporting_user_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `user`

@@ -1,5 +1,6 @@
 package com.lat.services;
 
+import com.lat.beans.Advert;
 import com.lat.beans.User;
 import com.lat.dao.DAOFactory;
 import com.lat.dao.GroupDAO;
@@ -8,6 +9,7 @@ import com.lat.forms.UserForm;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public class UserService
 {
@@ -53,9 +55,9 @@ public class UserService
         String email = getFieldValue(request, "email");
         String password = getFieldValue(request, "password");
         String valid = getFieldValue(request, "valid");
-        String lastname = getFieldValue(request, "lastname");
+        String nickname = getFieldValue(request, "nickname");
 
-        return this.userForm.processUser(email, password, valid, lastname);
+        return this.userForm.processUser(email, password, valid, nickname);
     }
 
     public void updateUser(HttpServletRequest request)
@@ -115,4 +117,11 @@ public class UserService
             return value.trim();
         }
     }
+
+    public void ban(User user) { userDao.suspend(user); }
+
+    public void reauthorize(User user) { userDao.reauthorize(user); }
+
+    public List<User> getAllSuspendedUsers(){ return userDao.findAllSuspended(); }
+
 }

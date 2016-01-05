@@ -25,6 +25,6 @@ public class LoanSubmitCode extends HttpServlet
         String code = request.getParameter("code");
         Integer loanId = Integer.valueOf(request.getParameter("loanId"));
         loanService.submitCode(loanId, code);
-        response.sendRedirect("/profils/loans");
+        response.sendRedirect("/profil/loans");
     }
 }

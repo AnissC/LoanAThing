@@ -5,13 +5,13 @@
 
 <lat:baseLayout>
     <jsp:attribute name="header">
-        <title>Abus Utilisateurs</title>
+        <title>Utilisateurs bannis</title>
         <link href="../../../inc/slideOnSideBar/css/component.css" rel='stylesheet' type='text/css'>
         <link href="../../../inc/css/backOfficeStyle.css" rel='stylesheet' type='text/css'>
         <link href="../../../inc/css/transformicons.css" rel="stylesheet">
-        <link href="../../../inc/css/annonce.css" rel="stylesheet">
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
         <link href="../../../inc/css/modal.css" rel="stylesheet">
+        <link href="../../../inc/css/annonce.css" rel="stylesheet" type="text/css">
 
       </jsp:attribute>
       <jsp:attribute name="content">
@@ -35,40 +35,34 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <h1 class="text-center">Utilisateurs signalés</h1>
+                                            <h1 class="text-center">Utilisateurs Bannis</h1>
                                         </div>
-                                        <c:forEach var="user" items="${reportedUsers}">
+                                    </div>
+                                    <div class="row">
+                                        <c:forEach var="user"  items="${suspendedUsers}" >
                                             <div class="col-xs-3">
-                                                <div class="advert text-center advert-reported">
+                                                <div class="advert text-center advert-suspended">
                                                     <div class="annonce-image">
-                                                        <img src="../../../inc/images/user/<c:out value="${user.image}"/>" alt="" class="img-responsive center-block">
+                                                        <img src="../../../inc/images/advert/<c:out value="${user.image}"/>" alt="" class="img-responsive center-block">
                                                     </div>
                                                     <div class="annonce-title">
-                                                        <h2><c:out value="${user.nickname}" /></h2>
+                                                        <h2 class=""><c:out value="${user.nickname}" /></h2>
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-xs-12">
-                                                            <a href="<c:url value="#"><c:param name="userId" value="${user.id}" /></c:url>">
+                                                            <a href="<c:url value="#"><c:param name="id" value="${user.id}" /></c:url>">
                                                                 <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--custom">
-                                                                    <span>Voir Profil</span>
+                                                                    <span>Voir le profil</span>
                                                                     <i class="fa fa-search button__icon"></i>
                                                                 </button>
                                                             </a>
                                                         </div>
                                                         <div class="col-xs-12">
-                                                            <a href="<c:url value="/backoffice/report/user/ignore"><c:param name="userId" value="${user.id}" /></c:url>">
+                                                            <a href="<c:url value="/backoffice/report/user/unban"><c:param name="userId" value="${user.id}" /></c:url>">
                                                                 <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--success">
-                                                                    <span>Ignorer</span>
-                                                                    <i class="fa fa-eye-slash button__icon"></i>
-                                                                </button>
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-xs-12">
-                                                            <a href="<c:url value="/backoffice/report/user/ban"><c:param name="userId" value="${user.id}" /></c:url>">
-                                                                <button type="button" class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
-                                                                    <span>Bannir</span>
-                                                                    <i class="fa fa-ban button__icon"></i>
+                                                                    <span>Retablir</span>
+                                                                    <i class="fa fa-eye button__icon"></i>
                                                                 </button>
                                                             </a>
                                                         </div>
@@ -92,8 +86,12 @@
         <script src="../../../inc/js/transformicon.js"></script>
         <script src="../../../inc/jquery-match-height-master/jquery.matchHeight-min.js"></script>
         <script src="../../../inc/js/konami.js"></script>
-
         <script>
+            $(function() {
+                $('.annonce-title').matchHeight();
+                $('.annonce-description').matchHeight();
+                $('.annonce-image').matchHeight();
+            });
             transformicons.add('.tcon', {
                 transform: "mouseover",
                 revert: "mouseout"
@@ -101,3 +99,4 @@
         </script>
     </jsp:attribute>
 </lat:baseLayout>
+

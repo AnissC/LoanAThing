@@ -58,10 +58,10 @@
                                                                         <div class="col-xs-12">
                                                                             <c:choose>
                                                                                 <c:when test="${!loan.stateReturnCode}">
-                                                                                    <p>Vous pouvez dès à présent prendre contact avec <c:out value="${loan.apply.user.firstname}"/> afin de convenir d'une date de rendez-vous.</p>
+                                                                                    <p>Vous pouvez dès à présent prendre contact avec <c:out value="${loan.apply.user.nickname}"/> afin de convenir d'une date de rendez-vous.</p>
                                                                                 </c:when>
                                                                                 <c:otherwise>
-                                                                                    <p>Le pret avec <c:out value="${loan.apply.user.firstname}"/> est terminé</p>
+                                                                                    <p>Le pret avec <c:out value="${loan.apply.user.nickname}"/> est terminé</p>
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                         </div>
@@ -82,7 +82,7 @@
                                                                         <c:choose>
                                                                             <c:when test="${loan.stateCode && !loan.stateReturnCode}">
                                                                                 <div class="col-xs-12">
-                                                                                    <p class="code-description text-center">Lors du rendez vous devrez échanger le code ci-dessous pour récuperer votre objet pour que <c:out value="${loan.apply.user.firstname}"/> puisse conclure la procédure de prêt.</p>
+                                                                                    <p class="code-description text-center">Lors du rendez vous devrez échanger le code ci-dessous pour récuperer votre objet pour que <c:out value="${loan.apply.user.nickname}"/> puisse conclure la procédure de prêt.</p>
                                                                                 </div>
                                                                                 <div class="col-xs-4 col-xs-offset-4">
                                                                                     <div class="row">
@@ -96,7 +96,7 @@
                                                                             </c:when>
                                                                             <c:when test="${loan.stateReturnCode}">
                                                                                 <div class="col-xs-12">
-                                                                                    <p class="code-description text-center">Félicitation le prêt s'est déroulé avec succès. Vous pouvez dès à présent donner un avis sur <c:out value="${loan.apply.user.firstname}"/> ou le signaler si un problème a eu lieu pendant l'échange</p>
+                                                                                    <p class="code-description text-center">Félicitation le prêt s'est déroulé avec succès. Vous pouvez dès à présent donner un avis sur <c:out value="${loan.apply.user.nickname}"/> ou le signaler si un problème a eu lieu pendant l'échange</p>
                                                                                 </div>
                                                                                 <div class="col-xs-4">
                                                                                     <div class="row">
@@ -123,17 +123,19 @@
                                                                                 <div class="col-xs-4">
                                                                                     <div class="row">
                                                                                         <div class="col-xs-8 col-xs-offset-2">
-                                                                                            <button class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
-                                                                                                <span>Signaler</span>
-                                                                                                <i class="fa fa-exclamation-triangle button__icon"></i>
-                                                                                            </button>
+                                                                                            <a href="<c:url value="/user/report"><c:param name="userId" value="${loan.apply.user.id}"/> </c:url>">
+                                                                                                <button class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
+                                                                                                    <span>Signaler</span>
+                                                                                                    <i class="fa fa-exclamation-triangle button__icon"></i>
+                                                                                                </button>
+                                                                                            </a>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </c:when>
                                                                             <c:otherwise>
                                                                                 <div class="col-xs-12">
-                                                                                     <p class="code-description text-center">Lors du rendez vous assurez vous que <c:out value="${loan.apply.user.firstname}"/> vous fournisse le code d'emprunt. Vous pourrez ensuite entrer le code dans le champs ci-dessous afin de valider le debut du pret.</p>
+                                                                                     <p class="code-description text-center">Lors du rendez vous assurez vous que <c:out value="${loan.apply.user.nickname}"/> vous fournisse le code d'emprunt. Vous pourrez ensuite entrer le code dans le champs ci-dessous afin de valider le debut du pret.</p>
                                                                                 </div>
                                                                                 <div class="col-xs-4">
                                                                                     <div class="row">
@@ -214,10 +216,10 @@
                                                                         <div class="col-xs-12">
                                                                             <c:choose>
                                                                                 <c:when test="${!loan.stateReturnCode}">
-                                                                                    <p>Vous pouvez dès à présent prendre contact avec <c:out value="${loan.apply.advert.user.firstname}"/> afin de convenir d'une date de rendez-vous.</p>
+                                                                                    <p>Vous pouvez dès à présent prendre contact avec <c:out value="${loan.apply.advert.user.nickname}"/> afin de convenir d'une date de rendez-vous.</p>
                                                                                 </c:when>
                                                                                 <c:otherwise>
-                                                                                    <p>Le pret avec <c:out value="${loan.apply.advert.user.firstname}"/> est terminé</p>
+                                                                                    <p>Le pret avec <c:out value="${loan.apply.advert.user.nickname}"/> est terminé</p>
                                                                                 </c:otherwise>
                                                                             </c:choose>
                                                                         </div>
@@ -238,7 +240,7 @@
                                                                         <c:choose>
                                                                             <c:when test="${loan.stateCode && !loan.stateReturnCode}">
                                                                                 <div class="col-xs-12">
-                                                                                    <p class="code-description text-center">Lors du rendez vous devrez échanger l'objet contre le code en possession de <c:out value="${loan.apply.user.firstname}"/> pour que vous puissiez ensuite conclure la procédure de prê.t</p>
+                                                                                    <p class="code-description text-center">Lors du rendez vous devrez échanger l'objet contre le code en possession de <c:out value="${loan.apply.user.nickname}"/> pour que vous puissiez ensuite conclure la procédure de prê.t</p>
                                                                                 </div>
                                                                                 <div class="col-xs-4">
                                                                                     <div class="row">
@@ -290,7 +292,7 @@
                                                                             </c:when>
                                                                             <c:when test="${loan.stateReturnCode}">
                                                                                 <div class="col-xs-12">
-                                                                                    <p class="code-description text-center">Félicitation le prêt s'est déroulé avec succès. Vous pouvez dès à présent donner un avis sur <c:out value="${loan.apply.advert.user.firstname}"/> ou le signaler si un problème a eu lieu pendant l'échange</p>
+                                                                                    <p class="code-description text-center">Félicitation le prêt s'est déroulé avec succès. Vous pouvez dès à présent donner un avis sur <c:out value="${loan.apply.advert.user.nickname}"/> ou le signaler si un problème a eu lieu pendant l'échange</p>
                                                                                 </div>
                                                                                 <div class="col-xs-4">
                                                                                     <div class="row">
@@ -317,17 +319,19 @@
                                                                                 <div class="col-xs-4">
                                                                                     <div class="row">
                                                                                         <div class="col-xs-8 col-xs-offset-2">
-                                                                                            <button class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
-                                                                                                <span>Signaler</span>
-                                                                                                <i class="fa fa-exclamation-triangle button__icon"></i>
-                                                                                            </button>
+                                                                                            <a href="<c:url value="/user/report"><c:param name="userId" value="${loan.apply.advert.user.id}"/></c:url>">
+                                                                                                <button class="btn btn-block button button--naira button--round-s button--border-thin button--naira--danger">
+                                                                                                    <span>Signaler</span>
+                                                                                                    <i class="fa fa-exclamation-triangle button__icon"></i>
+                                                                                                </button>
+                                                                                            </a>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </c:when>
                                                                             <c:otherwise>
                                                                                 <div class="col-xs-12">
-                                                                                    <p class="code-description text-center">Lors du rendez vous devrez échanger le code ci-dessous pour récuperer l'objet  et que <c:out value="${loan.apply.advert.user.firstname}"/> puisse demarer la procédure de prêt.</p>
+                                                                                    <p class="code-description text-center">Lors du rendez vous devrez échanger le code ci-dessous pour récuperer l'objet  et que <c:out value="${loan.apply.advert.user.nickname}"/> puisse demarer la procédure de prêt.</p>
                                                                                 </div>
                                                                                 <div class="col-xs-4 col-xs-offset-4">
                                                                                     <div class="row">
