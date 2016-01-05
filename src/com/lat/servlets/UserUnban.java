@@ -30,7 +30,5 @@ public class UserUnban extends HttpServlet
         {
             userService.reauthorize(user);
         }
-
-        response.sendRedirect("/backoffice/suspended/users");
     }
 }

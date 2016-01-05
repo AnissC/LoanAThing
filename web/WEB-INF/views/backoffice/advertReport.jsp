@@ -12,7 +12,7 @@
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
         <link href="../../../inc/css/modal.css" rel="stylesheet">
         <link href="../../../inc/css/annonce.css" rel="stylesheet" type="text/css">
-        <link href="../../../inc/toastr-master/build/toastr.min.css" rel="stylesheet" type="text/css">
+        <link href="../../../inc/toastr-master/build/toastr.css" rel="stylesheet" type="text/css">
 
 
       </jsp:attribute>

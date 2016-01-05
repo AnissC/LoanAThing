@@ -12,7 +12,7 @@
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
         <link href="../../../inc/css/modal.css" rel="stylesheet">
         <link href="../../../inc/css/advertView.css" rel="stylesheet">
-        <link href="../../../inc/toastr-master/build/toastr.min.css" rel="stylesheet" >
+        <link href="../../../inc/toastr-master/build/toastr.css" rel="stylesheet" >
     </jsp:attribute>
     <jsp:attribute name="content">
         <div id="st-container" class="st-container">
@@ -217,28 +217,26 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title"> Etes vous sur de vouloir signaler cette annonce ?</h4>
                     </div>
-
-                        <div class="modal-body">
-                            <p>En cas d'abut d'utilisation de la fonction signalement votre compte pourra être suspendu.</p>
-                            <p>Si vous avez un doute veuillez consulter la <a href="#" style="color: #0d3349">FAQ</a> pour savoir dans quels cas signaler une annonce.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <button data-dismiss="modal" type="button" class="button--nico button--nico--danger">
-                                        <span>Cancel </span>
-                                        <i class="fa fa-undo button__icon"></i>
-                                    </button>
-                                </div>
-                                <div class="col-xs-6">
-                                    <button id="btn-report" type="submit" class="button--nico--success button--nico">
-                                        <span>Signaler</span>
-                                        <i class="fa fa-exclamation-triangle button__icon"></i>
-                                    </button>
-                                </div>
+                    <div class="modal-body">
+                        <p>En cas d'abus d'utilisation de la fonction signalement votre compte pourra être suspendu.</p>
+                        <p>Si vous avez un doute veuillez consulter la <a href="#" style="color: #0d3349">FAQ</a> pour savoir dans quels cas signaler une annonce.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button data-dismiss="modal" type="button" class="button--nico button--nico--danger">
+                                    <span>Cancel </span>
+                                    <i class="fa fa-undo button__icon"></i>
+                                </button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button id="btn-report" type="submit" class="button--nico--success button--nico">
+                                    <span>Signaler</span>
+                                    <i class="fa fa-exclamation-triangle button__icon"></i>
+                                </button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

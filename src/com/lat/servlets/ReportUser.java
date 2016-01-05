@@ -29,7 +29,5 @@ public class ReportUser extends HttpServlet
         if(user != null){
             reportingUserService.reportUser(user);
         }
-        /*TODO voir si il est possible de juste envoyer un toaster sans rediriger*/
-        response.sendRedirect("/home");
     }
 }

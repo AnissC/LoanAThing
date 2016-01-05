@@ -28,7 +28,5 @@ public class AdvertUnban extends HttpServlet
         {
             advertService.reauthorize(advert);
         }
-
-        response.sendRedirect("/backoffice/suspended/adverts");
     }
 }
