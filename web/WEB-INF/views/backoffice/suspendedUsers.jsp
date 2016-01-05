@@ -43,7 +43,7 @@
                                             <div class="col-xs-3">
                                                 <div class="advert text-center advert-suspended">
                                                     <div class="annonce-image">
-                                                        <img src="../../../inc/images/advert/<c:out value="${user.image}"/>" alt="" class="img-responsive center-block">
+                                                        <img src="../../../inc/images/user/<c:out value="${user.image}"/>" alt="" class="img-responsive center-block">
                                                     </div>
                                                     <div class="annonce-title">
                                                         <h2 class=""><c:out value="${user.nickname}" /></h2>

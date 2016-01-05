@@ -21,7 +21,7 @@ public class UserDao
     private static final String SQL_INSERT = "INSERT INTO user (email, password, nickname) VALUES (?, ?, ?)";
     private static final String SQL_SUSPEND_USER = "UPDATE user SET is_suspend = TRUE WHERE id = ?";
     private static final String SQL_UNSUSPEND_USER = "UPDATE user SET is_suspend = FALSE WHERE id = ?";
-    private static final String SQL_SELECT_ALL_SUSPENDED = "SELECT * FROM advert WHERE is_suspend = TRUE";
+    private static final String SQL_SELECT_ALL_SUSPENDED = "SELECT * FROM user WHERE is_suspend = TRUE";
 
 
     UserDao(DAOFactory daoFactory)
