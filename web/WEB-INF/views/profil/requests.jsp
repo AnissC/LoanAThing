@@ -60,7 +60,7 @@
                                                         <c:forEach var="apply"  items="${pendingRequest}" >
                                                         <tr>
                                                             <td class="hidden id"><c:out value="${apply.id}"/></td>
-                                                            <td><p><c:out value="${apply.user.lastname}"/></p></td>
+                                                            <td><p><c:out value="${apply.user.nickname}"/></p></td>
                                                             <td><p><c:out value="${apply.dateStart}"/></p></td>
                                                             <td><p><c:out value="${apply.dateEnd}"/></p></td>
                                                             <td><a href="<c:url value="/loan/process"><c:param name="applyId" value="${apply.id}"/></c:url> "><div class="btn btn-block btn-success"><i class="fa fa-check"></i></div></a></td>

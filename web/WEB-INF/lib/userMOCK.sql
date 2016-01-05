@@ -1,0 +1,68 @@
+INSERT INTO `user` (
+    lastname,
+    firstname,
+    nickname,
+    email,
+    address,
+    city,
+    zipcode,
+    password,
+    birthday,
+    preferences,
+    school_domain,
+    education_formation,
+    is_suspend,
+    image,
+    group_id
+) VALUES (
+    'Mercier',
+    'Nicolas',
+    'Nico',
+    'nico@lat.fr',
+    '16 rue des nico',
+    'NicoVille',
+    '99999',
+    'gHoJRAQowKiu9YvT7OMpOLDXbmOBGeR2GXVvXCwg/zo=',
+    '1995-05-10',
+    NULL,
+    NULL,
+    NULL,
+    FALSE,
+    'nicolas.jpg',
+    1
+)
+
+INSERT INTO `user` (
+    lastname,
+    firstname,
+    nickname,
+    email,
+    address,
+    city,
+    zipcode,
+    password,
+    birthday,
+    preferences,
+    school_domain,
+    education_formation,
+    is_supend,
+    image,
+    group_id
+) VALUES (
+    'Signoret',
+    'Maxime',
+    'Maxime',
+    'maxime@lat.fr',
+    'chez maxime',
+    'maximeVille',
+    '66666',
+    'j+nCxEhHq1cqCPLF1okHfKHgc3foKk+CNk6M45sWIlc=',
+    '1995-01-01',
+    NULL,
+    NULL,
+    NULL,
+    FALSE,
+    'maxime.jpg',
+    1
+)
+

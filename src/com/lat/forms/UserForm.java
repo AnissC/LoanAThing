@@ -32,14 +32,14 @@ public final class UserForm
         return errors;
     }
 
-    public User processUser(String email, String password, String valid, String lastname)
+    public User processUser(String email, String password, String valid, String nickname)
     {
         User user = new User();
 
         try {
             checkEmail(email, user);
             checkPassword(password, valid, user);
-            checkLastname(lastname, user);
+            checkNickname(nickname, user);
 
             if (errors.isEmpty()) {
                 userDao.create(user);
@@ -225,12 +225,12 @@ public final class UserForm
         user.setPassword(encryptedPassword);
     }
 
-    private void checkLastname(String lastname, User user)
+    private void checkNickname(String nickname, User user)
     {
-        if (lastname != null && lastname.length() < 3) {
-            setError("lastname", "Le nom d'utilisateur doit contenir au moins 3 caractères.");
+        if (nickname != null && nickname.length() < 3) {
+            setError("nickname", "Le nom d'utilisateur doit contenir au moins 3 caractères.");
         } else {
-            user.setLastname(lastname);
+            user.setNickname(nickname);
         }
     }
 

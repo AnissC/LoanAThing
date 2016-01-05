@@ -7,9 +7,6 @@
         <title><c:out value="${advert.title}"/></title>
         <link href="../../../inc/css/style.css" rel='stylesheet' type='text/css'>
         <link href="../../../inc/slideOnSideBar/css/component.css" rel='stylesheet' type='text/css'>
-        <link href="../../../inc/css/multi-level-menu/component.css" rel="stylesheet">
-        <link href="../../../inc/css/multi-level-menu/demo.css" rel="stylesheet">
-        <link href="../../../inc/css/multi-level-menu/organicfoodicons.css" rel="stylesheet">
         <link href="../../../inc/css/transformicons.css" rel="stylesheet">
         <link href="../../../inc/css/annonce.css" rel="stylesheet">
         <link href="../../../inc/css/buttonStyle.css" rel="stylesheet">
@@ -42,53 +39,53 @@
                                             <div class="annonce">
                                                 <div class="row">
                                                     <div class="col-xs-4">
-                                                        <img src="../../../inc/images/advert/<c:out value="${advert.image}"/> " alt="" class="img-responsive">
+                                                        <img src="../../../inc/images/advert/<c:out value="${advert.image}"/> " alt="" class="img-responsive advert-view-img">
                                                     </div>
                                                     <div class="col-xs-8">
-                                                        <h2><c:out value="${advert.title}"/> <span><c:out value="${advert.category.name}"/></span></h2>
+                                                        <h2><c:out value="${advert.title}"/> <span> - <c:out value="${advert.category.name}"/></span></h2>
                                                         <p>Proposé par : <c:out value="${advert.user.lastname}"/> <c:out value="${advert.user.firstname}"/></p>
                                                         <p><c:out value="${advert.description}"/></p>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <h3 class="text-center">Date de disponibilite</h3>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <h4 class="text-center">
-                                                            <span><i class="fa fa-calendar-o"></i></span>
-                                                            <span><c:out value="${advert.dateStart}"/></span>
-                                                            <span><i class="fa fa-arrow-right"></i></span>
-                                                            <span><i class="fa fa-calendar-o"></i></span>
-                                                            <span><c:out value="${advert.dateEnd}"/></span>
-                                                        </h4>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <c:choose>
-                                                            <c:when test="${advert.user.id != sessionScope.userSession.id}">
-                                                                <!-- Button trigger modal -->
-                                                                <button data-toggle="modal" data-target="#loan" type="button" class="center-block btn btn-block button button--naira button--round-s button--border-thin button--naira--success pull-right">
-                                                                    <span>Emprunter</span>
-                                                                    <i class="fa fa-check button__icon"></i>
-                                                                </button>
-                                                                <a href="<c:url value="/advert/report"><c:param name="id" value="${advert.id}"/></c:url>">
-                                                                    <button type="button" class="center-block btn btn-block button button--naira button--round-s button--border-thin button--naira--danger pull-right">
-                                                                        <span>Signaler</span>
-                                                                        <i class="fa fa-exclamation-triangle button__icon"></i>
-                                                                    </button>
-                                                                </a>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <button data-toggle="modal" data-target="#update" type="button" class="center-block btn btn-block button button--naira button--round-s button--border-thin button--naira--success pull-right">
-                                                                    <span>Modifier</span>
-                                                                    <i class="fa fa-exchange button__icon"></i>
-                                                                </button>
-                                                            </c:otherwise>
-                                                        </c:choose>
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <h3 class="text-center">Date de disponibilite</h3>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <h4 class="text-center">
+                                                                    <span><i class="fa fa-calendar-o"></i></span>
+                                                                    <span><c:out value="${advert.dateStart}"/></span>
+                                                                    <span><i class="fa fa-arrow-right"></i></span>
+                                                                    <span><i class="fa fa-calendar-o"></i></span>
+                                                                    <span><c:out value="${advert.dateEnd}"/></span>
+                                                                </h4>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-xs-12">
+                                                                <c:choose>
+                                                                    <c:when test="${advert.user.id != sessionScope.userSession.id}">
+                                                                        <!-- Button trigger modal -->
+                                                                        <button data-toggle="modal" data-target="#loan" type="button" class="center-block btn btn-block button button--naira button--round-s button--border-thin button--naira--success pull-right">
+                                                                            <span>Emprunter</span>
+                                                                            <i class="fa fa-check button__icon"></i>
+                                                                        </button>
+                                                                        <a href="<c:url value="/advert/report"><c:param name="id" value="${advert.id}"/></c:url>">
+                                                                            <button type="button" class="center-block btn btn-block button button--naira button--round-s button--border-thin button--naira--danger pull-right">
+                                                                                <span>Signaler</span>
+                                                                                <i class="fa fa-exclamation-triangle button__icon"></i>
+                                                                            </button>
+                                                                        </a>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <button data-toggle="modal" data-target="#update" type="button" class="center-block btn btn-block button button--naira button--round-s button--border-thin button--naira--success pull-right">
+                                                                            <span>Modifier</span>
+                                                                            <i class="fa fa-exchange button__icon"></i>
+                                                                        </button>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

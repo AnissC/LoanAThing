@@ -19,6 +19,7 @@ public class User {
     private String image;
     private ArrayList<User> friends;
     private Group group;
+    private boolean isSuspend;
 
     public Integer getId() {
         return id;
@@ -147,4 +148,8 @@ public class User {
     public void setGroup(Group group) {
         this.group = group;
     }
+
+    public boolean isSuspend() { return isSuspend; }
+
+    public void setSuspend(boolean suspend) { isSuspend = suspend; }
 }

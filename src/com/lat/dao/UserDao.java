@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDao
 {
@@ -15,8 +17,12 @@ public class UserDao
     private static final String SQL_SELECT_WITH_EMAIL = "SELECT * FROM user WHERE email = ?";
     private static final String SQL_SELECT_WITH_EMAIL_AND_PASSWORD = "SELECT * FROM user WHERE email = ? AND password = ?";
     private static final String SQL_SELECT_WITH_ID = "SELECT * FROM user WHERE id = ?";
-    private static final String SQL_UPDATE = "UPDATE user SET lastname = ?, firstname = ?, nickname = ?, email = ?, address = ?, city = ?, zipcode = ?, birthday = ? WHERE id = ?";
-    private static final String SQL_INSERT = "INSERT INTO user (email, password, lastname) VALUES (?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE user SET lastname = ?, firstname = ?, nickname = ?, email = ?, address = ?, city = ?, zipcode = ?, birthday = ?, is_suspend = ? WHERE id = ?";
+    private static final String SQL_INSERT = "INSERT INTO user (email, password, nickname) VALUES (?, ?, ?)";
+    private static final String SQL_SUSPEND_USER = "UPDATE user SET is_suspend = TRUE WHERE id = ?";
+    private static final String SQL_UNSUSPEND_USER = "UPDATE user SET is_suspend = FALSE WHERE id = ?";
+    private static final String SQL_SELECT_ALL_SUSPENDED = "SELECT * FROM user WHERE is_suspend = TRUE";
+
 
     UserDao(DAOFactory daoFactory)
     {
@@ -32,7 +38,7 @@ public class UserDao
         try {
             /* Récupération d'une connexion depuis la Factory */
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, user.getEmail(), user.getPassword(), user.getLastname());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_INSERT, true, user.getEmail(), user.getPassword(), user.getNickname());
             int statut = preparedStatement.executeUpdate();
             /* Analyse du statut retourné par la requête d'insertion */
             if (statut == 0) {
@@ -61,7 +67,7 @@ public class UserDao
 
         try {
             connexion = daoFactory.getConnection();
-            preparedStatement = initialisationRequetePreparee(connexion, SQL_UPDATE, false, user.getLastname(), user.getFirstname(), user.getNickname(), user.getEmail(), user.getAddress(), user.getCity(), user.getZipCode(), user.getBirthday(), user.getId());
+            preparedStatement = initialisationRequetePreparee(connexion, SQL_UPDATE, false, user.getLastname(), user.getFirstname(), user.getNickname(), user.getEmail(), user.getAddress(), user.getCity(), user.getZipCode(), user.getBirthday(), user.isSuspend(), user.getId());
 
             int statut = preparedStatement.executeUpdate();
             if (statut == 0) {
@@ -168,8 +174,68 @@ public class UserDao
         user.setSchoolDomain(resultSet.getString("school_domain"));
         user.setEducationFormation(resultSet.getString("education_formation"));
         user.setImage(resultSet.getString("image"));
+        user.setSuspend(resultSet.getBoolean("is_suspend"));
         user.setGroup(groupDAO.findOneById(resultSet.getInt("group_id")));
 
         return user;
+    }
+
+    public void suspend(User user) throws DAOException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<User> users = new ArrayList<>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SUSPEND_USER, false, user.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+    }
+
+    public void reauthorize(User user) throws DAOException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<User> users = new ArrayList<>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_UNSUSPEND_USER, false, user.getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+    }
+
+    public List<User> findAllSuspended() throws DAOException
+    {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<User> users = new ArrayList<>();
+
+        try {
+            connection = daoFactory.getConnection();
+            preparedStatement = initialisationRequetePreparee(connection, SQL_SELECT_ALL_SUSPENDED, false);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                users.add(map(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DAOException(e);
+        } finally {
+            silentClosures(resultSet, preparedStatement, connection);
+        }
+
+        return users;
     }
 }

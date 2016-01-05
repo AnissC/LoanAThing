@@ -1,11 +1,11 @@
 .annonce{
     margin-top: 20px;
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255,255,255,0.05);
     border: 1px solid #fff;
 }
 
 h2{
-    margin-top: 75px;
+    margin-top: 10px;
 }
 
 .annonce h2{
@@ -31,7 +31,11 @@ h2{
 
 .annonce h2 span{
     font-variant: small-caps;
-    font-size: 50%;
-    color: rgba(255,255,255,0.4);
+    font-size: 75%;
+    color: rgba(255,255,255,0.6);
 
+}
+
+.advert-view-img{
+    margin-bottom: 20px;
 }

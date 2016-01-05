@@ -78,7 +78,12 @@
                                         <div class="col-xs-4">
                                             <div class="row">
                                                 <div class="col-xs-8 col-xs-offset-2">
-
+                                                    <a href="/backoffice/suspended/users">
+                                                        <div class="btn-bo">
+                                                            <h1 class="text-center"><i class="fa fa-thumbs-o-down"></i></h1>
+                                                            <p class="text-center">Utilisateurs suspendus</p>
+                                                        </div>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
