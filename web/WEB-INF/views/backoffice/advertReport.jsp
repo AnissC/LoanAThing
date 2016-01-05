@@ -43,7 +43,8 @@
                                     <div class="row">
                                         <c:forEach var="reportedAdvert"  items="${reportedAdverts}">
                                             <div class="col-xs-3">
-                                                <div class="advert text-center advert-reported">
+                                                <div id="<c:out value="${reportedAdvert.id}"/>" class="advert text-center advert-reported">
+                                                    <div class="nbSignalement">1</div>
                                                     <div class="annonce-image">
                                                         <img src="../../../inc/images/advert/<c:out value="${reportedAdvert.image}"/>" alt="" class="img-responsive center-block">
                                                     </div>
@@ -132,6 +133,17 @@
                     }
                 })
             };
+
+            $(".advert").each(function(){
+                var id = $(this).attr('id');
+                var $nbSignalement = $(this).find(".nbSignalement");
+                if($(this).parent().siblings().find('#' + id) != null){
+                    $(this).parent().siblings().find('#' + id).each(function(){
+                        $(this).parent().remove();
+                        $nbSignalement.html(parseInt($nbSignalement.html(), 10)+1);
+                    })
+                }
+            })
         </script>
     </jsp:attribute>
 </lat:baseLayout>

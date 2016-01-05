@@ -108,3 +108,17 @@ a, p, h1, h2, h3, h4, h5{
 .btn-bo h1 i{
     font-size: 40px;
 }
+
+.nbSignalement{
+    position: relative;
+    display: inline;
+    top: -17px;
+    left: 117px;
+    background-color: #c9302c;
+    padding: 5px 10px;
+    border: 1px solid;
+}
+
+.advert-reported{
+    border-top-right-radius: 0;
+}
