@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/backoffice/suspended/users")
-public class SuspendedUsers extends HttpServlet {
+public class SuspendedUsers extends HttpServlet
+{
     private UserService userService;
 
     public void init() throws ServletException

@@ -29,8 +29,7 @@ public class UserReportIgnore extends HttpServlet
     {
         User user = userService.getUserById(Integer.valueOf(request.getParameter("userId")));
 
-        if (user != null)
-        {
+        if (user != null) {
             reportingUserService.ignore(user);
         }
 

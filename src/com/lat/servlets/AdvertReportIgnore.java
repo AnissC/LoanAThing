@@ -27,8 +27,7 @@ public class AdvertReportIgnore extends HttpServlet
     {
         com.lat.beans.Advert advert = advertService.getAdvert(request);
 
-        if (advert != null)
-        {
+        if (advert != null) {
             reportingAdvertService.ignore(advert);
         }
 

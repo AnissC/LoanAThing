@@ -1,8 +1,7 @@
 package com.lat.servlets;
 
-import com.lat.beans.*;
-import com.lat.beans.Advert;
-import com.lat.dao.ReportingUserDao;
+import com.lat.beans.ReportingUser;
+import com.lat.beans.User;
 import com.lat.services.ReportingUserService;
 
 import javax.servlet.ServletException;
